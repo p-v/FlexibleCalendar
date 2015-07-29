@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.IntDef;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -118,9 +119,11 @@ public class FlexibleCalendarView extends LinearLayout implements
     private void init(AttributeSet attrs){
         setAttributes(attrs);
         setOrientation(VERTICAL);
+
+        //create week view header
         GridView weekDisplayView = new GridView(context);
         weekDisplayView.setLayoutParams(
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+                new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, GridView.LayoutParams.WRAP_CONTENT));
         weekDisplayView.setNumColumns(7);
         weekDisplayView.setColumnWidth(GridView.STRETCH_COLUMN_WIDTH);
         weekDisplayView.setAdapter(new WeekdayNameDisplayAdapter(getContext(), android.R.layout.simple_list_item_1));
@@ -129,7 +132,6 @@ public class FlexibleCalendarView extends LinearLayout implements
         //setup month view
         monthViewPager = new MonthViewPager(context);
         monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(startDisplayYear,startDisplayMonth));
-
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, startDisplayYear, startDisplayMonth, this);
         monthViewPagerAdapter.setMonthEventFetcher(this);
         monthInfPagerAdapter = new InfinitePagerAdapter(monthViewPagerAdapter);

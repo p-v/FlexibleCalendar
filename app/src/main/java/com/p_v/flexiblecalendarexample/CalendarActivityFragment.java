@@ -58,6 +58,14 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                     return eventColors;
                 }
 
+                if(year == 2015 && month == 6 && day == 31){
+                    List<Integer> eventColors = new ArrayList<Integer>(3);
+                    eventColors.add(android.R.color.holo_red_dark);
+                    eventColors.add(android.R.color.holo_orange_light);
+                    eventColors.add(android.R.color.holo_purple);
+                    return eventColors;
+                }
+
                 return null;
             }
         });
