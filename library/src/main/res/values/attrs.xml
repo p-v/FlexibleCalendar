@@ -1,0 +1,16 @@
+<resources>
+    <declare-styleable name="BaseCellView">
+        <attr name="textValue" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="FlexibleCalendarView">
+        <attr name="startDisplayYear" format="integer"/>
+        <attr name="startDisplayMonth" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="CellState">
+        <attr name="state_date_regular" format="boolean"/>
+        <attr name="state_date_today" format="boolean"/>
+        <attr name="state_date_selected" format="boolean"/>
+    </declare-styleable>
+</resources>
