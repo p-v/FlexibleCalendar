@@ -132,7 +132,8 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
     private void updateTitle(int year, int month){
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
-        someTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US)+" "+year);
+        someTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
+                this.getResources().getConfiguration().locale)+" "+year);
     }
 
     private List<CalendarEventsAdapter> getEventAdapters(){

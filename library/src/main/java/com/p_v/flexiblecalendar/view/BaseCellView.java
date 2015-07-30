@@ -86,14 +86,15 @@ public class BaseCellView extends TextView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if(paintList!=null) {
+        //initialize paint objects only if there is no state set
+        if((stateSet==null || stateSet.isEmpty()) && paintList!=null) {
             int num = paintList.size();
 
             Paint p = new Paint();
             p.setTextSize(getTextSize());
 
             Rect rect = new Rect();
-            p.getTextBounds("31", 0, 1, rect);
+            p.getTextBounds("31", 0, 1, rect); // measuring using fake text
 
             eventCircleY = (3 * getHeight() + rect.height()) / 4;
 
@@ -111,7 +112,8 @@ public class BaseCellView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(paintList!=null) {
+        // draw only if no states are present
+        if((stateSet==null || stateSet.isEmpty()) && paintList!=null) {
             int num = paintList.size();
             for (int i=0;i<num;i++) {
                 canvas.drawCircle(calculateStartPoint(i), eventCircleY, radius, paintList.get(i));
