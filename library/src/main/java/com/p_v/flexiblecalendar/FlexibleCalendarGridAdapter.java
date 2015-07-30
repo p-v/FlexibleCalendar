@@ -31,6 +31,10 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     public FlexibleCalendarGridAdapter(Context context, int year, int month ){
         this.context = context;
+        initialize(year,month);
+    }
+
+    public void initialize(int year, int month){
         this.year = year;
         this.month = month;
         this.monthDisplayHelper = new MonthDisplayHelper(year,month);
@@ -122,9 +126,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
         @Override
         public void onClick(final View v) {
-            if(selectedItem!=null){
-                notifyDataSetChanged();
-            }else{
+            if(selectedItem==null){
                 selectedItem = new SelectedDateItem(iYear,iMonth,iDay);
             }
 
@@ -132,18 +134,11 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
             selectedItem.setMonth(iMonth);
             selectedItem.setYear(iYear);
 
+            notifyDataSetChanged();
+
             if(onDateCellItemClickListener !=null){
                 onDateCellItemClickListener.onDateClick(selectedItem);
             }
-
-            v.post(new Runnable() {
-                @Override
-                public void run() {
-                    ((BaseCellView) v).removeState(BaseCellView.STATE_TODAY);
-                    ((BaseCellView) v).addState(BaseCellView.STATE_SELECTED);
-                    v.refreshDrawableState();
-                }
-            });
 
         }
     }

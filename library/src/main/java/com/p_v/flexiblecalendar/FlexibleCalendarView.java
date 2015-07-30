@@ -170,9 +170,15 @@ public class FlexibleCalendarView extends LinearLayout implements
 
         @Override
         public void onPageSelected(int position) {
-
-            monthViewPagerAdapter.refreshDateAdapters(position%4);
             int direction = position>lastPosition? RIGHT : LEFT;
+
+            //refresh the previous adapter and deselect the item
+            monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % 4).setSelectedItem(null,true);
+
+            //the month view pager adater will update here again
+            monthViewPagerAdapter.refreshDateAdapters(position%4);
+
+            //update last position
             lastPosition = position;
 
             //update the currently selected date item

@@ -64,15 +64,13 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         int[] nextDate = new int[2];
         FlexibleCalendarHelper.nextMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
 
-        dateAdapters.set((position + 1) % 4, new FlexibleCalendarGridAdapter(context, nextDate[0], nextDate[1]));
+        dateAdapters.get((position + 1) % 4).initialize(nextDate[0], nextDate[1]);
 
         FlexibleCalendarHelper.nextMonth(nextDate[0], nextDate[1], nextDate);
-        dateAdapters.set((position + 2) % 4, new FlexibleCalendarGridAdapter(context, nextDate[0], nextDate[1]));
+        dateAdapters.get((position + 2) % 4).initialize(nextDate[0], nextDate[1]);
 
         FlexibleCalendarHelper.previousMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
-        dateAdapters.set((position + 3) % 4, new FlexibleCalendarGridAdapter(context, nextDate[0], nextDate[1]));
-
-        notifyDataSetChanged();
+        dateAdapters.get((position + 3) % 4).initialize(nextDate[0], nextDate[1]);
     }
 
     public FlexibleCalendarGridAdapter getMonthAdapterAtPosition(int position){
