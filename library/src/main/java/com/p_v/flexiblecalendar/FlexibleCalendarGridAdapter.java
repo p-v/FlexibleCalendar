@@ -80,18 +80,17 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
             cellView.setOnClickListener(new DateClickListener(day, month, year, position));
             cellView.clearAllStates();
             if(monthEventFetcher!=null){
-                cellView.setEvents(monthEventFetcher.getEventsForTheDay(year,month,day));
-            }
-            if(calendar.get(Calendar.YEAR)==year
-                    && calendar.get(Calendar.MONTH) == month
-                    && calendar.get(Calendar.DAY_OF_MONTH) == day){
-                cellView.addState(R.attr.state_date_today);
+                cellView.setEvents(monthEventFetcher.getEventsForTheDay(year, month, day));
             }
             //select item
             if(selectedItem!= null && selectedItem.getYear()==year
                     && selectedItem.getMonth()==month
                     && selectedItem.getDay() ==day){
-                cellView.addState(R.attr.state_date_selected);
+                cellView.addState(BaseCellView.STATE_SELECTED);
+            }else if(calendar.get(Calendar.YEAR)==year
+                    && calendar.get(Calendar.MONTH) == month
+                    && calendar.get(Calendar.DAY_OF_MONTH) == day){
+                cellView.addState(BaseCellView.STATE_TODAY);
             }
             cellView.refreshDrawableState();
         }else{
@@ -140,7 +139,8 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
             v.post(new Runnable() {
                 @Override
                 public void run() {
-                    ((BaseCellView) v).addState(R.attr.state_date_selected);
+                    ((BaseCellView) v).removeState(BaseCellView.STATE_TODAY);
+                    ((BaseCellView) v).addState(BaseCellView.STATE_SELECTED);
                     v.refreshDrawableState();
                 }
             });

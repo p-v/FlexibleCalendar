@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by p-v on 14/07/15.
+ * @author p-v
  */
 public class BaseCellView extends TextView {
 
