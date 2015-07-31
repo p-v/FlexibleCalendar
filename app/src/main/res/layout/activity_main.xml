@@ -6,6 +6,7 @@
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/month_view"
+        android:background="@android:color/darker_gray"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         />

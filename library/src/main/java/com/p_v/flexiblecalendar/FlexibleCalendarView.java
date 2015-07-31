@@ -426,6 +426,6 @@ public class FlexibleCalendarView extends LinearLayout implements
     public void setCalendarView(ICalendarView calendar){
         this.calendarView = calendar;
         monthViewPagerAdapter.getCellViewDrawer().setCalendarView(calendarView);
-        weekdayDisplayAdapter.getCellView().setCalendarView(calendarView);
+        weekdayDisplayAdapter.getCellViewDrawer().setCalendarView(calendarView);
     }
 }

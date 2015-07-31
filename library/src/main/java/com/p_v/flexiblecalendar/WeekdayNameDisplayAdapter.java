@@ -42,7 +42,7 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
         this.cellViewDrawer = cellView;
     }
 
-    public ICellViewDrawer getCellView(){
+    public ICellViewDrawer getCellViewDrawer(){
         return cellViewDrawer;
     }
 
