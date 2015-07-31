@@ -27,6 +27,8 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener;
     private FlexibleCalendarGridAdapter.MonthEventFetcher monthEventFetcher;
     private ICellViewDrawer cellViewDrawer;
+    private int gridViewHorizontalSpacing;
+    private int gridViewVerticalSpacing;
 
     public MonthViewPagerAdapter(Context context, int year, int month, FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener){
         this.context = context;
@@ -108,6 +110,8 @@ public class MonthViewPagerAdapter extends PagerAdapter {
 
         GridView view = (GridView)inflater.inflate(R.layout.month_grid_layout,null);
         view.setAdapter(adapter);
+        view.setVerticalSpacing(gridViewVerticalSpacing);
+        view.setHorizontalSpacing(gridViewHorizontalSpacing);
 
         layout.addView(view);
         container.addView(layout);
@@ -136,6 +140,11 @@ public class MonthViewPagerAdapter extends PagerAdapter {
 
     public ICellViewDrawer getCellViewDrawer(){
         return cellViewDrawer;
+    }
+
+    public void setSpacing(int horizontalSpacing, int verticalSpacing){
+        this.gridViewHorizontalSpacing = horizontalSpacing;
+        this.gridViewVerticalSpacing = verticalSpacing;
     }
 
 }

@@ -99,6 +99,8 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
                     && calendar.get(Calendar.MONTH) == month
                     && calendar.get(Calendar.DAY_OF_MONTH) == day){
                 cellView.addState(BaseCellView.STATE_TODAY);
+            }else{
+                cellView.addState(BaseCellView.STATE_REGULAR);
             }
             cellView.refreshDrawableState();
         }else{

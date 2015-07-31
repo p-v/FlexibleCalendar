@@ -86,8 +86,9 @@ public class BaseCellView extends TextView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        //initialize paint objects only if there is no state set
-        if((stateSet==null || stateSet.isEmpty()) && paintList!=null) {
+        //initialize paint objects only if there is no state or just one state i.e. the regular day state
+        if((stateSet==null || stateSet.isEmpty()
+                ||(stateSet.size() ==1 && stateSet.contains(STATE_REGULAR))) && paintList!=null) {
             int num = paintList.size();
 
             Paint p = new Paint();
@@ -112,8 +113,9 @@ public class BaseCellView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // draw only if no states are present
-        if((stateSet==null || stateSet.isEmpty()) && paintList!=null) {
+        // draw only if there is no state or just one state i.e. the regular day state
+        if((stateSet==null || stateSet.isEmpty() || (stateSet.size() ==1
+                && stateSet.contains(STATE_REGULAR))) && paintList!=null) {
             int num = paintList.size();
             for (int i=0;i<num;i++) {
                 canvas.drawCircle(calculateStartPoint(i), eventCircleY, radius, paintList.get(i));

@@ -48,7 +48,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
-                    cellView = (BaseCellView) inflater.inflate(com.p_v.fliexiblecalendar.R.layout.square_cell_layout, null);
+                    cellView = (BaseCellView) inflater.inflate(R.layout.calendar1_date_cell_view, null);
                 }
                 return cellView;
             }
@@ -58,7 +58,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 BaseCellView cellView = (BaseCellView) convertView;
                 if(cellView == null){
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
-                    cellView = (SquareCellView)inflater.inflate(com.p_v.fliexiblecalendar.R.layout.square_cell_layout,null);
+                    cellView = (SquareCellView)inflater.inflate(R.layout.calendar1_week_cell_view,null);
                 }
                 return cellView;
             }

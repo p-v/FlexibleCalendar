@@ -2,6 +2,7 @@ package com.p_v.flexiblecalendar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -140,6 +141,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * View pager for the month view
      */
     private MonthViewPager monthViewPager;
+    private GridView weekDisplayView;
 
     private OnMonthChangeListener onMonthChangeListener;
     private OnDateClickListener onDateClickListener;
@@ -150,6 +152,12 @@ public class FlexibleCalendarView extends LinearLayout implements
     private int startDisplayYear;
     private int startDisplayMonth;
     private int startDisplayDay;
+    private int weekdayHorizontalSpacing;
+    private int weekdayVerticalSpacing;
+    private int monthDayHorizontalSpacing;
+    private int monthDayVerticalSpacing;
+    private int monthViewBackground;
+    private int weekViewBackground;
 
     /**
      * Currently selected date item
@@ -181,11 +189,14 @@ public class FlexibleCalendarView extends LinearLayout implements
         calendarView = new DefaultCalendarView();
 
         //create week view header
-        GridView weekDisplayView = new GridView(context);
+        weekDisplayView = new GridView(context);
         weekDisplayView.setLayoutParams(
                 new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, GridView.LayoutParams.WRAP_CONTENT));
         weekDisplayView.setNumColumns(7);
+        weekDisplayView.setHorizontalSpacing(weekdayHorizontalSpacing);
+        weekDisplayView.setVerticalSpacing(weekdayVerticalSpacing);
         weekDisplayView.setColumnWidth(GridView.STRETCH_COLUMN_WIDTH);
+        weekDisplayView.setBackgroundResource(weekViewBackground);
         weekdayDisplayAdapter = new WeekdayNameDisplayAdapter(getContext(), android.R.layout.simple_list_item_1);
 
         //setting default week cell view
@@ -196,9 +207,11 @@ public class FlexibleCalendarView extends LinearLayout implements
 
         //setup month view
         monthViewPager = new MonthViewPager(context);
+        monthViewPager.setBackgroundResource(monthViewBackground);
         monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(startDisplayYear, startDisplayMonth));
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, startDisplayYear, startDisplayMonth, this);
         monthViewPagerAdapter.setMonthEventFetcher(this);
+        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
 
         //set the default cell view
         monthViewPagerAdapter.setCellViewDrawer(new DateCellViewImpl(calendarView));
@@ -221,8 +234,17 @@ public class FlexibleCalendarView extends LinearLayout implements
         try {
             Calendar cal = Calendar.getInstance(FlexibleCalendarHelper.getLocale(context));
             startDisplayMonth = a.getInteger(R.styleable.FlexibleCalendarView_startDisplayMonth,cal.get(Calendar.MONTH));
-            startDisplayYear = a.getInteger(R.styleable.FlexibleCalendarView_startDisplayYear,cal.get(Calendar.YEAR));
+            startDisplayYear = a.getInteger(R.styleable.FlexibleCalendarView_startDisplayYear, cal.get(Calendar.YEAR));
             startDisplayDay = cal.get(Calendar.DAY_OF_MONTH);
+
+            weekdayHorizontalSpacing = (int)a.getDimension(R.styleable.FlexibleCalendarView_weekDayHorizontalSpacing, 0);
+            weekdayVerticalSpacing = (int)a.getDimension(R.styleable.FlexibleCalendarView_weekDayVerticalSpacing, 0);
+            monthDayHorizontalSpacing = (int)a.getDimension(R.styleable.FlexibleCalendarView_monthDayHorizontalSpacing, 0);
+            monthDayVerticalSpacing = (int)a.getDimension(R.styleable.FlexibleCalendarView_monthDayVerticalSpacing,0);
+
+            monthViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_monthViewBackground,android.R.color.transparent);
+            weekViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_weekViewBackground,android.R.color.transparent);
+
         } finally {
             a.recycle();
         }
@@ -427,5 +449,43 @@ public class FlexibleCalendarView extends LinearLayout implements
         this.calendarView = calendar;
         monthViewPagerAdapter.getCellViewDrawer().setCalendarView(calendarView);
         weekdayDisplayAdapter.getCellViewDrawer().setCalendarView(calendarView);
+    }
+
+    /**
+     * Set the background resource for week view
+     * @param resourceId
+     */
+    public void setWeekViewBackgroundResource(@DrawableRes int resourceId){
+        this.weekViewBackground = resourceId;
+        weekDisplayView.setBackgroundResource(resourceId);
+    }
+
+    /**
+     * Set background resource for the month view
+     * @param resourceId
+     */
+    public void setMonthViewBackgroundResource(@DrawableRes int resourceId){
+        this.monthViewBackground = resourceId;
+        monthViewPager.setBackgroundResource(resourceId);
+    }
+
+    public void setWeekViewHorizontalSpacing(int spacing){
+        this.weekdayHorizontalSpacing = spacing;
+        weekDisplayView.setHorizontalSpacing(weekdayHorizontalSpacing);
+    }
+
+    public void setWeekViewVerticalSpacing(int spacing){
+        this.weekdayVerticalSpacing = spacing;
+        weekDisplayView.setVerticalSpacing(weekdayVerticalSpacing);
+    }
+
+    public void setMonthViewHorizontalSpacing(int spacing){
+        this.monthDayHorizontalSpacing = spacing;
+        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
+    }
+
+    public void setMonthViewVerticalSpacing(int spacing){
+        this.monthDayVerticalSpacing = spacing;
+        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
     }
 }

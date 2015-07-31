@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:p-v="http://schemas.android.com/apk/res-auto">
     <item p-v:state_date_regular="true"
-        android:drawable="@drawable/cell_transparent_background"/>
+        android:drawable="@drawable/cell_green_circular_background"/>
     <item p-v:state_date_today="true"
         android:drawable="@drawable/circular_background_red"/>
     <item p-v:state_date_selected="true"

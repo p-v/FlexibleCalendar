@@ -7,6 +7,12 @@
     <declare-styleable name="FlexibleCalendarView">
         <attr name="startDisplayYear" format="integer"/>
         <attr name="startDisplayMonth" format="integer"/>
+        <attr name="weekDayHorizontalSpacing" format="dimension"/>
+        <attr name="weekDayVerticalSpacing" format="dimension"/>
+        <attr name="monthDayHorizontalSpacing" format="dimension"/>
+        <attr name="monthDayVerticalSpacing" format="dimension"/>
+        <attr name="weekViewBackground" format="reference"/>
+        <attr name="monthViewBackground" format="reference"/>
     </declare-styleable>
     <declare-styleable name="CellState">
         <attr name="state_date_regular" format="boolean"/>

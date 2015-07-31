@@ -47,6 +47,11 @@ public class CalendarListActivity extends ActionBarActivity implements CalendarL
                 startActivity(calActivity2);
                 break;
 
+            case 2:
+                Intent calActivity3 = new Intent(this,CalendarActivity3.class);
+                startActivity(calActivity3);
+                break;
+
             default:
 
 
