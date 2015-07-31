@@ -1,4 +1,11 @@
 # FlexibleCalendar
-A flexible android calendar. A basic calendar which can be extended to draw powerful and lovely calendars.
+
+A basic calendar which can be extended to draw powerful and lovely calendars.
+Also supports calendar events representation by default.
+
+Screenshots
+-----
+
+![Calendar 1](screenshots/screenshot-1.png) &nbsp; ![Calendar 2](screenshots/screenshot-2.png)
 
 ##### WORK IN PROGRESS - CONTRIBUTIONS ARE WELCOME
