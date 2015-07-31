@@ -9,6 +9,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
+import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private List<FlexibleCalendarGridAdapter> dateAdapters;
     private FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener;
     private FlexibleCalendarGridAdapter.MonthEventFetcher monthEventFetcher;
+    private ICellViewDrawer cellViewDrawer;
 
     public MonthViewPagerAdapter(Context context, int year, int month, FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener){
         this.context = context;
@@ -102,6 +104,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         FlexibleCalendarGridAdapter adapter = dateAdapters.get(position);
         adapter.setOnDateClickListener(onDateCellItemClickListener);
         adapter.setMonthEventFetcher(monthEventFetcher);
+        adapter.setCellViewDrawer(cellViewDrawer);
 
         GridView view = (GridView)inflater.inflate(R.layout.month_grid_layout,null);
         view.setAdapter(adapter);
@@ -125,6 +128,14 @@ public class MonthViewPagerAdapter extends PagerAdapter {
 
     public void setMonthEventFetcher(FlexibleCalendarGridAdapter.MonthEventFetcher monthEventFetcher){
         this.monthEventFetcher = monthEventFetcher;
+    }
+
+    public void setCellViewDrawer(ICellViewDrawer cellViewDrawer){
+        this.cellViewDrawer = cellViewDrawer;
+    }
+
+    public ICellViewDrawer getCellViewDrawer(){
+        return cellViewDrawer;
     }
 
 }

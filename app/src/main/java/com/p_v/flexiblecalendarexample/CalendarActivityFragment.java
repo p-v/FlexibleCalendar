@@ -12,12 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.SquareCellView;
 import com.p_v.flexiblecalendarexample.entity.Event;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 
 public class CalendarActivityFragment extends Fragment implements FlexibleCalendarView.OnMonthChangeListener,
@@ -41,6 +42,27 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
+        calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+            @Override
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+                BaseCellView cellView = (BaseCellView) convertView;
+                if (cellView == null) {
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    cellView = (BaseCellView) inflater.inflate(com.p_v.fliexiblecalendar.R.layout.square_cell_layout, null);
+                }
+                return cellView;
+            }
+
+            @Override
+            public BaseCellView getWeekdayCellView(int position, View convertView, ViewGroup parent) {
+                BaseCellView cellView = (BaseCellView) convertView;
+                if(cellView == null){
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    cellView = (SquareCellView)inflater.inflate(com.p_v.fliexiblecalendar.R.layout.square_cell_layout,null);
+                }
+                return cellView;
+            }
+        });
         calendarView.setOnMonthChangeListener(this);
         calendarView.setOnDateClickListener(this);
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {

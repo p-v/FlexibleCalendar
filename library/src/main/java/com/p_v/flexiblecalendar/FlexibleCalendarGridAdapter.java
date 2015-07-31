@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 import java.util.Calendar;
@@ -27,6 +28,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private OnDateCellItemClickListener onDateCellItemClickListener;
     private SelectedDateItem selectedItem;
     private MonthEventFetcher monthEventFetcher;
+    private ICellViewDrawer cellViewDrawer;
 
 
     public FlexibleCalendarGridAdapter(Context context, int year, int month ){
@@ -61,12 +63,15 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BaseCellView cellView = (BaseCellView) convertView;
-        if(cellView == null){
-            LayoutInflater inflater = LayoutInflater.from(context);
-            cellView = (BaseCellView)inflater.inflate(R.layout.square_cell_layout,null);
+        BaseCellView cellView = cellViewDrawer.getCellView(position, convertView, parent);
+        if(cellView==null){
+            cellView = (BaseCellView) convertView;
+            if(cellView == null){
+                LayoutInflater inflater = LayoutInflater.from(context);
+                cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+            }
         }
-        drawDateCell(cellView, position);
+        drawDateCell(cellView,position);
         return cellView;
     }
 
@@ -80,7 +85,6 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         if(monthDisplayHelper.isWithinCurrentMonth(row,col)){
             int day = monthDisplayHelper.getDayAt(row,col);
             cellView.setText(String.valueOf(day));
-            cellView.setBackgroundResource(R.drawable.cell_background);
             cellView.setOnClickListener(new DateClickListener(day, month, year, position));
             cellView.clearAllStates();
             if(monthEventFetcher!=null){
@@ -166,6 +170,10 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     void setMonthEventFetcher(MonthEventFetcher monthEventFetcher){
         this.monthEventFetcher = monthEventFetcher;
+    }
+
+    public void setCellViewDrawer(ICellViewDrawer cellViewDrawer){
+        this.cellViewDrawer = cellViewDrawer;
     }
 
 }

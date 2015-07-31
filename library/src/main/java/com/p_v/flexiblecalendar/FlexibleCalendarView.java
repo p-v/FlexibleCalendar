@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
+import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.impl.DateCellViewImpl;
+import com.p_v.flexiblecalendar.view.impl.WeekdayCellViewImpl;
 import com.p_v.fliexiblecalendar.R;
 
 import java.lang.annotation.Retention;
@@ -30,6 +33,31 @@ import java.util.List;
 public class FlexibleCalendarView extends LinearLayout implements
         FlexibleCalendarGridAdapter.OnDateCellItemClickListener,
         FlexibleCalendarGridAdapter.MonthEventFetcher {
+
+    /**
+     * Customize Calendar using this interface
+     */
+    public interface ICalendarView {
+        /**
+         * Cell view for the month
+         *
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
+        BaseCellView getCellView(int position, View convertView, ViewGroup parent);
+
+        /**
+         * Cell view for the weekday in the header
+         *
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
+        BaseCellView getWeekdayCellView(int position, View convertView, ViewGroup parent);
+    }
 
     /**
      * Event Data Provider used for displaying events for a particular date
@@ -64,12 +92,41 @@ public class FlexibleCalendarView extends LinearLayout implements
         void onDateClick(int year,int month, int day);
     }
 
+    /**
+     * Default calendar view for internal usage
+     */
+    private class DefaultCalendarView implements ICalendarView {
+
+        @Override
+        public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+            BaseCellView cellView = (BaseCellView) convertView;
+            if(cellView == null){
+                LayoutInflater inflater = LayoutInflater.from(context);
+                cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+            }
+            return cellView;
+        }
+
+        @Override
+        public BaseCellView getWeekdayCellView(int position, View convertView, ViewGroup parent) {
+            BaseCellView cellView = (BaseCellView) convertView;
+            if(cellView == null){
+                LayoutInflater inflater = LayoutInflater.from(context);
+                cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+            }
+            return cellView;
+        }
+    }
+
     /*
      * Direction Constants
      */
     public static final int RIGHT = 0;
     public static final int LEFT = 1;
+
     private InfinitePagerAdapter monthInfPagerAdapter;
+    private WeekdayNameDisplayAdapter weekdayDisplayAdapter;
+    private MonthViewPagerAdapter monthViewPagerAdapter;
 
     /**
      * Direction for movement of FlexibleCalendarView left or right
@@ -87,8 +144,8 @@ public class FlexibleCalendarView extends LinearLayout implements
     private OnMonthChangeListener onMonthChangeListener;
     private OnDateClickListener onDateClickListener;
 
-    private MonthViewPagerAdapter monthViewPagerAdapter;
     private EventDataProvider eventDataProvider;
+    private ICalendarView calendarView;
 
     private int startDisplayYear;
     private int startDisplayMonth;
@@ -120,20 +177,32 @@ public class FlexibleCalendarView extends LinearLayout implements
         setAttributes(attrs);
         setOrientation(VERTICAL);
 
+        //initialize the default calendar view
+        calendarView = new DefaultCalendarView();
+
         //create week view header
         GridView weekDisplayView = new GridView(context);
         weekDisplayView.setLayoutParams(
                 new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, GridView.LayoutParams.WRAP_CONTENT));
         weekDisplayView.setNumColumns(7);
         weekDisplayView.setColumnWidth(GridView.STRETCH_COLUMN_WIDTH);
-        weekDisplayView.setAdapter(new WeekdayNameDisplayAdapter(getContext(), android.R.layout.simple_list_item_1));
+        weekdayDisplayAdapter = new WeekdayNameDisplayAdapter(getContext(), android.R.layout.simple_list_item_1);
+
+        //setting default week cell view
+        weekdayDisplayAdapter.setCellView(new WeekdayCellViewImpl(calendarView));
+
+        weekDisplayView.setAdapter(weekdayDisplayAdapter);
         this.addView(weekDisplayView);
 
         //setup month view
         monthViewPager = new MonthViewPager(context);
-        monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(startDisplayYear,startDisplayMonth));
+        monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(startDisplayYear, startDisplayMonth));
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, startDisplayYear, startDisplayMonth, this);
         monthViewPagerAdapter.setMonthEventFetcher(this);
+
+        //set the default cell view
+        monthViewPagerAdapter.setCellViewDrawer(new DateCellViewImpl(calendarView));
+
         monthInfPagerAdapter = new InfinitePagerAdapter(monthViewPagerAdapter);
         monthViewPager.setAdapter(monthInfPagerAdapter);
         monthViewPager.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -176,7 +245,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % 4).setSelectedItem(null,true);
 
             //the month view pager adater will update here again
-            monthViewPagerAdapter.refreshDateAdapters(position%4);
+            monthViewPagerAdapter.refreshDateAdapters(position % 4);
 
             //update last position
             lastPosition = position;
@@ -346,6 +415,17 @@ public class FlexibleCalendarView extends LinearLayout implements
     @Override
     public List<Integer> getEventsForTheDay(int year, int month, int day) {
         return eventDataProvider == null?
-                null : eventDataProvider.getEventsForTheDay(year,month,day);
+                null : eventDataProvider.getEventsForTheDay(year, month, day);
+    }
+
+    /**
+     * Set the customized calendar view for the calendar for customizing cells
+     * and layout
+     * @param calendar
+     */
+    public void setCalendarView(ICalendarView calendar){
+        this.calendarView = calendar;
+        monthViewPagerAdapter.getCellViewDrawer().setCalendarView(calendarView);
+        weekdayDisplayAdapter.getCellView().setCalendarView(calendarView);
     }
 }

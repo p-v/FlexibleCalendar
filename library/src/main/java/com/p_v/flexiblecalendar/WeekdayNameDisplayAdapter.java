@@ -1,15 +1,13 @@
 package com.p_v.flexiblecalendar;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import com.p_v.flexiblecalendar.view.SquareCellView;
+import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 /**
@@ -17,22 +15,35 @@ import com.p_v.fliexiblecalendar.R;
  */
 public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
 
+    private ICellViewDrawer cellViewDrawer;
+
     public WeekdayNameDisplayAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId,FlexibleCalendarHelper.getWeekDaysList(context));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        SquareCellView textView = (SquareCellView)inflater.inflate(R.layout.square_cell_layout,null);
+        BaseCellView cellView = cellViewDrawer.getCellView(position,convertView,parent);
+        if(cellView==null){
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+        }
         String item = getItem(position);
-        textView.setText(item);
-        return textView;
+        cellView.setText(item);
+        return cellView;
     }
 
     @Override
     public boolean isEnabled(int position) {
         return false;
+    }
+
+    public void setCellView(ICellViewDrawer cellView) {
+        this.cellViewDrawer = cellView;
+    }
+
+    public ICellViewDrawer getCellView(){
+        return cellViewDrawer;
     }
 
 }
