@@ -164,6 +164,8 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     private SelectedDateItem selectedDateItem;
 
+    private int lastPosition;
+
     public FlexibleCalendarView(Context context){
         super(context);
         this.context = context;
@@ -217,6 +219,8 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPagerAdapter.setCellViewDrawer(new DateCellViewImpl(calendarView));
 
         monthInfPagerAdapter = new InfinitePagerAdapter(monthViewPagerAdapter);
+        //Initializing with the offset value
+        lastPosition = monthInfPagerAdapter.getRealCount() * 100;
         monthViewPager.setAdapter(monthInfPagerAdapter);
         monthViewPager.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
@@ -252,8 +256,7 @@ public class FlexibleCalendarView extends LinearLayout implements
 
     private class MonthChangeListener implements ViewPager.OnPageChangeListener{
 
-        //Initializing with the offset value
-        private int lastPosition = monthInfPagerAdapter.getRealCount() * 100;
+
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -394,17 +397,8 @@ public class FlexibleCalendarView extends LinearLayout implements
             cal.set(selectedDateItem.getYear(), selectedDateItem.getMonth(), selectedDateItem.getDay());
             cal.add(Calendar.DATE, -1);
 
-            if(selectedDateItem.getMonth()!=cal.get(Calendar.MONTH)){
-                monthViewPager.setCurrentItem(monthViewPager.getCurrentItem()-1,true);
-                monthViewPager.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Calendar cal = FlexibleCalendarHelper.getLocalizedCalendar(context);
-                        cal.set(selectedDateItem.getYear(), selectedDateItem.getMonth(), selectedDateItem.getDay());
-                        selectedDateItem.setDay(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-                        monthViewPagerAdapter.setSelectedItem(selectedDateItem);
-                    }
-                });
+            if(selectedDateItem.getMonth()!=cal.get(Calendar.MONTH)) {
+                moveToPreviousMonth();
             }else{
                 selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
                 selectedDateItem.setMonth(cal.get(Calendar.MONTH));
@@ -424,7 +418,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             cal.add(Calendar.DATE, 1);
 
             if(selectedDateItem.getMonth()!=cal.get(Calendar.MONTH)){
-                monthViewPager.setCurrentItem(monthViewPager.getCurrentItem() + 1, true);
+                moveToNextMonth();
             }else{
                 selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
                 selectedDateItem.setMonth(cal.get(Calendar.MONTH));
@@ -469,23 +463,54 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPager.setBackgroundResource(resourceId);
     }
 
+    /**
+     * sets weekview header horizontal spacing between weekdays
+     * @param spacing
+     */
     public void setWeekViewHorizontalSpacing(int spacing){
         this.weekdayHorizontalSpacing = spacing;
         weekDisplayView.setHorizontalSpacing(weekdayHorizontalSpacing);
+
     }
 
+    /**
+     * Sets the weekview header vertical spacing between weekdays
+     * @param spacing
+     */
     public void setWeekViewVerticalSpacing(int spacing){
         this.weekdayVerticalSpacing = spacing;
         weekDisplayView.setVerticalSpacing(weekdayVerticalSpacing);
     }
 
+    /**
+     * Sets the month view cells horizontal spacing
+     * @param spacing
+     */
     public void setMonthViewHorizontalSpacing(int spacing){
         this.monthDayHorizontalSpacing = spacing;
-        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
+        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing, monthDayVerticalSpacing);
     }
 
+    /**
+     * Sets the month view cells vertical spacing
+     * @param spacing
+     */
     public void setMonthViewVerticalSpacing(int spacing){
         this.monthDayVerticalSpacing = spacing;
-        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
+        monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing, monthDayVerticalSpacing);
+    }
+
+    /**
+     * move to next month
+     */
+    public void moveToNextMonth(){
+        monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount()*100)+1,true);
+    }
+
+    /**
+     * move to previous month
+     */
+    public void moveToPreviousMonth(){
+        monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount()*100)-1,true);
     }
 }

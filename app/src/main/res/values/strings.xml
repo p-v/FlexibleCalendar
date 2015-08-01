@@ -6,4 +6,5 @@
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_calendar_list">CalendarListActivity</string>
     <string name="title_activity_calendar_activity3">CalendarActivity3</string>
+    <string name="title_activity_calendary_activity4">CalendaryActivity4</string>
 </resources>

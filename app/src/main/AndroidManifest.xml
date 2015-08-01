@@ -28,6 +28,10 @@
             android:name=".CalendarActivity3"
             android:label="@string/title_activity_calendar_activity3" >
         </activity>
+        <activity
+            android:name=".CalendarActivity4"
+            android:label="@string/title_activity_calendary_activity4" >
+        </activity>
     </application>
 
 </manifest>

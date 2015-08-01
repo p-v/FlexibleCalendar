@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.p_v.flexiblecalendarexample.CalendarActivity4">
+
+    <LinearLayout android:orientation="horizontal"
+        android:background="@android:color/holo_purple"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView android:id="@+id/left_arrow"
+            android:src="@drawable/left_arrow"
+            android:layout_weight="1"
+            android:layout_width="20dp"
+            android:layout_height="40dp" />
+
+        <TextView android:id="@+id/month_text_view"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_light"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <ImageView android:id="@+id/right_arrow"
+            android:src="@drawable/right_arrow"
+            android:layout_weight="1"
+            android:layout_width="20dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+
+
+    <com.p_v.flexiblecalendar.FlexibleCalendarView
+        android:layout_weight="1"
+        android:id="@+id/calendar_view"
+        android:background="@android:color/darker_gray"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        />
+
+</LinearLayout>
