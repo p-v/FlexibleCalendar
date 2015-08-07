@@ -36,11 +36,15 @@
 
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
-        android:layout_weight="1"
         android:id="@+id/calendar_view"
         android:background="@android:color/darker_gray"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         />
+
+    <Button android:id="@+id/reset_button"
+        android:text="Go to current month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

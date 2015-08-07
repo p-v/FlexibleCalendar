@@ -82,4 +82,18 @@ public class FlexibleCalendarHelper {
         return displayHelper.getRowOf(cal.getActualMaximum(Calendar.DAY_OF_MONTH)) + 1;
     }
 
+    /**
+     * Get number of month difference with the current month
+     * @param year
+     * @param month
+     * @return
+     */
+    public static int getMonthDifference(int year, int month){
+        Calendar cal = Calendar.getInstance();
+        int currentMonth = cal.get(Calendar.MONTH);
+        int currentYear = cal.get(Calendar.YEAR);
+
+        return (currentYear - year) * 12 + currentMonth - month;
+    }
+
 }

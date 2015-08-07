@@ -269,8 +269,11 @@ public class FlexibleCalendarView extends LinearLayout implements
             //refresh the previous adapter and deselect the item
             monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % 4).setSelectedItem(null,true);
 
+            //compute the new SelectedDateItem based on the diffence in postion
+            SelectedDateItem newDateItem = computeNewSelectedDateItem(lastPosition - position);
+
             //the month view pager adater will update here again
-            monthViewPagerAdapter.refreshDateAdapters(position % 4);
+            monthViewPagerAdapter.refreshDateAdapters(position % 4, newDateItem);
 
             //update last position
             lastPosition = position;
@@ -290,6 +293,17 @@ public class FlexibleCalendarView extends LinearLayout implements
 
         @Override
         public void onPageScrollStateChanged(int state) {
+        }
+
+        private SelectedDateItem computeNewSelectedDateItem(int difference){
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(selectedDateItem.getYear(),selectedDateItem.getMonth(),1);
+            cal.add(Calendar.MONTH, -difference);
+
+            return new SelectedDateItem(cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH), 1);
+
         }
     }
 
@@ -504,13 +518,58 @@ public class FlexibleCalendarView extends LinearLayout implements
      * move to next month
      */
     public void moveToNextMonth(){
-        monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount()*100)+1,true);
+        moveToPosition(1);
+    }
+
+    /**
+     * move to position with respect to current position
+     * for internal use
+     */
+    private void moveToPosition(int position){
+        monthViewPager.setCurrentItem(lastPosition + position - monthInfPagerAdapter.getRealCount() * 100, true);
     }
 
     /**
      * move to previous month
      */
     public void moveToPreviousMonth(){
-        monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount()*100)-1,true);
+        moveToPosition(-1);
     }
+
+    /**
+     * move the position to the current month
+     */
+    public void goToCurrentMonth(){
+        //check has to go left side or right
+        int monthDifference = FlexibleCalendarHelper
+                .getMonthDifference(selectedDateItem.getYear(),selectedDateItem.getMonth());
+
+        if(monthDifference!=0){
+            moveToPosition(monthDifference);
+        }
+
+        /*if(monthDifference>0){
+            //move right
+            if(monthDifference == 1){
+                moveToPosition(1);
+            }else if(monthDifference == 2){
+                monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount() * 100) + 2, true);
+            }else{
+                //refresh complete adapters
+                //TODO
+
+            }
+        }else if (monthDifference<0){
+            if(monthDifference == -1){
+                moveToPosition(-1);
+            }else if(monthDifference == -2){
+                moveToPosition(-2);
+            }else{
+
+                //refresh adapters TODO
+            }
+        }*/
+
+    }
+
 }

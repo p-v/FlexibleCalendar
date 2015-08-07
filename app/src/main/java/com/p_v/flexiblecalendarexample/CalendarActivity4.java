@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class CalendarActivity4 extends ActionBarActivity {
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, 1);
                 monthTextView.setText(cal.getDisplayName(Calendar.MONTH,
-                        Calendar.LONG, Locale.ENGLISH)+ " "+ year);
+                        Calendar.LONG, Locale.ENGLISH) + " " + year);
 
             }
         });
@@ -86,6 +87,14 @@ public class CalendarActivity4 extends ActionBarActivity {
                     cellView.setTextSize(18);
                 }
                 return cellView;
+            }
+        });
+
+        Button resetButton = (Button)findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarView.goToCurrentMonth();
             }
         });
     }

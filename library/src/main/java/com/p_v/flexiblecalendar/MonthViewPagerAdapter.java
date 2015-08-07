@@ -60,10 +60,10 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth));
     }
 
-    public void refreshDateAdapters(int position){
+    public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem){
         FlexibleCalendarGridAdapter currentAdapter = dateAdapters.get(position);
         //selecting the first date of the month
-        currentAdapter.setSelectedItem(new SelectedDateItem(currentAdapter.getYear(),currentAdapter.getMonth(),1),true);
+        currentAdapter.setSelectedItem(selectedDateItem,true);
 
         int[] nextDate = new int[2];
         FlexibleCalendarHelper.nextMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
