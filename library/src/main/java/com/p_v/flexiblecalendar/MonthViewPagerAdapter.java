@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MonthViewPagerAdapter extends PagerAdapter {
 
-    private static final int VIEWS_IN_PAGER = 4;
+    public static final int VIEWS_IN_PAGER = 4;
 
     private Context context;
     private List<FlexibleCalendarGridAdapter> dateAdapters;
@@ -68,13 +68,14 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         int[] nextDate = new int[2];
         FlexibleCalendarHelper.nextMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
 
-        dateAdapters.get((position + 1) % 4).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 1) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
 
         FlexibleCalendarHelper.nextMonth(nextDate[0], nextDate[1], nextDate);
-        dateAdapters.get((position + 2) % 4).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 2) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
 
         FlexibleCalendarHelper.previousMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
-        dateAdapters.get((position + 3) % 4).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 3) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
+
     }
 
     public FlexibleCalendarGridAdapter getMonthAdapterAtPosition(int position){

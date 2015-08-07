@@ -267,19 +267,19 @@ public class FlexibleCalendarView extends LinearLayout implements
             int direction = position>lastPosition? RIGHT : LEFT;
 
             //refresh the previous adapter and deselect the item
-            monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % 4).setSelectedItem(null,true);
+            monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true);
 
             //compute the new SelectedDateItem based on the diffence in postion
             SelectedDateItem newDateItem = computeNewSelectedDateItem(lastPosition - position);
 
             //the month view pager adater will update here again
-            monthViewPagerAdapter.refreshDateAdapters(position % 4, newDateItem);
+            monthViewPagerAdapter.refreshDateAdapters(position % MonthViewPagerAdapter.VIEWS_IN_PAGER, newDateItem);
 
             //update last position
             lastPosition = position;
 
             //update the currently selected date item
-            FlexibleCalendarGridAdapter adapter = monthViewPagerAdapter.getMonthAdapterAtPosition(position%4);
+            FlexibleCalendarGridAdapter adapter = monthViewPagerAdapter.getMonthAdapterAtPosition(position%MonthViewPagerAdapter.VIEWS_IN_PAGER);
             selectedDateItem = adapter.getSelectedItem();
 
             if(onMonthChangeListener!=null){
