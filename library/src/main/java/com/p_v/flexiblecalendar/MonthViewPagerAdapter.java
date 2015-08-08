@@ -60,8 +60,12 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth));
     }
 
-    public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem){
+    public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){
         FlexibleCalendarGridAdapter currentAdapter = dateAdapters.get(position);
+        if(refreshAll){
+            //refresh all used when go to current month is called to refresh all the adapters
+            currentAdapter.initialize(selectedDateItem.getYear(),selectedDateItem.getMonth());
+        }
         //selecting the first date of the month
         currentAdapter.setSelectedItem(selectedDateItem,true);
 

@@ -160,6 +160,12 @@ public class FlexibleCalendarView extends LinearLayout implements
     private int weekViewBackground;
 
     /**
+     * Reset adapters flag used internally
+     * for tracking go to current month
+     */
+    private boolean resetAdapters;
+
+    /**
      * Currently selected date item
      */
     private SelectedDateItem selectedDateItem;
@@ -273,7 +279,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             SelectedDateItem newDateItem = computeNewSelectedDateItem(lastPosition - position);
 
             //the month view pager adater will update here again
-            monthViewPagerAdapter.refreshDateAdapters(position % MonthViewPagerAdapter.VIEWS_IN_PAGER, newDateItem);
+            monthViewPagerAdapter.refreshDateAdapters(position % MonthViewPagerAdapter.VIEWS_IN_PAGER, newDateItem, resetAdapters);
 
             //update last position
             lastPosition = position;
@@ -286,7 +292,19 @@ public class FlexibleCalendarView extends LinearLayout implements
                 //fire on month change event
                 startDisplayYear = adapter.getYear();
                 startDisplayMonth = adapter.getMonth();
-                onMonthChangeListener.onMonthChange(startDisplayYear, startDisplayMonth,direction);
+                onMonthChangeListener.onMonthChange(startDisplayYear, startDisplayMonth, direction);
+            }
+
+            if(resetAdapters){
+                resetAdapters = false;
+                monthViewPager.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //resetting fake count
+                        monthInfPagerAdapter.setFakeCount(-1);
+                        monthInfPagerAdapter.notifyDataSetChanged();
+                    }
+                });
             }
 
         }
@@ -545,31 +563,14 @@ public class FlexibleCalendarView extends LinearLayout implements
                 .getMonthDifference(selectedDateItem.getYear(),selectedDateItem.getMonth());
 
         if(monthDifference!=0){
+            resetAdapters = true;
+            if(monthDifference<0){
+                //set fake count to avoid freezing in InfiniteViewPager as it iterates to Integer.MAX_VALUE
+                monthInfPagerAdapter.setFakeCount(lastPosition);
+                monthInfPagerAdapter.notifyDataSetChanged();
+            }
             moveToPosition(monthDifference);
         }
-
-        /*if(monthDifference>0){
-            //move right
-            if(monthDifference == 1){
-                moveToPosition(1);
-            }else if(monthDifference == 2){
-                monthViewPager.setCurrentItem((lastPosition - monthInfPagerAdapter.getRealCount() * 100) + 2, true);
-            }else{
-                //refresh complete adapters
-                //TODO
-
-            }
-        }else if (monthDifference<0){
-            if(monthDifference == -1){
-                moveToPosition(-1);
-            }else if(monthDifference == -2){
-                moveToPosition(-2);
-            }else{
-
-                //refresh adapters TODO
-            }
-        }*/
-
     }
 
 }

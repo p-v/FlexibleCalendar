@@ -17,14 +17,20 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     private PagerAdapter adapter;
 
+    private int fakeCount;
+
     public InfinitePagerAdapter(PagerAdapter adapter) {
         this.adapter = adapter;
+        this.fakeCount = -1;
     }
 
     @Override
     public int getCount() {
         if (getRealCount() == 0) {
             return 0;
+        }
+        if(fakeCount!=-1){
+            return fakeCount;
         }
         // warning: scrolling to very high values (1,000,000+) results in
         // strange drawing behaviour
@@ -132,4 +138,14 @@ public class InfinitePagerAdapter extends PagerAdapter {
             Log.d(TAG, message);
         }
     }
+
+    /**
+     * Set the count for the adapter. <br/>
+     * A fake count to set limit the number of pages in the adapter
+     * @param fakeCount count
+     */
+    public void setFakeCount(int fakeCount){
+        this.fakeCount = fakeCount;
+    }
+
 }
