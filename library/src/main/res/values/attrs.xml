@@ -13,10 +13,12 @@
         <attr name="monthDayVerticalSpacing" format="dimension"/>
         <attr name="weekViewBackground" format="reference"/>
         <attr name="monthViewBackground" format="reference"/>
+        <attr name="showDatesOutsideMonth" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="CellState">
         <attr name="state_date_regular" format="boolean"/>
         <attr name="state_date_today" format="boolean"/>
         <attr name="state_date_selected" format="boolean"/>
+        <attr name="state_date_outside_month" format="boolean"/>
     </declare-styleable>
 </resources>

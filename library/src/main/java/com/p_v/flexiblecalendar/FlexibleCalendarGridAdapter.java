@@ -29,10 +29,14 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private SelectedDateItem selectedItem;
     private MonthEventFetcher monthEventFetcher;
     private ICellViewDrawer cellViewDrawer;
+    private boolean showDatesOutsideMonth;
+
+    private static final int SIX_WEEK_DAY_COUNT = 42;
 
 
-    public FlexibleCalendarGridAdapter(Context context, int year, int month ){
+    public FlexibleCalendarGridAdapter(Context context, int year, int month, boolean showDatesOutsideMonth ){
         this.context = context;
+        this.showDatesOutsideMonth = showDatesOutsideMonth;
         initialize(year,month);
     }
 
@@ -45,7 +49,8 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return monthDisplayHelper.getNumberOfDaysInMonth() + monthDisplayHelper.getFirstDayOfMonth() - 1;
+        return showDatesOutsideMonth? SIX_WEEK_DAY_COUNT
+                :monthDisplayHelper.getNumberOfDaysInMonth() + monthDisplayHelper.getFirstDayOfMonth() - 1;
     }
 
     @Override
@@ -104,7 +109,33 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
             }
             cellView.refreshDrawableState();
         }else{
-            cellView.setBackgroundResource(android.R.color.transparent);
+            if(showDatesOutsideMonth){
+                int day = monthDisplayHelper.getDayAt(row,col);
+                cellView.setText(String.valueOf(day));
+                int[] temp = new int[2];
+                //date outside month and less than equal to 12 means it belongs to next month otherwise previous
+                if(day<=12){
+                    FlexibleCalendarHelper.nextMonth(year,month,temp);
+                    cellView.setOnClickListener(new DateClickListener(day, temp[1], temp[0], position));
+                }else{
+                    FlexibleCalendarHelper.previousMonth(year, month, temp);
+                    cellView.setOnClickListener(new DateClickListener(day, temp[1], temp[0], position));
+                }
+
+                cellView.clearAllStates();
+                //select item
+                if(selectedItem!= null && selectedItem.getYear()==temp[0]
+                        && selectedItem.getMonth()==temp[1]
+                        && selectedItem.getDay() ==day){
+                    cellView.addState(BaseCellView.STATE_SELECTED);
+                }else{
+                    cellView.addState(BaseCellView.STATE_OUTSIDE_MONTH);
+                }
+                cellView.refreshDrawableState();
+            } else{
+                cellView.setBackgroundResource(android.R.color.transparent);
+            }
+
         }
     }
 

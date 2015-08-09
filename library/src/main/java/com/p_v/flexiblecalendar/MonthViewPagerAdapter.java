@@ -29,11 +29,15 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private ICellViewDrawer cellViewDrawer;
     private int gridViewHorizontalSpacing;
     private int gridViewVerticalSpacing;
+    private boolean showDatesOutsideMonth;
 
-    public MonthViewPagerAdapter(Context context, int year, int month, FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener){
+    public MonthViewPagerAdapter(Context context, int year, int month,
+                                 FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener,
+                                 boolean showDatesOutsideMonth){
         this.context = context;
         this.dateAdapters = new ArrayList<>(VIEWS_IN_PAGER);
         this.onDateCellItemClickListener = onDateCellItemClickListener;
+        this.showDatesOutsideMonth = showDatesOutsideMonth;
         initializeDateAdapters(year, month);
     }
 
@@ -49,7 +53,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         }
 
         for(int i=0;i<VIEWS_IN_PAGER - 1;i++){
-            dateAdapters.add(new FlexibleCalendarGridAdapter(context,year,month));
+            dateAdapters.add(new FlexibleCalendarGridAdapter(context,year,month,showDatesOutsideMonth));
             if(month==11){
                 year++;
                 month =0;
@@ -57,7 +61,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
                 month++;
             }
         }
-        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth));
+        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth,showDatesOutsideMonth));
     }
 
     public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){

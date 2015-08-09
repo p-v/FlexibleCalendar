@@ -158,6 +158,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     private int monthDayVerticalSpacing;
     private int monthViewBackground;
     private int weekViewBackground;
+    private boolean showDatesOutsideMonth;
 
     /**
      * Reset adapters flag used internally
@@ -217,7 +218,7 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPager = new MonthViewPager(context);
         monthViewPager.setBackgroundResource(monthViewBackground);
         monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(startDisplayYear, startDisplayMonth));
-        monthViewPagerAdapter = new MonthViewPagerAdapter(context, startDisplayYear, startDisplayMonth, this);
+        monthViewPagerAdapter = new MonthViewPagerAdapter(context, startDisplayYear, startDisplayMonth, this,showDatesOutsideMonth);
         monthViewPagerAdapter.setMonthEventFetcher(this);
         monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
 
@@ -253,7 +254,9 @@ public class FlexibleCalendarView extends LinearLayout implements
             monthDayVerticalSpacing = (int)a.getDimension(R.styleable.FlexibleCalendarView_monthDayVerticalSpacing,0);
 
             monthViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_monthViewBackground,android.R.color.transparent);
-            weekViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_weekViewBackground,android.R.color.transparent);
+            weekViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_weekViewBackground, android.R.color.transparent);
+
+            showDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_showDatesOutsideMonth, false);
 
         } finally {
             a.recycle();

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:p-v="http://schemas.android.com/apk/res-auto">
-    <item p-v:state_date_regular="true"
+    xmlns:flexible="http://schemas.android.com/apk/res-auto">
+    <item flexible:state_date_regular="true"
         android:drawable="@drawable/cell_purple_background"/>
-    <item p-v:state_date_today="true"
+    <item flexible:state_date_today="true"
         android:drawable="@drawable/cell_gray_background"/>
-    <item p-v:state_date_selected="true"
+    <item flexible:state_date_selected="true"
         android:drawable="@drawable/cell_red_background"/>
+    <item flexible:state_date_outside_month="true"
+        android:drawable="@drawable/cell_blue_background"/>
 </selector>
