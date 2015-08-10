@@ -6,13 +6,14 @@ import android.view.ViewGroup;
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
+import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
 
 /**
  * Default week cell view drawer
  *
  * @author p-v
  */
-public class WeekdayCellViewImpl implements ICellViewDrawer {
+public class WeekdayCellViewImpl implements IWeekCellViewDrawer {
 
     private FlexibleCalendarView.ICalendarView calendarView;
 

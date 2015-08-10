@@ -6,12 +6,13 @@ import android.view.ViewGroup;
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
+import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 
 /**
  * Default date cell view drawer
  * @author p-v
  */
-public class DateCellViewImpl implements ICellViewDrawer {
+public class DateCellViewImpl implements IDateCellViewDrawer {
 
     private FlexibleCalendarView.ICalendarView calendarView;
 
@@ -25,7 +26,7 @@ public class DateCellViewImpl implements ICellViewDrawer {
     }
 
     @Override
-    public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
-        return calendarView.getCellView(position,convertView,parent);
+    public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentMonth) {
+        return calendarView.getCellView(position,convertView,parent,isWithinCurrentMonth);
     }
 }

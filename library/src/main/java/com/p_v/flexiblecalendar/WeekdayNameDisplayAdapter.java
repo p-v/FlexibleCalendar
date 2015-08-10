@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
+import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 /**
@@ -15,7 +16,7 @@ import com.p_v.fliexiblecalendar.R;
  */
 public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
 
-    private ICellViewDrawer cellViewDrawer;
+    private IWeekCellViewDrawer cellViewDrawer;
 
     public WeekdayNameDisplayAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId,FlexibleCalendarHelper.getWeekDaysList(context));
@@ -23,7 +24,7 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BaseCellView cellView = cellViewDrawer.getCellView(position,convertView,parent);
+        BaseCellView cellView = cellViewDrawer.getCellView(position, convertView, parent);
         if(cellView==null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
@@ -38,11 +39,11 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
         return false;
     }
 
-    public void setCellView(ICellViewDrawer cellView) {
+    public void setCellView(IWeekCellViewDrawer cellView) {
         this.cellViewDrawer = cellView;
     }
 
-    public ICellViewDrawer getCellViewDrawer(){
+    public IWeekCellViewDrawer getCellViewDrawer(){
         return cellViewDrawer;
     }
 

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
+import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private List<FlexibleCalendarGridAdapter> dateAdapters;
     private FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener;
     private FlexibleCalendarGridAdapter.MonthEventFetcher monthEventFetcher;
-    private ICellViewDrawer cellViewDrawer;
+    private IDateCellViewDrawer cellViewDrawer;
     private int gridViewHorizontalSpacing;
     private int gridViewVerticalSpacing;
     private boolean showDatesOutsideMonth;
@@ -143,7 +144,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         this.monthEventFetcher = monthEventFetcher;
     }
 
-    public void setCellViewDrawer(ICellViewDrawer cellViewDrawer){
+    public void setCellViewDrawer(IDateCellViewDrawer cellViewDrawer){
         this.cellViewDrawer = cellViewDrawer;
     }
 

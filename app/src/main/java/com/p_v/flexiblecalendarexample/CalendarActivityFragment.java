@@ -44,7 +44,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override
-            public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentMonth) {
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(getActivity());

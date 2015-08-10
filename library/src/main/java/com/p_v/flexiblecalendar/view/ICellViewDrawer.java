@@ -16,13 +16,4 @@ public interface ICellViewDrawer {
      */
     void setCalendarView(FlexibleCalendarView.ICalendarView calendarView);
 
-    /**
-     * Cell view
-     *
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
-     */
-    BaseCellView getCellView(int position, View convertView, ViewGroup parent);
 }

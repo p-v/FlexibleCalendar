@@ -47,7 +47,7 @@ public class FlexibleCalendarView extends LinearLayout implements
          * @param parent
          * @return
          */
-        BaseCellView getCellView(int position, View convertView, ViewGroup parent);
+        BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentMonth);
 
         /**
          * Cell view for the weekday in the header
@@ -99,7 +99,8 @@ public class FlexibleCalendarView extends LinearLayout implements
     private class DefaultCalendarView implements ICalendarView {
 
         @Override
-        public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+        public BaseCellView getCellView(int position, View convertView, ViewGroup parent,
+                                        boolean isWithinCurrentMonth) {
             BaseCellView cellView = (BaseCellView) convertView;
             if(cellView == null){
                 LayoutInflater inflater = LayoutInflater.from(context);

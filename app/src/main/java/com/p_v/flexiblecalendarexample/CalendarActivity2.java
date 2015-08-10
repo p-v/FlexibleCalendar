@@ -35,7 +35,7 @@ public class CalendarActivity2 extends ActionBarActivity {
         });
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override
-            public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentDate) {
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(CalendarActivity2.this);

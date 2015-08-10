@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
+import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
 import java.util.Calendar;
@@ -28,7 +29,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private OnDateCellItemClickListener onDateCellItemClickListener;
     private SelectedDateItem selectedItem;
     private MonthEventFetcher monthEventFetcher;
-    private ICellViewDrawer cellViewDrawer;
+    private IDateCellViewDrawer cellViewDrawer;
     private boolean showDatesOutsideMonth;
 
     private static final int SIX_WEEK_DAY_COUNT = 42;
@@ -68,7 +69,13 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BaseCellView cellView = cellViewDrawer.getCellView(position, convertView, parent);
+        int row = position/7;
+        int col = position%7;
+
+        //checking if is within current month
+        boolean isWithinCurrentMonth = monthDisplayHelper.isWithinCurrentMonth(row,col);
+
+        BaseCellView cellView = cellViewDrawer.getCellView(position, convertView, parent, isWithinCurrentMonth);
         if(cellView==null){
             cellView = (BaseCellView) convertView;
             if(cellView == null){
@@ -76,18 +83,14 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
                 cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
             }
         }
-        drawDateCell(cellView,position);
+        drawDateCell(cellView,position, isWithinCurrentMonth, row, col);
         return cellView;
     }
 
-    private void drawDateCell(BaseCellView cellView, int position){
-        int row = position/7;
-        int col = position%7;
+    private void drawDateCell(BaseCellView cellView, int position, boolean isWithinCurrentMonth,
+                              int row, int col){
 
-        // TODO make it flexible enough to handle out of month dates.
-        // Currently it handles only dates in the month
-
-        if(monthDisplayHelper.isWithinCurrentMonth(row,col)){
+        if(isWithinCurrentMonth){
             int day = monthDisplayHelper.getDayAt(row,col);
             cellView.setText(String.valueOf(day));
             cellView.setOnClickListener(new DateClickListener(day, month, year, position));
@@ -205,7 +208,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.monthEventFetcher = monthEventFetcher;
     }
 
-    public void setCellViewDrawer(ICellViewDrawer cellViewDrawer){
+    public void setCellViewDrawer(IDateCellViewDrawer cellViewDrawer){
         this.cellViewDrawer = cellViewDrawer;
     }
 
