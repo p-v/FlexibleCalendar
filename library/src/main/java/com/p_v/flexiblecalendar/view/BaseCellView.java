@@ -1,6 +1,7 @@
 package com.p_v.flexiblecalendar.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -29,8 +30,8 @@ public class BaseCellView extends TextView {
     private Paint eventPaint;
 
     private int eventCircleY;
-    private int radius=5;
-    private int padding = 1;
+    private int radius;
+    private int padding;
     private int leftMostPosition = Integer.MIN_VALUE;
     private List<Paint> paintList;
 
@@ -40,15 +41,22 @@ public class BaseCellView extends TextView {
 
     public BaseCellView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public BaseCellView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
-    private void init(){
+    private void init(AttributeSet attrs){
+        TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.BaseCellView);
+        try{
+            radius = (int)a.getDimension(R.styleable.BaseCellView_event_radius,5);
+            padding = (int)a.getDimension(R.styleable.BaseCellView_event_circle_padding,1);
+        }finally {
+            a.recycle();
+        }
         stateSet = new HashSet<>(3);
         eventPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         eventPaint.setStyle(Paint.Style.FILL);

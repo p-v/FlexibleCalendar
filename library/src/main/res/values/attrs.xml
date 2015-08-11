@@ -1,8 +1,7 @@
 <resources>
     <declare-styleable name="BaseCellView">
-        <attr name="textValue" format="string"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="textColor" format="color"/>
+        <attr name="event_radius" format="dimension"/>
+        <attr name="event_circle_padding" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="FlexibleCalendarView">
         <attr name="startDisplayYear" format="integer"/>
