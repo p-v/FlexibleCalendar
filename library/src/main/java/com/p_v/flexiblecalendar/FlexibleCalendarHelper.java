@@ -96,4 +96,16 @@ public class FlexibleCalendarHelper {
         return (currentYear - year) * 12 + currentMonth - month;
     }
 
+    /**
+     * Get number of month difference between two the start and end month/year
+     * @param startYear
+     * @param startMonth
+     * @param endYear
+     * @param endMonth
+     * @return
+     */
+    public static int getMonthDifference(int startYear, int startMonth, int endYear, int endMonth){
+        return (endYear - startYear) * 12 + endMonth - startMonth;
+    }
+
 }

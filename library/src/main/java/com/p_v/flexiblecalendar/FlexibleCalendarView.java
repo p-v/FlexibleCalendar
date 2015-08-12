@@ -172,6 +172,11 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     private SelectedDateItem selectedDateItem;
 
+    /**
+     * Flag to track date click
+     */
+    private boolean isDateClicked;
+
     private int lastPosition;
 
     public FlexibleCalendarView(Context context){
@@ -279,8 +284,16 @@ public class FlexibleCalendarView extends LinearLayout implements
             //refresh the previous adapter and deselect the item
             monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true);
 
-            //compute the new SelectedDateItem based on the difference in position
-            SelectedDateItem newDateItem = computeNewSelectedDateItem(lastPosition - position);
+            SelectedDateItem newDateItem;
+            if(isDateClicked){
+                //set the selectedDateItem from onDateClick as the newDateItem
+                newDateItem = selectedDateItem;
+                isDateClicked = false;
+            }else{
+                //compute the new SelectedDateItem based on the difference in position
+                newDateItem = computeNewSelectedDateItem(lastPosition - position);
+            }
+
 
             //the month view pager adater will update here again
             monthViewPagerAdapter.refreshDateAdapters(position % MonthViewPagerAdapter.VIEWS_IN_PAGER, newDateItem, resetAdapters);
@@ -411,7 +424,22 @@ public class FlexibleCalendarView extends LinearLayout implements
 */
     @Override
     public void onDateClick(SelectedDateItem selectedItem) {
-        this.selectedDateItem = selectedItem;
+        isDateClicked = true;
+        if(selectedDateItem.getYear()!=selectedItem.getYear() || selectedDateItem.getMonth()!=selectedItem.getMonth()){
+            //different month
+            int monthDifference = FlexibleCalendarHelper.getMonthDifference(selectedItem.getYear(),selectedItem.getMonth(),
+                    selectedDateItem.getYear(),selectedDateItem.getMonth());
+            this.selectedDateItem = selectedItem;
+            //move back or forth based on the monthDifference
+            if(monthDifference > 0){
+                moveToPreviousMonth();
+            }else{
+                moveToNextMonth();
+            }
+        }else{
+            //do nothing if same month
+            this.selectedDateItem = selectedItem;
+        }
         if(onDateClickListener!=null) {
             onDateClickListener.onDateClick(selectedItem.getYear(), selectedItem.getMonth(), selectedItem.getDay());
         }

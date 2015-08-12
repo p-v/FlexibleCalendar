@@ -166,13 +166,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
         @Override
         public void onClick(final View v) {
-            if(selectedItem==null){
-                selectedItem = new SelectedDateItem(iYear,iMonth,iDay);
-            }
-
-            selectedItem.setDay(iDay);
-            selectedItem.setMonth(iMonth);
-            selectedItem.setYear(iYear);
+            selectedItem = new SelectedDateItem(iYear,iMonth,iDay);
 
             notifyDataSetChanged();
 
