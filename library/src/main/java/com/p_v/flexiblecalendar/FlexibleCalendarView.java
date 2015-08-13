@@ -173,9 +173,9 @@ public class FlexibleCalendarView extends LinearLayout implements
     private SelectedDateItem selectedDateItem;
 
     /**
-     * Internal flag to track date click
+     * Internal flag to override the computed date on month change
      */
-    private boolean isDateClicked;
+    private boolean shouldOverrideComputedDate;
 
     private int lastPosition;
 
@@ -285,10 +285,10 @@ public class FlexibleCalendarView extends LinearLayout implements
             monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true);
 
             SelectedDateItem newDateItem;
-            if(isDateClicked){
-                //set the selectedDateItem from onDateClick as the newDateItem
+            if(shouldOverrideComputedDate){
+                //set the selectedDateItem as the newDateItem
                 newDateItem = selectedDateItem;
-                isDateClicked = false;
+                shouldOverrideComputedDate = false;
             }else{
                 //compute the new SelectedDateItem based on the difference in position
                 newDateItem = computeNewSelectedDateItem(lastPosition - position);
@@ -425,7 +425,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     @Override
     public void onDateClick(SelectedDateItem selectedItem) {
         if(selectedDateItem.getYear()!=selectedItem.getYear() || selectedDateItem.getMonth()!=selectedItem.getMonth()){
-            isDateClicked = true;
+            shouldOverrideComputedDate = true;
             //different month
             int monthDifference = FlexibleCalendarHelper.getMonthDifference(selectedItem.getYear(),selectedItem.getMonth(),
                     selectedDateItem.getYear(),selectedDateItem.getMonth());
@@ -462,6 +462,15 @@ public class FlexibleCalendarView extends LinearLayout implements
             cal.add(Calendar.DATE, -1);
 
             if(selectedDateItem.getMonth()!=cal.get(Calendar.MONTH)) {
+                //update selected date item
+                selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
+                selectedDateItem.setMonth(cal.get(Calendar.MONTH));
+                selectedDateItem.setYear(cal.get(Calendar.YEAR));
+
+                //set true to override the computed date in onPageSelected method
+                shouldOverrideComputedDate = true;
+
+                //scroll to previous month
                 moveToPreviousMonth();
             }else{
                 selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
@@ -603,6 +612,17 @@ public class FlexibleCalendarView extends LinearLayout implements
             }
             moveToPosition(monthDifference);
         }
+    }
+
+    /**
+     * Flag to show dates outside the month. Default value is false which will show only the dates
+     * within the month
+     *
+     * @param showDatesOutsideMonth set true to show the dates outside month
+     */
+    public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
+        this.showDatesOutsideMonth = showDatesOutsideMonth;
+        this.invalidate();
     }
 
 }
