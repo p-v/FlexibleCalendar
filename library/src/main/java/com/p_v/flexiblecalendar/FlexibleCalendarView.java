@@ -173,7 +173,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     private SelectedDateItem selectedDateItem;
 
     /**
-     * Flag to track date click
+     * Internal flag to track date click
      */
     private boolean isDateClicked;
 
@@ -424,8 +424,8 @@ public class FlexibleCalendarView extends LinearLayout implements
 */
     @Override
     public void onDateClick(SelectedDateItem selectedItem) {
-        isDateClicked = true;
         if(selectedDateItem.getYear()!=selectedItem.getYear() || selectedDateItem.getMonth()!=selectedItem.getMonth()){
+            isDateClicked = true;
             //different month
             int monthDifference = FlexibleCalendarHelper.getMonthDifference(selectedItem.getYear(),selectedItem.getMonth(),
                     selectedDateItem.getYear(),selectedDateItem.getMonth());
