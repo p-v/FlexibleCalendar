@@ -62,6 +62,11 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 }
                 return cellView;
             }
+
+            @Override
+            public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+                return String.valueOf(defaultValue.charAt(0));
+            }
         });
         calendarView.setOnMonthChangeListener(this);
         calendarView.setOnDateClickListener(this);

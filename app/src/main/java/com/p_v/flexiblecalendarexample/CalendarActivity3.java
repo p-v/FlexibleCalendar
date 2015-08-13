@@ -46,6 +46,11 @@ public class CalendarActivity3 extends ActionBarActivity {
                 }
                 return cellView;
             }
+
+            @Override
+            public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+                return null;
+            }
         });
 
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {

@@ -58,6 +58,14 @@ public class FlexibleCalendarView extends LinearLayout implements
          * @return
          */
         BaseCellView getWeekdayCellView(int position, View convertView, ViewGroup parent);
+
+        /**
+         * Get display value for the day of week
+         * @param dayOfWeek the value of day of week where 1 is SUNDAY, 2 is MONDAY ... 7 is SATURDAY
+         * @param defaultValue the default value for the day of week
+         * @return
+         */
+        String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue);
     }
 
     /**
@@ -117,6 +125,11 @@ public class FlexibleCalendarView extends LinearLayout implements
                 cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
             }
             return cellView;
+        }
+
+        @Override
+        public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+            return null;
         }
     }
 

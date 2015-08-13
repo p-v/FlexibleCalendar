@@ -1,6 +1,7 @@
 package com.p_v.flexiblecalendar;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
+
+import java.util.Calendar;
 
 /**
  * @author p-v
@@ -29,8 +32,12 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
             LayoutInflater inflater = LayoutInflater.from(getContext());
             cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
         }
-        String item = getItem(position);
-        cellView.setText(item);
+        String defaultValue = getItem(position);
+        String weekdayName = cellViewDrawer.getWeekDayName(position + 1,defaultValue); //adding 1 as week days starts from 1 in Calendar
+        if(TextUtils.isEmpty(weekdayName)){
+            weekdayName = defaultValue;
+        }
+        cellView.setText(weekdayName);
         return cellView;
     }
 

@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
 import com.p_v.flexiblecalendar.view.BaseCellView;
-import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
 
 /**
@@ -29,5 +28,10 @@ public class WeekdayCellViewImpl implements IWeekCellViewDrawer {
     @Override
     public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
         return calendarView.getWeekdayCellView(position, convertView, parent);
+    }
+
+    @Override
+    public String getWeekDayName(int dayOfWeek, String defaultValue) {
+        return calendarView.getDayOfWeekDisplayValue(dayOfWeek,defaultValue);
     }
 }

@@ -16,4 +16,12 @@ public interface IWeekCellViewDrawer extends ICellViewDrawer {
      * @return
      */
     BaseCellView getCellView(int position, View convertView, ViewGroup parent);
+
+    /**
+     * Display value for the day of week
+     * @param dayOfWeek
+     * @param defaultValue
+     * @return
+     */
+    String getWeekDayName(int dayOfWeek, String defaultValue);
 }

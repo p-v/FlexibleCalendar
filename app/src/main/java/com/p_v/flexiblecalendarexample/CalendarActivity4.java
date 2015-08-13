@@ -85,6 +85,11 @@ public class CalendarActivity4 extends ActionBarActivity {
                 }
                 return cellView;
             }
+
+            @Override
+            public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+                return null;
+            }
         });
 
         Button resetButton = (Button)findViewById(R.id.reset_button);
