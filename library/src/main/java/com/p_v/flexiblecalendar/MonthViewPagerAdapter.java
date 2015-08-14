@@ -62,7 +62,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
                 month++;
             }
         }
-        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth,showDatesOutsideMonth));
+        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth));
     }
 
     public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){
@@ -155,6 +155,13 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     public void setSpacing(int horizontalSpacing, int verticalSpacing){
         this.gridViewHorizontalSpacing = horizontalSpacing;
         this.gridViewVerticalSpacing = verticalSpacing;
+    }
+
+    public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
+        this.showDatesOutsideMonth = showDatesOutsideMonth;
+        for(FlexibleCalendarGridAdapter adapter : dateAdapters){
+            adapter.setShowDatesOutsideMonth(showDatesOutsideMonth);
+        }
     }
 
 }

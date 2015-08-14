@@ -61,6 +61,7 @@ public class CalendarActivity4 extends ActionBarActivity {
 
             }
         });
+        calendarView.setShowDatesOutsideMonth(true);
 
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override

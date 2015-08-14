@@ -206,4 +206,9 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.cellViewDrawer = cellViewDrawer;
     }
 
+    public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
+        this.showDatesOutsideMonth = showDatesOutsideMonth;
+        this.notifyDataSetChanged();
+    }
+
 }
