@@ -137,6 +137,8 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
                 cellView.refreshDrawableState();
             } else{
                 cellView.setBackgroundResource(android.R.color.transparent);
+                cellView.setText(null);
+                cellView.setOnClickListener(null);
             }
 
         }

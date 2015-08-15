@@ -636,7 +636,14 @@ public class FlexibleCalendarView extends LinearLayout implements
     public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
         this.showDatesOutsideMonth = showDatesOutsideMonth;
         monthViewPagerAdapter.setShowDatesOutsideMonth(showDatesOutsideMonth);
+    }
 
+    /**
+     * Get the show dates outside month flag
+     * @return true if showDatesOutsideMonth is enable, false otherwise
+     */
+    public boolean getShowDatesOutsideMonth(){
+        return showDatesOutsideMonth;
     }
 
 }
