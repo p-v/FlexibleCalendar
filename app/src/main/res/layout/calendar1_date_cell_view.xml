@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.p_v.flexiblecalendar.view.SquareCellView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.p_v.flexiblecalendarexample.widget.ExampleCellView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:flexible="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:gravity="center"
     android:background="@drawable/cell_background"
     flexible:event_radius="3dp"
+    android:textColor="#E6E6CD"
     flexible:event_circle_padding="2dp"
     android:layout_height="match_parent"
     />

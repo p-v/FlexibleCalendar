@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     xmlns:support="http://schemas.android.com/apk/res-auto"
-    xmlns:flexible="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.p_v.flexiblecalendarexample.CalendarActivityFragment">
@@ -18,12 +18,54 @@
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
+        android:background="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    
-    <com.p_v.flexiblecalendarexample.CalendarDetailView
-        android:id="@+id/detail_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button android:id="@+id/move_to_previous_date"
+            android:text="Move To Previous Date"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button android:id="@+id/move_to_next_date"
+            android:text="Move to Next Date"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button android:id="@+id/move_to_previous_month"
+            android:text="Move to previous month"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button android:id="@+id/move_to_next_month"
+            android:text="Move to next month"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <Button android:id="@+id/go_to_current_month"
+        android:text="Go to current month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/show_dates_outside_month"
+        android:text="Show dates outside month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
 </LinearLayout>

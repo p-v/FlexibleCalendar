@@ -1,6 +1,6 @@
 # FlexibleCalendar
 
-A customizable calendar for android.
+A customizable calendar for android. Now, customize your calendar your way.
 
 ![Demo](demo/demo.gif)
 
@@ -31,6 +31,10 @@ calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
         }
         return cellView;
     }
+    @Override
+    public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+        return String.valueOf(defaultValue.charAt(0));
+    }
 });
 ```
 
@@ -44,6 +48,33 @@ calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
     }
 });
 ```
+
+Track the month change event by setting the <b>OnMonthChangeListener</b>
+```java
+calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
+    @Override
+    public void onMonthChange(int year, int month, int direction) {
+        //do things on month change
+    }
+});
+```
+
+Display circular events in different colors and sizes.
+
+![Events](demo/screenshot-1.jpg)
+
+Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
+ using `FlexibleCalendarView#showDatesOutsideMonth()` method.
+
+![Outside Month](demo/screenshot-2.jpg) &nbsp; ![Without Outside Month](demo/screenshot-3.jpg)
+
+<b>Navigate the calendar:</b>
+
+`goToCurrentMonth` - Go the the current month <br/>
+`moveToNextDate` - Select the date after the current selection <br/>
+`moveToPreviousDate` - Select the date before the current selection <br/>
+`moveToNextMonth` - Move the view to the next month from the current visible month <br/>
+`moveToPreviousMonth` - Move the view to the previous month from the current visible month <br/>
 
 <b>Customizable display cells with different states:</b>
 
