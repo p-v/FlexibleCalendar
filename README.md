@@ -4,6 +4,16 @@ A customizable calendar for android. Now, customize your calendar your way.
 
 ![Demo](demo/demo.gif)
 
+**Gradle**
+
+Add dependencies in `build.gradle`,
+
+```groovy
+dependencies {
+    compile 'com.p_v:flexiblecalendar:0.1.1'
+}
+```
+
 Customize <b>FlexibleCalendar</b> using the <b>ICalendarView</b> interface
 
 ```java
