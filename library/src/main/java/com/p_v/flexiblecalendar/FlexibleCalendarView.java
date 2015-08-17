@@ -113,7 +113,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             BaseCellView cellView = (BaseCellView) convertView;
             if(cellView == null){
                 LayoutInflater inflater = LayoutInflater.from(context);
-                cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+                cellView = (BaseCellView)inflater.inflate(R.layout.square_cell_layout,null);
             }
             return cellView;
         }
@@ -123,7 +123,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             BaseCellView cellView = (BaseCellView) convertView;
             if(cellView == null){
                 LayoutInflater inflater = LayoutInflater.from(context);
-                cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+                cellView = (BaseCellView)inflater.inflate(R.layout.square_cell_layout,null);
             }
             return cellView;
         }
