@@ -5,11 +5,14 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.p_v.fliexiblecalendar.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +23,15 @@ import java.util.Set;
  */
 public class BaseCellView extends TextView {
 
+    public static final int TODAY = 0;
+    public static final int SELECTED = 1;
+    public static final int REGULAR = 3;
+    public static final int SELECTED_TODAY = 4;
+    public static final int OUTSIDE_MONTH = 5;
+
+    @IntDef({TODAY,SELECTED,REGULAR,SELECTED_TODAY,OUTSIDE_MONTH})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CellType{}
 
     public static final int STATE_TODAY = R.attr.state_date_today;
     public static final int STATE_REGULAR = R.attr.state_date_regular;

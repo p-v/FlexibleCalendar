@@ -35,11 +35,18 @@ public class CalendarActivity2 extends ActionBarActivity {
         });
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override
-            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentDate) {
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(CalendarActivity2.this);
                     cellView = (BaseCellView) inflater.inflate(R.layout.calendar2_date_cell_view, null);
+                }
+                if (cellType == BaseCellView.TODAY){
+                    cellView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                    cellView.setTextSize(15);
+                } else {
+                    cellView.setTextColor(getResources().getColor(android.R.color.white));
+                    cellView.setTextSize(12);
                 }
                 return cellView;
             }

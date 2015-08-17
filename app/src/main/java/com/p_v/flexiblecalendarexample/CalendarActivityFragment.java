@@ -46,13 +46,13 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override
-            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentMonth) {
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, @BaseCellView.CellType int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
                     cellView = (BaseCellView) inflater.inflate(R.layout.calendar1_date_cell_view, null);
                 }
-                if(!isWithinCurrentMonth){
+                if(cellType == BaseCellView.OUTSIDE_MONTH){
                     cellView.setTextColor(getResources().getColor(R.color.date_outside_month_text_color_activity_1));
                 }
                 return cellView;

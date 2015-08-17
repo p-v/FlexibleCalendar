@@ -1,8 +1,7 @@
 package com.p_v.flexiblecalendarexample;
 
-import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +27,7 @@ public class CalendarActivity3 extends ActionBarActivity {
 
         calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
             @Override
-            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, boolean isWithinCurrentMonth) {
+            public BaseCellView getCellView(int position, View convertView, ViewGroup parent, int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(CalendarActivity3.this);

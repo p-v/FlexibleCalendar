@@ -13,9 +13,9 @@ public interface IDateCellViewDrawer extends ICellViewDrawer {
      * @param position
      * @param convertView
      * @param parent
-     * @param isWithinCurrentMonth
+     * @param cellType
      * @return
      */
     BaseCellView getCellView(int position, View convertView, ViewGroup parent,
-                             boolean isWithinCurrentMonth);
+                             @BaseCellView.CellType int cellType);
 }
