@@ -1,7 +1,6 @@
 package com.p_v.flexiblecalendar.view;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -10,7 +9,6 @@ import com.p_v.fliexiblecalendar.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +16,7 @@ import java.util.Set;
 /**
  * @author p-v
  */
-public class BaseCellView extends TextView {
+public abstract class BaseCellView extends TextView {
 
     public static final int TODAY = 0;
     public static final int SELECTED = 1;
@@ -36,7 +34,6 @@ public class BaseCellView extends TextView {
     public static final int STATE_OUTSIDE_MONTH = R.attr.state_date_outside_month;
 
     private Set<Integer> stateSet;
-    private List<Paint> paintList;
 
     public BaseCellView(Context context) {
         super(context);
@@ -78,26 +75,10 @@ public class BaseCellView extends TextView {
         }
     }
 
-    public void setEvents(List<Integer> colorList){
-        if(colorList!=null){
-            paintList = new ArrayList<>(colorList.size());
-            for(Integer e : colorList){
-                Paint eventPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                eventPaint.setStyle(Paint.Style.FILL);
-                eventPaint.setColor(getContext().getResources().getColor(e));
-                paintList.add(eventPaint);
-            }
-            invalidate();
-            requestLayout();
-        }
-    }
+    public abstract void setEvents(List<Integer> colorList);
 
     public Set<Integer> getStateSet(){
         return stateSet;
-    }
-
-    protected List<Paint> getPaintList(){
-        return paintList;
     }
 
 }

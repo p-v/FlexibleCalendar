@@ -5,16 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.IntDef;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import com.p_v.fliexiblecalendar.R;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +22,7 @@ public class CircularEventCellView extends BaseCellView {
     private int radius;
     private int padding;
     private int leftMostPosition = Integer.MIN_VALUE;
+    private List<Paint> paintList;
 
     public CircularEventCellView(Context context) {
         super(context);
@@ -57,7 +53,6 @@ public class CircularEventCellView extends BaseCellView {
         super.onSizeChanged(w, h, oldw, oldh);
 
         Set<Integer> stateSet = getStateSet();
-        List<Paint> paintList = getPaintList();
 
         //initialize paint objects only if there is no state or just one state i.e. the regular day state
         if((stateSet==null || stateSet.isEmpty()
@@ -88,7 +83,6 @@ public class CircularEventCellView extends BaseCellView {
         super.onDraw(canvas);
 
         Set<Integer> stateSet = getStateSet();
-        List<Paint> paintList = getPaintList();
 
         // draw only if there is no state or just one state i.e. the regular day state
         if((stateSet==null || stateSet.isEmpty() || (stateSet.size() ==1
@@ -102,6 +96,21 @@ public class CircularEventCellView extends BaseCellView {
 
     private int calculateStartPoint(int offset){
         return leftMostPosition + offset *(2*(radius+padding)) ;
+    }
+
+    @Override
+    public void setEvents(List<Integer> colorList){
+        if(colorList!=null){
+            paintList = new ArrayList<>(colorList.size());
+            for(Integer e : colorList){
+                Paint eventPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                eventPaint.setStyle(Paint.Style.FILL);
+                eventPaint.setColor(getContext().getResources().getColor(e));
+                paintList.add(eventPaint);
+            }
+            invalidate();
+            requestLayout();
+        }
     }
 
 }
