@@ -10,7 +10,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:0.1.1'
+    compile 'com.p_v:flexiblecalendar:0.5.0'
 }
 ```
 
@@ -19,12 +19,19 @@ Customize <b>FlexibleCalendar</b> using the <b>ICalendarView</b> interface
 ```java
 calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
     @Override
-    public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
+    public BaseCellView getCellView(int position, View convertView, ViewGroup parent, int cellType) {
         //customize the date cells
         BaseCellView cellView = (BaseCellView) convertView;
         if (cellView == null) {
             LayoutInflater inflater = LayoutInflater.from(CalendarActivity4.this);
             cellView = (BaseCellView) inflater.inflate(R.layout.calendar3_date_cell_view, null);
+        }
+        if (cellType == BaseCellView.TODAY){
+            cellView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            cellView.setTextSize(15);
+        } else {
+            cellView.setTextColor(getResources().getColor(android.R.color.white));
+            cellView.setTextSize(12);
         }
         return cellView;
     }
