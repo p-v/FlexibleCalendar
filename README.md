@@ -10,7 +10,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:0.5.0'
+    compile 'com.p_v:flexiblecalendar:0.5.1'
 }
 ```
 

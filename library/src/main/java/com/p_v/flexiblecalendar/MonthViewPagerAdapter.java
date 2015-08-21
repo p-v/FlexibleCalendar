@@ -164,4 +164,8 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         }
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }

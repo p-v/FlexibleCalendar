@@ -1,3 +1,6 @@
+0.5.1
+=====
+- Added `refresh` method to refresh the views
 0.5.0
 ======
 - Added cellType for customizing the cell based on type
