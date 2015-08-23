@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.Event;
 import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
@@ -192,7 +193,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     }
 
     interface MonthEventFetcher {
-        List<Integer> getEventsForTheDay(int year,int month,int day);
+        List<? extends Event> getEventsForTheDay(int year,int month,int day);
     }
 
     public void setOnDateClickListener(OnDateCellItemClickListener onDateCellItemClickListener){

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.Event;
 import com.p_v.flexiblecalendar.view.impl.DateCellViewImpl;
 import com.p_v.flexiblecalendar.view.impl.WeekdayCellViewImpl;
 import com.p_v.fliexiblecalendar.R;
@@ -73,7 +74,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Event Data Provider used for displaying events for a particular date
      */
     public interface EventDataProvider {
-        List<Integer> getEventsForTheDay(int year,int month, int day);
+        List<? extends Event> getEventsForTheDay(int year,int month, int day);
     }
 
     /**
@@ -516,7 +517,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     }
 
     @Override
-    public List<Integer> getEventsForTheDay(int year, int month, int day) {
+    public List<? extends Event> getEventsForTheDay(int year, int month, int day) {
         return eventDataProvider == null?
                 null : eventDataProvider.getEventsForTheDay(year, month, day);
     }

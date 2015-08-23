@@ -75,7 +75,7 @@ public abstract class BaseCellView extends TextView {
         }
     }
 
-    public abstract void setEvents(List<Integer> colorList);
+    public abstract void setEvents(List<? extends Event> colorList);
 
     public Set<Integer> getStateSet(){
         return stateSet;
