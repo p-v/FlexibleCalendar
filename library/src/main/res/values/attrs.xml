@@ -1,7 +1,13 @@
 <resources>
-    <declare-styleable name="BaseCellView">
+    <declare-styleable name="CircularEventCellView">
         <attr name="event_radius" format="dimension"/>
         <attr name="event_circle_padding" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="EventCountCellView">
+        <attr name="event_count_radius" format="dimension"/>
+        <attr name="event_background" format="color"/>
+        <attr name="event_count_text_color" format="color"/>
+        <attr name="event_text_size" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="FlexibleCalendarView">
         <attr name="startDisplayYear" format="integer"/>

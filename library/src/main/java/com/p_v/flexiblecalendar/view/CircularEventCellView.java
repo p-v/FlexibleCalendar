@@ -39,10 +39,10 @@ public class CircularEventCellView extends BaseCellView {
     }
 
     private void init(AttributeSet attrs){
-        TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.BaseCellView);
+        TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.CircularEventCellView);
         try{
-            radius = (int)a.getDimension(R.styleable.BaseCellView_event_radius,5);
-            padding = (int)a.getDimension(R.styleable.BaseCellView_event_circle_padding,1);
+            radius = (int)a.getDimension(R.styleable.CircularEventCellView_event_radius,5);
+            padding = (int)a.getDimension(R.styleable.CircularEventCellView_event_circle_padding,1);
         }finally {
             a.recycle();
         }

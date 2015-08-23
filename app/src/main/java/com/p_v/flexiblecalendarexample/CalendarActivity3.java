@@ -58,8 +58,26 @@ public class CalendarActivity3 extends ActionBarActivity {
                 if(year==2015 && month== 7 && day ==25){
                     List<CalendarEvent> colorLst = new ArrayList<>();
                     colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    return colorLst;
+                }
+                if(year==2015 && month== 7 && day ==22){
+                    List<CalendarEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
                     colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
                     colorLst.add(new CalendarEvent(android.R.color.holo_purple));
+                    return colorLst;
+                }
+                if(year==2015 && month== 7 && day ==28){
+                    List<CalendarEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    colorLst.add(new CalendarEvent(android.R.color.holo_purple));
+                    return colorLst;
+                }
+                if(year==2015 && month== 7 && day ==29){
+                    List<CalendarEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
                     return colorLst;
                 }
                 return null;
