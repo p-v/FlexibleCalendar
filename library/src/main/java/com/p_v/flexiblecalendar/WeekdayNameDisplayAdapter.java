@@ -12,17 +12,30 @@ import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 /**
  * @author p-v
  */
-public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
+public class WeekdayNameDisplayAdapter extends ArrayAdapter<WeekdayNameDisplayAdapter.WeekDay>{
 
     private IWeekCellViewDrawer cellViewDrawer;
+    private WeekDay[] weekDayArray;
 
-    public WeekdayNameDisplayAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId,FlexibleCalendarHelper.getWeekDaysList(context));
+    public WeekdayNameDisplayAdapter(Context context, int textViewResourceId, int startDayOfTheWeek) {
+        super(context, textViewResourceId);
+        initializeWeekDays(startDayOfTheWeek);
+    }
+
+    @Override
+    public WeekDay getItem(int position) {
+        return weekDayArray[position];
+    }
+
+    @Override
+    public int getCount() {
+        return weekDayArray.length;
     }
 
     @Override
@@ -32,13 +45,32 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
             LayoutInflater inflater = LayoutInflater.from(getContext());
             cellView = (BaseCellView)inflater.inflate(R.layout.square_cell_layout,null);
         }
-        String defaultValue = getItem(position);
-        String weekdayName = cellViewDrawer.getWeekDayName(position + 1,defaultValue); //adding 1 as week days starts from 1 in Calendar
+        WeekDay weekDay = getItem(position);
+        String weekdayName = cellViewDrawer.getWeekDayName(weekDay.index, weekDay.displayValue); //adding 1 as week days starts from 1 in Calendar
         if(TextUtils.isEmpty(weekdayName)){
-            weekdayName = defaultValue;
+            weekdayName = weekDay.displayValue;
         }
         cellView.setText(weekdayName);
         return cellView;
+    }
+
+    private void initializeWeekDays(int startDayOfTheWeek){
+        DateFormatSymbols symbols = new DateFormatSymbols(FlexibleCalendarHelper.getLocale(getContext()));
+        String[] weekDayList = symbols.getShortWeekdays(); // weekday list has 8 elements
+        weekDayArray = new WeekDay[7];
+        //reordering array based on the start day of the week
+        for(int i = 1; i<weekDayList.length; i++){
+            WeekDay weekDay = new WeekDay();
+            weekDay.index = i;
+            weekDay.displayValue = weekDayList[i];
+            int tempVal = i - startDayOfTheWeek;
+            weekDayArray[tempVal <0 ? 7 + tempVal : tempVal] = weekDay;
+        }
+    }
+
+    public class WeekDay{
+        int index;
+        String displayValue;
     }
 
     @Override

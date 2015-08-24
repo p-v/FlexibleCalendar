@@ -19,6 +19,7 @@
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
         android:background="#000000"
+        support:startDayOfTheWeek="MONDAY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

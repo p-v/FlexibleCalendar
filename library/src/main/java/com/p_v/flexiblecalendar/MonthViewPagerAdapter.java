@@ -32,14 +32,16 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private int gridViewVerticalSpacing;
     private boolean showDatesOutsideMonth;
     private boolean refreshMonthViewAdpater;
+    private int startDayOfTheWeek;
 
     public MonthViewPagerAdapter(Context context, int year, int month,
                                  FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener,
-                                 boolean showDatesOutsideMonth){
+                                 boolean showDatesOutsideMonth, int startDayOfTheWeek){
         this.context = context;
         this.dateAdapters = new ArrayList<>(VIEWS_IN_PAGER);
         this.onDateCellItemClickListener = onDateCellItemClickListener;
         this.showDatesOutsideMonth = showDatesOutsideMonth;
+        this.startDayOfTheWeek = startDayOfTheWeek;
         initializeDateAdapters(year, month);
     }
 
@@ -55,7 +57,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         }
 
         for(int i=0;i<VIEWS_IN_PAGER - 1;i++){
-            dateAdapters.add(new FlexibleCalendarGridAdapter(context,year,month,showDatesOutsideMonth));
+            dateAdapters.add(new FlexibleCalendarGridAdapter(context,year,month,showDatesOutsideMonth,startDayOfTheWeek));
             if(month==11){
                 year++;
                 month =0;
@@ -63,14 +65,14 @@ public class MonthViewPagerAdapter extends PagerAdapter {
                 month++;
             }
         }
-        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth));
+        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth,startDayOfTheWeek));
     }
 
     public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){
         FlexibleCalendarGridAdapter currentAdapter = dateAdapters.get(position);
         if(refreshAll){
             //refresh all used when go to current month is called to refresh all the adapters
-            currentAdapter.initialize(selectedDateItem.getYear(),selectedDateItem.getMonth());
+            currentAdapter.initialize(selectedDateItem.getYear(),selectedDateItem.getMonth(),startDayOfTheWeek);
         }
         //selecting the first date of the month
         currentAdapter.setSelectedItem(selectedDateItem,true);
@@ -78,13 +80,13 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         int[] nextDate = new int[2];
         FlexibleCalendarHelper.nextMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
 
-        dateAdapters.get((position + 1) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 1) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1],startDayOfTheWeek);
 
         FlexibleCalendarHelper.nextMonth(nextDate[0], nextDate[1], nextDate);
-        dateAdapters.get((position + 2) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 2) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1],startDayOfTheWeek);
 
         FlexibleCalendarHelper.previousMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
-        dateAdapters.get((position + 3) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1]);
+        dateAdapters.get((position + 3) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1],startDayOfTheWeek);
 
     }
 

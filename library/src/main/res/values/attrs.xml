@@ -19,6 +19,15 @@
         <attr name="weekViewBackground" format="reference"/>
         <attr name="monthViewBackground" format="reference"/>
         <attr name="showDatesOutsideMonth" format="boolean"/>
+        <attr name="startDayOfTheWeek" format="enum">
+            <enum name="SUNDAY" value="1"/>
+            <enum name="MONDAY" value="2"/>
+            <enum name="TUESDAY" value="3"/>
+            <enum name="WEDNESDAY" value="4"/>
+            <enum name="THURSDAY" value="5"/>
+            <enum name="FRIDAY" value="6"/>
+            <enum name="SATURDAY" value="7"/>
+        </attr>
     </declare-styleable>
     <declare-styleable name="CellState">
         <attr name="state_date_regular" format="boolean"/>

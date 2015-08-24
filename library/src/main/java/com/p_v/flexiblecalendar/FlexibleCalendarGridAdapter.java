@@ -35,16 +35,17 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private static final int SIX_WEEK_DAY_COUNT = 42;
 
 
-    public FlexibleCalendarGridAdapter(Context context, int year, int month, boolean showDatesOutsideMonth ){
+    public FlexibleCalendarGridAdapter(Context context, int year, int month,
+                                       boolean showDatesOutsideMonth, int startDayOfTheWeek){
         this.context = context;
         this.showDatesOutsideMonth = showDatesOutsideMonth;
-        initialize(year,month);
+        initialize(year,month,startDayOfTheWeek);
     }
 
-    public void initialize(int year, int month){
+    public void initialize(int year, int month, int startDayOfTheWeek){
         this.year = year;
         this.month = month;
-        this.monthDisplayHelper = new MonthDisplayHelper(year,month);
+        this.monthDisplayHelper = new MonthDisplayHelper(year,month,startDayOfTheWeek);
         this.calendar = FlexibleCalendarHelper.getLocalizedCalendar(context);
     }
 

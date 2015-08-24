@@ -192,6 +192,11 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     private boolean shouldOverrideComputedDate;
 
+    /**
+     * First day of the week in the calendar
+     */
+    private int startDayOfTheWeek;
+
     private int lastPosition;
 
     public FlexibleCalendarView(Context context){
@@ -227,7 +232,8 @@ public class FlexibleCalendarView extends LinearLayout implements
         weekDisplayView.setVerticalSpacing(weekdayVerticalSpacing);
         weekDisplayView.setColumnWidth(GridView.STRETCH_COLUMN_WIDTH);
         weekDisplayView.setBackgroundResource(weekViewBackground);
-        weekdayDisplayAdapter = new WeekdayNameDisplayAdapter(getContext(), android.R.layout.simple_list_item_1);
+        weekdayDisplayAdapter = new WeekdayNameDisplayAdapter(getContext(),
+                android.R.layout.simple_list_item_1,startDayOfTheWeek);
 
         //setting default week cell view
         weekdayDisplayAdapter.setCellView(new WeekdayCellViewImpl(calendarView));
@@ -239,7 +245,8 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPager = new MonthViewPager(context);
         monthViewPager.setBackgroundResource(monthViewBackground);
         monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth));
-        monthViewPagerAdapter = new MonthViewPagerAdapter(context, displayYear, displayMonth, this,showDatesOutsideMonth);
+        monthViewPagerAdapter = new MonthViewPagerAdapter(context, displayYear, displayMonth, this,
+                showDatesOutsideMonth, startDayOfTheWeek);
         monthViewPagerAdapter.setMonthEventFetcher(this);
         monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
 
@@ -278,6 +285,12 @@ public class FlexibleCalendarView extends LinearLayout implements
             weekViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_weekViewBackground, android.R.color.transparent);
 
             showDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_showDatesOutsideMonth, false);
+
+            startDayOfTheWeek = a.getInt(R.styleable.FlexibleCalendarView_startDayOfTheWeek, Calendar.SUNDAY);
+            if(startDayOfTheWeek<1 || startDayOfTheWeek>7){
+                // setting the start day to sunday in case of invalid input
+                startDayOfTheWeek = Calendar.SUNDAY;
+            }
 
         } finally {
             a.recycle();
