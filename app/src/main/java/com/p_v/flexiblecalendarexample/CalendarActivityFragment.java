@@ -113,7 +113,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         Button prevDateBtn = (Button)view.findViewById(R.id.move_to_previous_date);
         Button nextMonthBtn = (Button)view.findViewById(R.id.move_to_next_month);
         Button prevMonthBtn = (Button)view.findViewById(R.id.move_to_previous_month);
-        Button goToCurrentMonthBtn = (Button)view.findViewById(R.id.go_to_current_month);
+        Button goToCurrentDayBtn = (Button)view.findViewById(R.id.go_to_current_day);
         Button showDatesOutSideMonthBtn = (Button)view.findViewById(R.id.show_dates_outside_month);
 
         nextDateBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,10 +140,10 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 calendarView.moveToPreviousMonth();
             }
         });
-        goToCurrentMonthBtn.setOnClickListener(new View.OnClickListener() {
+        goToCurrentDayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendarView.goToCurrentMonth();
+                calendarView.goToCurrentDay();
             }
         });
 

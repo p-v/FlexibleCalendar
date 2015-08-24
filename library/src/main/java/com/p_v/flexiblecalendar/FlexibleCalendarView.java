@@ -643,6 +643,38 @@ public class FlexibleCalendarView extends LinearLayout implements
     }
 
     /**
+     * move the position to today's date
+     */
+    public void goToCurrentDay(){
+        //check has to go left side or right
+        int monthDifference = FlexibleCalendarHelper
+                .getMonthDifference(displayYear, displayMonth);
+
+        //current date
+        Calendar cal = Calendar.getInstance();
+        //update selected date item
+        selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
+        selectedDateItem.setMonth(cal.get(Calendar.MONTH));
+        selectedDateItem.setYear(cal.get(Calendar.YEAR));
+
+        if(monthDifference!=0){
+            resetAdapters = true;
+            if(monthDifference<0){
+                //set fake count to avoid freezing in InfiniteViewPager as it iterates to Integer.MAX_VALUE
+                monthInfPagerAdapter.setFakeCount(lastPosition);
+                monthInfPagerAdapter.notifyDataSetChanged();
+            }
+            //set true to override the computed date in onPageSelected method
+            shouldOverrideComputedDate = true;
+            moveToPosition(monthDifference);
+        }else{
+            FlexibleCalendarGridAdapter currentlyVisibleAdapter = monthViewPagerAdapter
+                    .getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER);
+            currentlyVisibleAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * Flag to show dates outside the month. Default value is false which will show only the dates
      * within the month
      *

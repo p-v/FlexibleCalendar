@@ -59,8 +59,8 @@
 
     </LinearLayout>
 
-    <Button android:id="@+id/go_to_current_month"
-        android:text="Go to current month"
+    <Button android:id="@+id/go_to_current_day"
+        android:text="Go to current day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
