@@ -13,14 +13,14 @@ import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
  */
 public class DateCellViewImpl implements IDateCellViewDrawer {
 
-    private FlexibleCalendarView.ICalendarView calendarView;
+    private FlexibleCalendarView.CalendarView calendarView;
 
-    public DateCellViewImpl(FlexibleCalendarView.ICalendarView calendarView){
+    public DateCellViewImpl(FlexibleCalendarView.CalendarView calendarView){
         this.calendarView = calendarView;
     }
 
     @Override
-    public void setCalendarView(FlexibleCalendarView.ICalendarView calendarView) {
+    public void setCalendarView(FlexibleCalendarView.CalendarView calendarView) {
         this.calendarView = calendarView;
     }
 

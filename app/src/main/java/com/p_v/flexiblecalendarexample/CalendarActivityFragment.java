@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.entity.CalendarEvent;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.SquareCellView;
 
@@ -44,7 +45,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
-        calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+        calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
             public BaseCellView getCellView(int position, View convertView, ViewGroup parent, @BaseCellView.CellType int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;

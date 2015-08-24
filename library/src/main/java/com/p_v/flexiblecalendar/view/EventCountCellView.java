@@ -3,11 +3,11 @@ package com.p_v.flexiblecalendar.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 
+import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.fliexiblecalendar.R;
 
 import java.util.List;

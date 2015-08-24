@@ -1,15 +1,15 @@
 package com.p_v.flexiblecalendarexample;
 
-import com.p_v.flexiblecalendar.view.Event;
+import com.p_v.flexiblecalendar.entity.Event;
 
 /**
  * @author p-v
  */
-public class CalendarEvent implements Event {
+public class CustomEvent implements Event {
 
     private int color;
 
-    public CalendarEvent(int color){
+    public CustomEvent(int color){
         this.color = color;
     }
 

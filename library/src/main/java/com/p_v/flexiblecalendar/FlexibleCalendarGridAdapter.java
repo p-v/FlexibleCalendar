@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
-import com.p_v.flexiblecalendar.view.Event;
+import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
 

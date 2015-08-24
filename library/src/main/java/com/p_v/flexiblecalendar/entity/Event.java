@@ -1,4 +1,4 @@
-package com.p_v.flexiblecalendar.view;
+package com.p_v.flexiblecalendar.entity;
 
 /**
  * @author p-v

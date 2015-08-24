@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
-import com.p_v.flexiblecalendar.view.Event;
+import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.flexiblecalendar.view.impl.DateCellViewImpl;
 import com.p_v.flexiblecalendar.view.impl.WeekdayCellViewImpl;
 import com.p_v.fliexiblecalendar.R;
@@ -39,7 +39,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     /**
      * Customize Calendar using this interface
      */
-    public interface ICalendarView {
+    public interface CalendarView {
         /**
          * Cell view for the month
          *
@@ -106,7 +106,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     /**
      * Default calendar view for internal usage
      */
-    private class DefaultCalendarView implements ICalendarView {
+    private class DefaultCalendarView implements CalendarView {
 
         @Override
         public BaseCellView getCellView(int position, View convertView, ViewGroup parent,
@@ -163,7 +163,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     private OnDateClickListener onDateClickListener;
 
     private EventDataProvider eventDataProvider;
-    private ICalendarView calendarView;
+    private CalendarView calendarView;
 
     private int displayYear;
     private int displayMonth;
@@ -527,7 +527,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * and layout
      * @param calendar
      */
-    public void setCalendarView(ICalendarView calendar){
+    public void setCalendarView(CalendarView calendar){
         this.calendarView = calendar;
         monthViewPagerAdapter.getCellViewDrawer().setCalendarView(calendarView);
         weekdayDisplayAdapter.getCellViewDrawer().setCalendarView(calendarView);

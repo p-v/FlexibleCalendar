@@ -25,7 +25,7 @@ public class CalendarActivity3 extends ActionBarActivity {
         calendarView.setMonthViewHorizontalSpacing(10);
         calendarView.setMonthViewVerticalSpacing(10);
 
-        calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+        calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
             public BaseCellView getCellView(int position, View convertView, ViewGroup parent, int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;
@@ -54,30 +54,30 @@ public class CalendarActivity3 extends ActionBarActivity {
 
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
-            public List<CalendarEvent> getEventsForTheDay(int year, int month, int day) {
+            public List<CustomEvent> getEventsForTheDay(int year, int month, int day) {
                 if(year==2015 && month== 7 && day ==25){
-                    List<CalendarEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    List<CustomEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
                     return colorLst;
                 }
                 if(year==2015 && month== 7 && day ==22){
-                    List<CalendarEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
-                    colorLst.add(new CalendarEvent(android.R.color.holo_purple));
+                    List<CustomEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
+                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
+                    colorLst.add(new CustomEvent(android.R.color.holo_purple));
                     return colorLst;
                 }
                 if(year==2015 && month== 7 && day ==28){
-                    List<CalendarEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
-                    colorLst.add(new CalendarEvent(android.R.color.holo_purple));
+                    List<CustomEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
+                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
+                    colorLst.add(new CustomEvent(android.R.color.holo_purple));
                     return colorLst;
                 }
                 if(year==2015 && month== 7 && day ==29){
-                    List<CalendarEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CalendarEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    List<CustomEvent> colorLst = new ArrayList<>();
+                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
+                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
                     return colorLst;
                 }
                 return null;

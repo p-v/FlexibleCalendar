@@ -5,6 +5,7 @@ import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.fliexiblecalendar.R;
 
 import java.lang.annotation.Retention;
