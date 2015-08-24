@@ -65,11 +65,6 @@ calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
     }
 });
 ```
-Customize the cells and events by extending the class **BaseCellView**. 
-
-Existing cells include **CircularEventCellView**, **SquareCellView** and **EventCountCellView**.
-
-
 Track the month change event by setting the **OnMonthChangeListener**
 ```java
 calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
@@ -83,6 +78,11 @@ calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeList
 Display events in different styles.
 
 ![Circular Multiple Events](demo/screenshot-1.jpg) &nbsp; ![Events with count](demo/screenshot-4.jpg)
+
+Customize the cells and events by extending the class **BaseCellView**. 
+
+Existing cells include **CircularEventCellView**, **SquareCellView** and **EventCountCellView**.
+
 
 Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
  using `FlexibleCalendarView#showDatesOutsideMonth()` method.
