@@ -77,6 +77,8 @@ calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeList
 });
 ```
 
+**Customizations:**
+
 Display events in different styles.
 
 ![Circular Multiple Events](demo/screenshot-1.jpg) &nbsp; ![Events with count](demo/screenshot-4.jpg)
@@ -84,7 +86,6 @@ Display events in different styles.
 Customize the cells and events by extending the class **BaseCellView**. 
 
 Existing cells include **CircularEventCellView**, **SquareCellView** and **EventCountCellView**.
-
 
 Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
  using `FlexibleCalendarView#showDatesOutsideMonth()` method.
