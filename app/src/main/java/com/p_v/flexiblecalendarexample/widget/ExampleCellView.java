@@ -4,11 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.p_v.flexiblecalendar.view.BaseCellView;
+import com.p_v.flexiblecalendar.view.CircularEventCellView;
+
+import java.util.List;
 
 /**
  * @author p-v
  */
-public class ExampleCellView extends BaseCellView {
+public class ExampleCellView extends CircularEventCellView {
 
     public ExampleCellView(Context context) {
         super(context);

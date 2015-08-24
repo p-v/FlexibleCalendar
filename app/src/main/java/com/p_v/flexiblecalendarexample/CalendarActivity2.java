@@ -33,7 +33,7 @@ public class CalendarActivity2 extends ActionBarActivity {
                 Toast.makeText(CalendarActivity2.this, cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " " + year, Toast.LENGTH_SHORT).show();
             }
         });
-        calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+        calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
             public BaseCellView getCellView(int position, View convertView, ViewGroup parent, int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;

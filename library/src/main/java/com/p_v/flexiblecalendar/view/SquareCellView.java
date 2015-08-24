@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 /**
  * Created by p-v on 15/07/15.
  */
-public class SquareCellView extends BaseCellView {
+public class SquareCellView extends CircularEventCellView {
 
     public SquareCellView(Context context) {
         super(context);

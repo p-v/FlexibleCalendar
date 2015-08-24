@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.entity.CalendarEvent;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.SquareCellView;
 
@@ -44,7 +45,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
-        calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+        calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
             public BaseCellView getCellView(int position, View convertView, ViewGroup parent, @BaseCellView.CellType int cellType) {
                 BaseCellView cellView = (BaseCellView) convertView;
@@ -77,19 +78,19 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         calendarView.setOnDateClickListener(this);
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
-            public List<Integer> getEventsForTheDay(int year, int month, int day) {
+            public List<CalendarEvent> getEventsForTheDay(int year, int month, int day) {
                 if (year == 2015 && month == 8 && day == 12) {
-                    List<Integer> eventColors = new ArrayList<Integer>(2);
-                    eventColors.add(android.R.color.holo_blue_light);
-                    eventColors.add(android.R.color.holo_purple);
+                    List<CalendarEvent> eventColors = new ArrayList<>(2);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
                     return eventColors;
                 }
                 if (year == 2015 && month == 8 && day == 7 ||
                         year == 2015 && month == 8 && day == 29 ||
                         year == 2015 && month == 8 && day == 5 ||
                         year == 2015 && month == 8 && day == 9) {
-                    List<Integer> eventColors = new ArrayList<Integer>(1);
-                    eventColors.add(android.R.color.holo_blue_light);
+                    List<CalendarEvent> eventColors = new ArrayList<>(1);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
                     return eventColors;
                 }
 
@@ -97,10 +98,10 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                         year == 2015 && month == 8 && day == 22 ||
                         year == 2015 && month == 8 && day == 18 ||
                         year == 2015 && month == 9 && day == 11) {
-                    List<Integer> eventColors = new ArrayList<Integer>(3);
-                    eventColors.add(android.R.color.holo_red_dark);
-                    eventColors.add(android.R.color.holo_orange_light);
-                    eventColors.add(android.R.color.holo_purple);
+                    List<CalendarEvent> eventColors = new ArrayList<>(3);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_orange_light));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
                     return eventColors;
                 }
 

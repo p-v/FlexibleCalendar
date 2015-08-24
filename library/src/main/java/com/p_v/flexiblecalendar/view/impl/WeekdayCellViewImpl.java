@@ -14,14 +14,14 @@ import com.p_v.flexiblecalendar.view.IWeekCellViewDrawer;
  */
 public class WeekdayCellViewImpl implements IWeekCellViewDrawer {
 
-    private FlexibleCalendarView.ICalendarView calendarView;
+    private FlexibleCalendarView.CalendarView calendarView;
 
-    public WeekdayCellViewImpl(FlexibleCalendarView.ICalendarView calendarView){
+    public WeekdayCellViewImpl(FlexibleCalendarView.CalendarView calendarView){
         this.calendarView = calendarView;
     }
 
     @Override
-    public void setCalendarView(FlexibleCalendarView.ICalendarView calendarView) {
+    public void setCalendarView(FlexibleCalendarView.CalendarView calendarView) {
         this.calendarView = calendarView;
     }
 

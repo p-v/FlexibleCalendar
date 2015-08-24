@@ -30,7 +30,7 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<String>{
         BaseCellView cellView = cellViewDrawer.getCellView(position, convertView, parent);
         if(cellView==null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            cellView = (BaseCellView)inflater.inflate(R.layout.base_cell_layout,null);
+            cellView = (BaseCellView)inflater.inflate(R.layout.square_cell_layout,null);
         }
         String defaultValue = getItem(position);
         String weekdayName = cellViewDrawer.getWeekDayName(position + 1,defaultValue); //adding 1 as week days starts from 1 in Calendar
