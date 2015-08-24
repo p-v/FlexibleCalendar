@@ -223,4 +223,9 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void setFirstDayOfTheWeek(int firstDayOfTheWeek){
+        monthDisplayHelper = new MonthDisplayHelper(year,month,firstDayOfTheWeek);
+        this.notifyDataSetChanged();
+    }
+
 }

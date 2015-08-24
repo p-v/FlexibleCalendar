@@ -86,4 +86,9 @@ public class WeekdayNameDisplayAdapter extends ArrayAdapter<WeekdayNameDisplayAd
         return cellViewDrawer;
     }
 
+    public void setStartDayOfTheWeek(int startDayOfTheWeek){
+        initializeWeekDays(startDayOfTheWeek);
+        this.notifyDataSetChanged();
+    }
+
 }

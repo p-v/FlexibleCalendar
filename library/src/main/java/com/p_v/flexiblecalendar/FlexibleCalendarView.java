@@ -700,4 +700,33 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPagerAdapter.refreshAdapters();
     }
 
+    /**
+     * <p>Set the start day of week.</p>
+     *
+     * SUNDAY = 1,
+     * MONDAY = 2,
+     * TUESDAY = 3,
+     * WEDNESDAY = 4,
+     * THURSDAY = 5,
+     * FRIDAY = 6,
+     * SATURDAY = 7
+     *
+     * @param startDayOfTheWeek Add values between 1 to 7. Defaults to 1 if entered outside boundary
+     */
+    public void setStartDayOfTheWeek(int startDayOfTheWeek){
+        this.startDayOfTheWeek = startDayOfTheWeek;
+        if(startDayOfTheWeek<1 || startDayOfTheWeek > 7){
+            startDayOfTheWeek = 1;
+        }
+        monthViewPagerAdapter.setStartDayOfTheWeek(startDayOfTheWeek);
+        weekdayDisplayAdapter.setStartDayOfTheWeek(startDayOfTheWeek);
+    }
+
+    /**
+     * @return start day of the week
+     */
+    public int getStartDayOfTheWeek(){
+        return startDayOfTheWeek;
+    }
+
 }

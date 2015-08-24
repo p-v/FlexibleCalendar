@@ -27,6 +27,7 @@ public class CalendarActivity4 extends ActionBarActivity {
         setContentView(R.layout.activity_calendary_activity4);
 
         final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
+        calendarView.setStartDayOfTheWeek(Calendar.MONDAY);
 
         ImageView leftArrow = (ImageView)findViewById(R.id.left_arrow);
         ImageView rightArrow = (ImageView)findViewById(R.id.right_arrow);

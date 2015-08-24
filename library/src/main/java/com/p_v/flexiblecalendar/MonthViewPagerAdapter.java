@@ -65,7 +65,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
                 month++;
             }
         }
-        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth,startDayOfTheWeek));
+        dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth, startDayOfTheWeek));
     }
 
     public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){
@@ -86,7 +86,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         dateAdapters.get((position + 2) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1],startDayOfTheWeek);
 
         FlexibleCalendarHelper.previousMonth(currentAdapter.getYear(), currentAdapter.getMonth(), nextDate);
-        dateAdapters.get((position + 3) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1],startDayOfTheWeek);
+        dateAdapters.get((position + 3) % VIEWS_IN_PAGER).initialize(nextDate[0], nextDate[1], startDayOfTheWeek);
 
     }
 
@@ -180,4 +180,12 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         this.notifyDataSetChanged();
         this.refreshMonthViewAdpater = false;
     }
+
+    public void setStartDayOfTheWeek(int startDayOfTheWeek){
+        this.startDayOfTheWeek = startDayOfTheWeek;
+        for(FlexibleCalendarGridAdapter adapter : dateAdapters){
+            adapter.setFirstDayOfTheWeek(startDayOfTheWeek);
+        }
+    }
+
 }
