@@ -1,6 +1,6 @@
 # FlexibleCalendar
 
-A customizable calendar for android. 
+A customizable calendar for android with customizable events.
 
 ![Demo](demo/demo.gif)
 

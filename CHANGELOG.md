@@ -1,3 +1,6 @@
+1.0.0
+=====
+- Customize date cell by adding custom events. Events are now customizable
 0.5.1
 =====
 - Added `refresh` method to refresh the views
