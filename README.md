@@ -12,7 +12,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:1.0.0'
+    compile 'com.p_v:flexiblecalendar:1.1.0'
 }
 ```
 
@@ -89,24 +89,28 @@ Existing cells include **CircularEventCellView**, **SquareCellView** and **Event
 Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
  using `FlexibleCalendarView#showDatesOutsideMonth()` method.
 
+ Set the first day of the week using `FlexibleCalendarView#setStartDayOfTheWeek` method or through xml
+ by setting the attribute `startDayOfTheWeek`.
+
 ![Outside Month](demo/screenshot-2.jpg) &nbsp; ![Without Outside Month](demo/screenshot-3.jpg)
 
-<b>Navigate the calendar:</b>
+**Navigate the calendar:**
 
+`goToCurrentDay` - Go the the current day <br/>
 `goToCurrentMonth` - Go the the current month <br/>
 `moveToNextDate` - Select the date after the current selection <br/>
 `moveToPreviousDate` - Select the date before the current selection <br/>
 `moveToNextMonth` - Move the view to the next month from the current visible month <br/>
 `moveToPreviousMonth` - Move the view to the previous month from the current visible month <br/>
 
-<b>Customizable display cells with different states:</b>
+**Customizable display cells with different states:**
 
 `state_date_regular` - Regular date<br/>
 `state_date_today` - Today's date<br/>
 `state_date_selected` - Selected date<br/>
 `state_date_outside_month` - Date lying outside month but in current month view<br/>
 
-<b>Sample cell background:</b>
+**Sample cell background:**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

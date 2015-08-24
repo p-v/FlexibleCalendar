@@ -1,3 +1,8 @@
+1.1.0
+=====
+- Add method `goToCurrentDay`
+- Add customization to set start day of the week.
+
 1.0.0
 =====
 - Customize date cell by adding custom events. Events are now customizable
