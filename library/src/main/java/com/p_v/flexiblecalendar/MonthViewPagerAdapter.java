@@ -31,6 +31,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
     private int gridViewHorizontalSpacing;
     private int gridViewVerticalSpacing;
     private boolean showDatesOutsideMonth;
+    private boolean refreshMonthViewAdpater;
 
     public MonthViewPagerAdapter(Context context, int year, int month,
                                  FlexibleCalendarGridAdapter.OnDateCellItemClickListener onDateCellItemClickListener,
@@ -166,6 +167,15 @@ public class MonthViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        return POSITION_NONE;
+        if(refreshMonthViewAdpater){
+            return POSITION_NONE;
+        }
+        return POSITION_UNCHANGED;
+    }
+
+    public void refreshAdapters(){
+        this.refreshMonthViewAdpater = true;
+        this.notifyDataSetChanged();
+        this.refreshMonthViewAdpater = false;
     }
 }

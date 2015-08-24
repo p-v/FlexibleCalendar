@@ -12,14 +12,44 @@ import com.p_v.flexiblecalendar.FlexibleCalendarView;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalendarActivity3 extends ActionBarActivity {
+
+    private Map<Integer,List<CustomEvent>> eventMap;
+
+    private void  initializeEvents(){
+        eventMap = new HashMap<>();
+        List<CustomEvent> colorLst = new ArrayList<>();
+        colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
+        eventMap.put(25,colorLst);
+
+        List<CustomEvent> colorLst1 = new ArrayList<>();
+        colorLst1.add(new CustomEvent(android.R.color.holo_red_dark));
+        colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
+        colorLst1.add(new CustomEvent(android.R.color.holo_purple));
+        eventMap.put(22,colorLst1);
+
+        List<CustomEvent> colorLst2= new ArrayList<>();
+        colorLst2.add(new CustomEvent(android.R.color.holo_red_dark));
+        colorLst2.add(new CustomEvent(android.R.color.holo_blue_light));
+        colorLst2.add(new CustomEvent(android.R.color.holo_purple));
+        eventMap.put(28,colorLst1);
+
+        List<CustomEvent> colorLst3 = new ArrayList<>();
+        colorLst3.add(new CustomEvent(android.R.color.holo_red_dark));
+        colorLst3.add(new CustomEvent(android.R.color.holo_blue_light));
+        eventMap.put(29,colorLst1);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_activity3);
+
+        initializeEvents();
 
         final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
         calendarView.setMonthViewHorizontalSpacing(10);
@@ -55,35 +85,26 @@ public class CalendarActivity3 extends ActionBarActivity {
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
             public List<CustomEvent> getEventsForTheDay(int year, int month, int day) {
-                if (year == 2015 && month == 7 && day == 25) {
-                    List<CustomEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
-                    return colorLst;
-                }
-                if (year == 2015 && month == 7 && day == 22) {
-                    List<CustomEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
-                    colorLst.add(new CustomEvent(android.R.color.holo_purple));
-                    return colorLst;
-                }
-                if (year == 2015 && month == 7 && day == 28) {
-                    List<CustomEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
-                    colorLst.add(new CustomEvent(android.R.color.holo_purple));
-                    return colorLst;
-                }
-                if (year == 2015 && month == 7 && day == 29) {
-                    List<CustomEvent> colorLst = new ArrayList<>();
-                    colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
-                    colorLst.add(new CustomEvent(android.R.color.holo_blue_light));
-                    return colorLst;
-                }
-                return null;
+                return getEvents(year,month,day);
             }
         });
 
+        findViewById(R.id.update_events_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<CustomEvent> colorLst1 = new ArrayList<>();
+                colorLst1.add(new CustomEvent(android.R.color.holo_red_dark));
+                colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
+                colorLst1.add(new CustomEvent(android.R.color.holo_purple));
+                eventMap.put(2,colorLst1);
+                calendarView.refresh();
+            }
+        });
+
+    }
+
+    public List<CustomEvent> getEvents(int year, int month, int day){
+        return eventMap.get(day);
     }
 
     @Override

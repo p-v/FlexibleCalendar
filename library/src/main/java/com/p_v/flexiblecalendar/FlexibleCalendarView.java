@@ -652,7 +652,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Refresh the calendar view. Invalidate and redraw all the cells
      */
     public void refresh(){
-        monthViewPagerAdapter.notifyDataSetChanged();
+        monthViewPagerAdapter.refreshAdapters();
     }
 
 }
