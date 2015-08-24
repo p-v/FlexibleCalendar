@@ -1,6 +1,6 @@
 # FlexibleCalendar
 
-A customizable calendar for android. Now, customize your calendar your way.
+A customizable calendar for android. 
 
 ![Demo](demo/demo.gif)
 
@@ -14,10 +14,10 @@ dependencies {
 }
 ```
 
-Customize <b>FlexibleCalendar</b> using the <b>ICalendarView</b> interface
+Customize **FlexibleCalendar** using the **CalendarView** interface
 
 ```java
-calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
+calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
     @Override
     public BaseCellView getCellView(int position, View convertView, ViewGroup parent) {
         //customize the date cells
@@ -48,18 +48,22 @@ calendarView.setCalendarView(new FlexibleCalendarView.ICalendarView() {
 });
 ```
 
-Display events for a day using the <b>EventDataProvider</b>
+Display events for a day using the **EventDataProvider**
 
 ```java
 calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
     @Override
-    public List<Integer> getEventsForTheDay(int year, int month, int day) {
+    public List<? extends Event> getEventsForTheDay(int year, int month, int day) {
         return getEventColorList(year,month,day);
     }
 });
 ```
+Customize the cells and events by extending the class **BaseCellView**. 
 
-Track the month change event by setting the <b>OnMonthChangeListener</b>
+Existing cells include **CircularEventCellView**, **SquareCellView** and **EventCountCellView**.
+
+
+Track the month change event by setting the **OnMonthChangeListener**
 ```java
 calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
     @Override
@@ -69,9 +73,9 @@ calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeList
 });
 ```
 
-Display circular events in different colors and sizes.
+Display events in different styles.
 
-![Events](demo/screenshot-1.jpg)
+![Circular Multiple Events](demo/screenshot-1.jpg) &nbsp; ![Events with count](demo/screenshot-4.jpg)
 
 Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
  using `FlexibleCalendarView#showDatesOutsideMonth()` method.
