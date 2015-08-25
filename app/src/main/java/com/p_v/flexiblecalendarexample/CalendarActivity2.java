@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -41,7 +44,7 @@ public class CalendarActivity2 extends ActionBarActivity {
                     LayoutInflater inflater = LayoutInflater.from(CalendarActivity2.this);
                     cellView = (BaseCellView) inflater.inflate(R.layout.calendar2_date_cell_view, null);
                 }
-                if (cellType == BaseCellView.TODAY){
+                if (cellType == BaseCellView.TODAY) {
                     cellView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                     cellView.setTextSize(15);
                 } else {
@@ -63,6 +66,32 @@ public class CalendarActivity2 extends ActionBarActivity {
 
             @Override
             public String getDayOfWeekDisplayValue(int dayOfWeek, String defaultValue) {
+                return null;
+            }
+        });
+
+        calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
+            @Override
+            public List<? extends Event> getEventsForTheDay(int year, int month, int day) {
+                if(year==2015 && month == 7 && day == 25){
+                    List<CustomEvent> colorLst1 = new ArrayList<>();
+                    colorLst1.add(new CustomEvent(android.R.color.holo_green_dark));
+                    colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
+                    colorLst1.add(new CustomEvent(android.R.color.holo_purple));
+                    return colorLst1;
+                }
+                if(year==2015 && month == 7 && day == 8){
+                    List<CustomEvent> colorLst1 = new ArrayList<>();
+                    colorLst1.add(new CustomEvent(android.R.color.holo_green_dark));
+                    colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
+                    colorLst1.add(new CustomEvent(android.R.color.holo_purple));
+                    return colorLst1;
+                }
+                if(year==2015 && month == 7 && day == 5){
+                    List<CustomEvent> colorLst1 = new ArrayList<>();
+                    colorLst1.add(new CustomEvent(android.R.color.holo_purple));
+                    return colorLst1;
+                }
                 return null;
             }
         });
