@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
+import com.p_v.flexiblecalendar.exception.HighValueException;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.flexiblecalendar.view.impl.DateCellViewImpl;
@@ -25,6 +26,7 @@ import com.p_v.fliexiblecalendar.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -477,7 +479,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * @return currently selected date
      */
     public SelectedDateItem getSelectedDateItem(){
-        return selectedDateItem;
+        return selectedDateItem.clone();
     }
 
     /**
@@ -727,6 +729,54 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     public int getStartDayOfTheWeek(){
         return startDayOfTheWeek;
+    }
+
+    public void selectDate(Date date) throws HighValueException{
+        if(date == null) return;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        selectDate(calendar);
+    }
+
+    public void selectDate(Calendar calendar) throws HighValueException{
+        if(calendar==null) return;
+
+        selectDate(calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    public void selectDate(int newYear, int newMonth, int newDay) throws HighValueException{
+        int monthDifference = FlexibleCalendarHelper
+                .getMonthDifference(selectedDateItem.getYear(),selectedDateItem.getMonth(),
+                        newYear,newMonth);
+
+        int offsetValue = monthViewPager.getOffsetAmount();
+        if(Math.abs(monthDifference) > 20000){
+            throw new HighValueException();
+        }
+
+        selectedDateItem.setDay(newDay);
+        selectedDateItem.setMonth(newMonth);
+        selectedDateItem.setYear(newYear);
+
+        if(monthDifference!=0){
+            //different month
+            resetAdapters = true;
+            if(monthDifference<0){
+                //set fake count to avoid freezing in InfiniteViewPager as it iterates to Integer.MAX_VALUE
+                monthInfPagerAdapter.setFakeCount(lastPosition);
+                monthInfPagerAdapter.notifyDataSetChanged();
+            }
+            //set true to override the computed date in onPageSelected method
+            shouldOverrideComputedDate = true;
+            moveToPosition(monthDifference);
+        }else{
+            monthViewPagerAdapter
+                    .getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER)
+                    .setSelectedItem(selectedDateItem, true);
+        }
+
     }
 
 }

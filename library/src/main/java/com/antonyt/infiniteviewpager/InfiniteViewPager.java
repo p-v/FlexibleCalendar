@@ -58,7 +58,7 @@ public class InfiniteViewPager extends ViewPager {
         }
     }
 
-    private int getOffsetAmount() {
+    public int getOffsetAmount() {
         if (getAdapter().getCount() == 0) {
             return 0;
         }

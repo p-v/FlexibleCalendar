@@ -15,6 +15,11 @@ public class SelectedDateItem {
         this.day = day;
     }
 
+    @Override
+    public SelectedDateItem clone() {
+        return new SelectedDateItem(year,month,day);
+    }
+
     public int getDay() {
         return day;
     }
