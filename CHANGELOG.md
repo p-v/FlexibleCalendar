@@ -1,3 +1,7 @@
+1.1.1
+=====
+- Add method `selectDate`.
+
 1.1.0
 =====
 - Add method `goToCurrentDay`

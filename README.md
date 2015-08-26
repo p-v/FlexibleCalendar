@@ -12,7 +12,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:1.1.0'
+    compile 'com.p_v:flexiblecalendar:1.1.1'
 }
 ```
 
@@ -97,6 +97,7 @@ Choose whether to show dates outside month or not by setting the `showDatesOutsi
 
 **Navigate the calendar:**
 
+`selectDate` - Scroll and select the provided date
 `goToCurrentDay` - Go the the current day <br/>
 `goToCurrentMonth` - Go the the current month <br/>
 `moveToNextDate` - Select the date after the current selection <br/>
