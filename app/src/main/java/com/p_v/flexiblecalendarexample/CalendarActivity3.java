@@ -1,5 +1,6 @@
 package com.p_v.flexiblecalendarexample;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -7,19 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.entity.CalendarEvent;
+import com.p_v.flexiblecalendar.exception.HighValueException;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalendarActivity3 extends ActionBarActivity {
+public class CalendarActivity3 extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
 
     private Map<Integer,List<CustomEvent>> eventMap;
-
+    private FlexibleCalendarView calendarView;
     private void  initializeEvents(){
         eventMap = new HashMap<>();
         List<CustomEvent> colorLst = new ArrayList<>();
@@ -51,9 +57,15 @@ public class CalendarActivity3 extends ActionBarActivity {
 
         initializeEvents();
 
-        final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
+        calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
         calendarView.setMonthViewHorizontalSpacing(10);
         calendarView.setMonthViewVerticalSpacing(10);
+        calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
+            @Override
+            public void onMonthChange(int year, int month, @FlexibleCalendarView.Direction int direction) {
+                Toast.makeText(CalendarActivity3.this,""+year+" "+ (month+1),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
@@ -85,7 +97,7 @@ public class CalendarActivity3 extends ActionBarActivity {
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
             public List<CustomEvent> getEventsForTheDay(int year, int month, int day) {
-                return getEvents(year,month,day);
+                return getEvents(year, month, day);
             }
         });
 
@@ -96,11 +108,22 @@ public class CalendarActivity3 extends ActionBarActivity {
                 colorLst1.add(new CustomEvent(android.R.color.holo_red_dark));
                 colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
                 colorLst1.add(new CustomEvent(android.R.color.holo_purple));
-                eventMap.put(2,colorLst1);
+                eventMap.put(2, colorLst1);
                 calendarView.refresh();
             }
         });
 
+        findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                DatePickerDialog dialog= new DatePickerDialog(CalendarActivity3.this,CalendarActivity3.this,
+                        calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+
+            }
+        });
     }
 
     public List<CustomEvent> getEvents(int year, int month, int day){
@@ -127,5 +150,14 @@ public class CalendarActivity3 extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        try{
+            calendarView.selectDate(year,monthOfYear,dayOfMonth);
+        }catch(HighValueException e){
+            e.printStackTrace();
+        }
     }
 }

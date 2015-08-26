@@ -3,7 +3,7 @@ package com.p_v.flexiblecalendar.exception;
 /**
  * @author p-v
  */
-public class HighValueException extends Exception {
+public class HighValueException extends RuntimeException{
 
     public HighValueException(){
         super();

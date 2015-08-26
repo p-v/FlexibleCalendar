@@ -143,6 +143,8 @@ public class FlexibleCalendarView extends LinearLayout implements
     public static final int RIGHT = 0;
     public static final int LEFT = 1;
 
+    private static final int HIGH_VALUE = 20000;
+
     private InfinitePagerAdapter monthInfPagerAdapter;
     private WeekdayNameDisplayAdapter weekdayDisplayAdapter;
     private MonthViewPagerAdapter monthViewPagerAdapter;
@@ -731,14 +733,23 @@ public class FlexibleCalendarView extends LinearLayout implements
         return startDayOfTheWeek;
     }
 
-    public void selectDate(Date date) throws HighValueException{
+    /**
+     * Select the date in the FlexibleCalendar
+     *
+     * @param date
+     */
+    public void selectDate(Date date) {
         if(date == null) return;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         selectDate(calendar);
     }
 
-    public void selectDate(Calendar calendar) throws HighValueException{
+    /**
+     * Select the date in the FlexibleCalendar
+     * @param calendar
+     */
+    public void selectDate(Calendar calendar) {
         if(calendar==null) return;
 
         selectDate(calendar.get(Calendar.YEAR),
@@ -746,14 +757,20 @@ public class FlexibleCalendarView extends LinearLayout implements
 
     }
 
-    public void selectDate(int newYear, int newMonth, int newDay) throws HighValueException{
+    /**
+     * Select the date in the FlexibleCalendar
+     * @param newYear
+     * @param newMonth
+     * @param newDay
+     */
+    public void selectDate(int newYear, int newMonth, int newDay) {
         int monthDifference = FlexibleCalendarHelper
                 .getMonthDifference(selectedDateItem.getYear(),selectedDateItem.getMonth(),
                         newYear,newMonth);
 
-        int offsetValue = monthViewPager.getOffsetAmount();
-        if(Math.abs(monthDifference) > 20000){
-            throw new HighValueException();
+        if(Math.abs(monthDifference) > HIGH_VALUE){
+            //throw exception for high values
+            throw new HighValueException("Difference too high to make the change");
         }
 
         selectedDateItem.setDay(newDay);

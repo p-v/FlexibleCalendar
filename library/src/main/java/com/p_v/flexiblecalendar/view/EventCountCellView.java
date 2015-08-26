@@ -90,7 +90,7 @@ public class EventCountCellView extends BaseCellView{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(mEventCount>0) {
+        if(mEventCount>0 && mPaint!=null && mTextPaint!= null) {
             canvas.drawCircle(eventCircleX, eventCircleY, radius, mPaint);
             canvas.drawText(String.valueOf(mEventCount), eventCircleX, mTextY, mTextPaint);
         }
