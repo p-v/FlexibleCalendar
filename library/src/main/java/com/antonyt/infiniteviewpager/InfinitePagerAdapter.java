@@ -14,6 +14,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     private static final String TAG = "InfinitePagerAdapter";
     private static final boolean DEBUG = true;
+    private static final int MAX_VAL = 10000;
 
     private PagerAdapter adapter;
 
@@ -32,9 +33,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         if(fakeCount!=-1){
             return fakeCount;
         }
-        // warning: scrolling to very high values (1,000,000+) results in
-        // strange drawing behaviour
-        return Integer.MAX_VALUE;
+        return MAX_VAL;
     }
 
     /**
