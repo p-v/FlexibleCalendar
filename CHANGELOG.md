@@ -1,3 +1,7 @@
+1.1.2
+=====
+- Limit the number of pages to 20000 to avoid freezing.
+
 1.1.1
 =====
 - Add method `selectDate`.
