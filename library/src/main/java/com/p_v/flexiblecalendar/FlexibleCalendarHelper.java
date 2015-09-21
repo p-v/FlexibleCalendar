@@ -75,10 +75,10 @@ public class FlexibleCalendarHelper {
      * @param month month
      * @return number of rows
      */
-    public static int getNumOfRowsForTheMonth(int year,int month){
+    public static int getNumOfRowsForTheMonth(int year,int month, int startDayOfTheWeek){
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
-        MonthDisplayHelper displayHelper = new MonthDisplayHelper(year,month);
+        MonthDisplayHelper displayHelper = new MonthDisplayHelper(year,month,startDayOfTheWeek);
         return displayHelper.getRowOf(cal.getActualMaximum(Calendar.DAY_OF_MONTH)) + 1;
     }
 

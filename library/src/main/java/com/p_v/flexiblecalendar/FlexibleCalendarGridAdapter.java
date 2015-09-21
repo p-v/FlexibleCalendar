@@ -52,7 +52,8 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return showDatesOutsideMonth? SIX_WEEK_DAY_COUNT
-                :monthDisplayHelper.getNumberOfDaysInMonth() + monthDisplayHelper.getFirstDayOfMonth() - 1;
+                :monthDisplayHelper.getNumberOfDaysInMonth()
+                + monthDisplayHelper.getWeekStartDay() + monthDisplayHelper.getFirstDayOfMonth() - 1;
     }
 
     @Override
