@@ -248,7 +248,7 @@ public class FlexibleCalendarView extends LinearLayout implements
         //setup month view
         monthViewPager = new MonthViewPager(context);
         monthViewPager.setBackgroundResource(monthViewBackground);
-        monthViewPager.setNumOfRows(FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth));
+        monthViewPager.setNumOfRows(showDatesOutsideMonth? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth));
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, displayYear, displayMonth, this,
                 showDatesOutsideMonth, startDayOfTheWeek);
         monthViewPagerAdapter.setMonthEventFetcher(this);
@@ -686,6 +686,8 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
         this.showDatesOutsideMonth = showDatesOutsideMonth;
+        monthViewPager.setNumOfRows(showDatesOutsideMonth? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth));
+        monthViewPager.invalidate();
         monthViewPagerAdapter.setShowDatesOutsideMonth(showDatesOutsideMonth);
     }
 

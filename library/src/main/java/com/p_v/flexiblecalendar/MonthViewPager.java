@@ -43,11 +43,11 @@ class MonthViewPager extends InfiniteViewPager {
                         .makeMeasureSpec(height, MeasureSpec.AT_MOST));
 
                 height = firstChild.getMeasuredHeight();
-                rowHeight = height/numOfRows;
+                rowHeight = numOfRows == 6? height : (int)Math.ceil(((float)height*6)/5);
             }
         }
 
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(rowHeight*6 + 40,
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(rowHeight,
                 MeasureSpec.EXACTLY);
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
