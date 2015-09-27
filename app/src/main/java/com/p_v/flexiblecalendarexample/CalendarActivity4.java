@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
+import com.p_v.flexiblecalendar.entity.MonthItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 
 import java.util.Calendar;
@@ -26,18 +27,19 @@ public class CalendarActivity4 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendary_activity4);
 
-        final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
+        final FlexibleCalendarView calendarView = (FlexibleCalendarView) findViewById(R.id.calendar_view);
         calendarView.setStartDayOfTheWeek(Calendar.MONDAY);
 
-        ImageView leftArrow = (ImageView)findViewById(R.id.left_arrow);
-        ImageView rightArrow = (ImageView)findViewById(R.id.right_arrow);
+        ImageView leftArrow = (ImageView) findViewById(R.id.left_arrow);
+        ImageView rightArrow = (ImageView) findViewById(R.id.right_arrow);
 
-        monthTextView = (TextView)findViewById(R.id.month_text_view);
+        monthTextView = (TextView) findViewById(R.id.month_text_view);
 
         Calendar cal = Calendar.getInstance();
-        cal.set(calendarView.getSelectedDateItem().getYear(), calendarView.getSelectedDateItem().getMonth(), 1);
+        MonthItem currentMonth = calendarView.getCurrentMonth();
+        cal.set(currentMonth.getYear(), currentMonth.getMonth(), 1);
         monthTextView.setText(cal.getDisplayName(Calendar.MONTH,
-                Calendar.LONG, Locale.ENGLISH) + " " + calendarView.getSelectedDateItem().getYear());
+                Calendar.LONG, Locale.ENGLISH) + " " + currentMonth.getYear());
 
         leftArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +96,7 @@ public class CalendarActivity4 extends ActionBarActivity {
             }
         });
 
-        Button resetButton = (Button)findViewById(R.id.reset_button);
+        Button resetButton = (Button) findViewById(R.id.reset_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
 import com.p_v.flexiblecalendar.entity.CalendarEvent;
+import com.p_v.flexiblecalendar.entity.MonthItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.view.SquareCellView;
 
@@ -109,6 +110,8 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
             }
         });
 
+        calendarView.selectDate(2015, 8, 15);
+
         Button nextDateBtn = (Button)view.findViewById(R.id.move_to_next_date);
         Button prevDateBtn = (Button)view.findViewById(R.id.move_to_previous_date);
         Button nextMonthBtn = (Button)view.findViewById(R.id.move_to_next_month);
@@ -170,7 +173,8 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        updateTitle(calendarView.getSelectedDateItem().getYear(), calendarView.getSelectedDateItem().getMonth());
+        MonthItem currentMonth = calendarView.getCurrentMonth();
+        updateTitle(currentMonth.getYear(), currentMonth.getMonth());
     }
 
     public void setupToolBar(View mainView){
