@@ -18,6 +18,7 @@
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
+        support:monthDayVerticalSpacing="10dp"
         android:background="#000000"
         support:startDayOfTheWeek="WEDNESDAY"
         android:layout_width="match_parent"
