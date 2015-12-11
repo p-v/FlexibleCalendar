@@ -179,6 +179,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     private int monthViewBackground;
     private int weekViewBackground;
     private boolean showDatesOutsideMonth;
+	private boolean decorateDatesOutsideMonth;
 
     /**
      * Reset adapters flag used internally
@@ -250,7 +251,7 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPager.setBackgroundResource(monthViewBackground);
         monthViewPager.setNumOfRows(showDatesOutsideMonth? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth,startDayOfTheWeek));
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, displayYear, displayMonth, this,
-                showDatesOutsideMonth, startDayOfTheWeek);
+                showDatesOutsideMonth, decorateDatesOutsideMonth, startDayOfTheWeek);
         monthViewPagerAdapter.setMonthEventFetcher(this);
         monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
 
@@ -289,6 +290,7 @@ public class FlexibleCalendarView extends LinearLayout implements
             weekViewBackground = a.getResourceId(R.styleable.FlexibleCalendarView_weekViewBackground, android.R.color.transparent);
 
             showDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_showDatesOutsideMonth, false);
+			decorateDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_decorateDatesOutsideMonth, false);
 
             startDayOfTheWeek = a.getInt(R.styleable.FlexibleCalendarView_startDayOfTheWeek, Calendar.SUNDAY);
             if(startDayOfTheWeek<1 || startDayOfTheWeek>7){
@@ -686,7 +688,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
         this.showDatesOutsideMonth = showDatesOutsideMonth;
-        monthViewPager.setNumOfRows(showDatesOutsideMonth? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth, startDayOfTheWeek));
+        monthViewPager.setNumOfRows(showDatesOutsideMonth ? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth, startDayOfTheWeek));
         monthViewPager.invalidate();
         monthViewPagerAdapter.setShowDatesOutsideMonth(showDatesOutsideMonth);
     }
@@ -699,7 +701,26 @@ public class FlexibleCalendarView extends LinearLayout implements
         return showDatesOutsideMonth;
     }
 
-    /**
+	/**
+	 * Flag to decorate dates outside the month. Default value is false which will only decorate
+	 * dates within the month
+	 * @param decorateDatesOutsideMonth set true to decorate the dates outside month
+	 */
+	public void setDecorateDatesOutsideMonth( boolean decorateDatesOutsideMonth ) {
+		this.decorateDatesOutsideMonth = decorateDatesOutsideMonth;
+		monthViewPager.invalidate();
+		monthViewPagerAdapter.setDecorateDatesOutsideMonth( decorateDatesOutsideMonth );
+	}
+
+	/**
+	 * Get the decorate dates outside month flag
+	 * @return true if the decorateDatesOutsideMonth is enabled, false otherwise
+	 */
+	public boolean getDecorateDatesOutsideMonth() {
+		return decorateDatesOutsideMonth;
+	}
+
+	/**
      * Refresh the calendar view. Invalidate and redraw all the cells
      */
     public void refresh(){
