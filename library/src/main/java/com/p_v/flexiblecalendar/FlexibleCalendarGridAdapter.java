@@ -31,14 +31,16 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private MonthEventFetcher monthEventFetcher;
     private IDateCellViewDrawer cellViewDrawer;
     private boolean showDatesOutsideMonth;
+	private boolean decorateDatesOutsideMonth;
 
     private static final int SIX_WEEK_DAY_COUNT = 42;
 
 
-    public FlexibleCalendarGridAdapter(Context context, int year, int month,
-                                       boolean showDatesOutsideMonth, int startDayOfTheWeek){
+	public FlexibleCalendarGridAdapter(Context context, int year, int month,
+                                       boolean showDatesOutsideMonth, boolean decorateDatesOutsideMonth, int startDayOfTheWeek){
         this.context = context;
         this.showDatesOutsideMonth = showDatesOutsideMonth;
+		this.decorateDatesOutsideMonth = decorateDatesOutsideMonth;
         initialize(year,month,startDayOfTheWeek);
     }
 
@@ -147,7 +149,12 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
                     FlexibleCalendarHelper.previousMonth(year, month, temp);
                     cellView.setOnClickListener(new DateClickListener(day, temp[1], temp[0]));
                 }
-                cellView.addState(BaseCellView.STATE_OUTSIDE_MONTH);
+
+				if(decorateDatesOutsideMonth && monthEventFetcher!=null){
+					cellView.setEvents(monthEventFetcher.getEventsForTheDay(temp[0], temp[1], day));
+				}
+
+				cellView.addState(BaseCellView.STATE_OUTSIDE_MONTH);
             } else{
                 cellView.setBackgroundResource(android.R.color.transparent);
                 cellView.setText(null);
@@ -223,6 +230,11 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.showDatesOutsideMonth = showDatesOutsideMonth;
         this.notifyDataSetChanged();
     }
+
+	public void setDecorateDatesOutsideMonth(boolean decorateDatesOutsideMonth) {
+		this.decorateDatesOutsideMonth = decorateDatesOutsideMonth;
+		this.notifyDataSetChanged();
+	}
 
     public void setFirstDayOfTheWeek(int firstDayOfTheWeek){
         monthDisplayHelper = new MonthDisplayHelper(year,month,firstDayOfTheWeek);
