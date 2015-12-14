@@ -1,3 +1,7 @@
+1.1.4
+=====
+- Add a flag `decorateDatesOutsideMonth` to decorate dates with events outside month.
+
 1.1.3
 =====
 - Fix showDatesOutsideMonth when start day of the week is set to some other value then SUNDAY
