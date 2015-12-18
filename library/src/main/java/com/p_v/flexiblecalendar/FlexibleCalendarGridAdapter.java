@@ -127,10 +127,13 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
                 cellView.setEvents(monthEventFetcher.getEventsForTheDay(year, month, day));
             }
             switch (cellType){
+                case BaseCellView.SELECTED_TODAY:
+        	    cellView.addState(BaseCellView.STATE_TODAY);
+        	    cellView.addState(BaseCellView.STATE_SELECTED);
+        	    break;
                 case BaseCellView.TODAY:
                     cellView.addState(BaseCellView.STATE_TODAY);
                     break;
-                case BaseCellView.SELECTED_TODAY:
                 case BaseCellView.SELECTED:
                     cellView.addState(BaseCellView.STATE_SELECTED);
                     break;
