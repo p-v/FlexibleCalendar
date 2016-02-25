@@ -653,12 +653,12 @@ public class FlexibleCalendarView extends LinearLayout implements
      * @param date
      */
     public void goToMonth(Date date){
-        int y = FlexibleCalendarHelper.getYearFromDate(date);
-        int m = FlexibleCalendarHelper.getMonthFromDate(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
 
         //check has to go left side or right
         int monthDifference = FlexibleCalendarHelper.
-                getMonthDifference(displayYear, displayMonth, y, m);
+                getMonthDifference(displayYear, displayMonth, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH));
 
         if(monthDifference != 0){
             resetAdapters = true;
@@ -685,40 +685,6 @@ public class FlexibleCalendarView extends LinearLayout implements
         selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
         selectedDateItem.setMonth(cal.get(Calendar.MONTH));
         selectedDateItem.setYear(cal.get(Calendar.YEAR));
-
-        if(monthDifference!=0){
-            resetAdapters = true;
-            if(monthDifference<0){
-                //set fake count to avoid freezing in InfiniteViewPager as it iterates to Integer.MAX_VALUE
-                monthInfPagerAdapter.setFakeCount(lastPosition);
-                monthInfPagerAdapter.notifyDataSetChanged();
-            }
-            //set true to override the computed date in onPageSelected method
-            shouldOverrideComputedDate = true;
-            moveToPosition(monthDifference);
-        }else{
-            FlexibleCalendarGridAdapter currentlyVisibleAdapter = monthViewPagerAdapter
-                    .getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER);
-            currentlyVisibleAdapter.notifyDataSetChanged();
-        }
-    }
-
-    /**
-     * Move the position to the specified date
-     * @param date
-     */
-    public void goToDate(Date date){
-        int y = FlexibleCalendarHelper.getYearFromDate(date);
-        int m = FlexibleCalendarHelper.getMonthFromDate(date);
-        int d = FlexibleCalendarHelper.getDateFromDate(date);
-
-        //check has to go left side or right
-        int monthDifference = FlexibleCalendarHelper
-                .getMonthDifference(displayYear, displayMonth, y, m);
-
-        selectedDateItem.setDay(d);
-        selectedDateItem.setMonth(m);
-        selectedDateItem.setYear(y);
 
         if(monthDifference!=0){
             resetAdapters = true;
