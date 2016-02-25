@@ -6,6 +6,7 @@ import android.util.MonthDisplayHelper;
 import java.text.DateFormatSymbols;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -106,6 +107,39 @@ public class FlexibleCalendarHelper {
      */
     public static int getMonthDifference(int startYear, int startMonth, int endYear, int endMonth){
         return (endYear - startYear) * 12 + endMonth - startMonth;
+    }
+
+    /**
+     * Get the year from the date
+     * @param date
+     * @return the year from the given date
+     */
+    public static int getYearFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.YEAR);
+    }
+
+    /**
+     * Get the month from the date
+     * @param date
+     * @return the month from the given date (0 is January)
+     */
+    public static int getMonthFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.MONTH);
+    }
+
+    /**
+     * Get the date from the date
+     * @param date
+     * @return the date from the given date
+     */
+    public static int getDateFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.DATE);
     }
 
 }
