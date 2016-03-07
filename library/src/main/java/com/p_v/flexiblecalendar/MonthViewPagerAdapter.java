@@ -1,6 +1,7 @@
 package com.p_v.flexiblecalendar;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,8 @@ public class MonthViewPagerAdapter extends PagerAdapter {
 		this.decorateDatesOutsideMonth = decorateDatesOutsideMonth;
         this.startDayOfTheWeek = startDayOfTheWeek;
         initializeDateAdapters(year, month);
+
+        registerDataSetObserver(new MonthViewPagerDataSetObserver());
     }
 
     private void initializeDateAdapters(int year, int month){
@@ -194,6 +197,23 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         this.startDayOfTheWeek = startDayOfTheWeek;
         for(FlexibleCalendarGridAdapter adapter : dateAdapters){
             adapter.setFirstDayOfTheWeek(startDayOfTheWeek);
+        }
+    }
+
+
+    protected class MonthViewPagerDataSetObserver extends DataSetObserver {
+        @Override
+        public void onChanged() {
+            for (FlexibleCalendarGridAdapter adapter : dateAdapters) {
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onInvalidated() {
+            for (FlexibleCalendarGridAdapter adapter : dateAdapters) {
+                adapter.notifyDataSetInvalidated();
+            }
         }
     }
 }
