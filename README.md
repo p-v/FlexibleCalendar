@@ -1,5 +1,7 @@
 # FlexibleCalendar
 
+###**Broken for support library 23.2.0** 
+
 [![Join the chat at https://gitter.im/p-v/FlexibleCalendar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/p-v/FlexibleCalendar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FlexibleCalendar-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2323)
 
 A customizable calendar for android with customizable events.
