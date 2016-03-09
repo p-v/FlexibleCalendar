@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
-import com.p_v.flexiblecalendar.entity.SelectedDateItem;
+import com.p_v.flexiblecalendar.entity.DateItem;
 import com.p_v.flexiblecalendar.view.ICellViewDrawer;
 import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 import com.p_v.fliexiblecalendar.R;
@@ -73,7 +73,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         dateAdapters.add(new FlexibleCalendarGridAdapter(context, pYear, pMonth, showDatesOutsideMonth, decorateDatesOutsideMonth, startDayOfTheWeek));
     }
 
-    public void refreshDateAdapters(int position, SelectedDateItem selectedDateItem,boolean refreshAll){
+    public void refreshDateAdapters(int position, DateItem selectedDateItem,boolean refreshAll){
         FlexibleCalendarGridAdapter currentAdapter = dateAdapters.get(position);
         if(refreshAll){
             //refresh all used when go to current month is called to refresh all the adapters
@@ -141,7 +141,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         container.removeView((LinearLayout) object);
     }
 
-    public void setSelectedItem(SelectedDateItem selectedItem){
+    public void setSelectedItem(DateItem selectedItem){
         for(FlexibleCalendarGridAdapter f : dateAdapters){
             f.setSelectedItem(selectedItem,true);
         }

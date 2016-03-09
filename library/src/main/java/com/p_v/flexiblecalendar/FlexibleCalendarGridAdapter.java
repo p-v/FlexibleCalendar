@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.p_v.flexiblecalendar.entity.SelectedDateItem;
+import com.p_v.flexiblecalendar.entity.DateItem;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 import com.p_v.flexiblecalendar.entity.Event;
 import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
@@ -27,7 +27,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     private MonthDisplayHelper monthDisplayHelper;
     private Calendar calendar;
     private OnDateCellItemClickListener onDateCellItemClickListener;
-    private SelectedDateItem selectedItem;
+    private DateItem selectedItem;
     private MonthEventFetcher monthEventFetcher;
     private IDateCellViewDrawer cellViewDrawer;
     private boolean showDatesOutsideMonth;
@@ -189,7 +189,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
         @Override
         public void onClick(final View v) {
-            selectedItem = new SelectedDateItem(iYear,iMonth,iDay);
+            selectedItem = new DateItem(iYear,iMonth,iDay);
 
             notifyDataSetChanged();
 
@@ -201,7 +201,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     }
 
     public interface OnDateCellItemClickListener {
-        void onDateClick(SelectedDateItem selectedItem);
+        void onDateClick(DateItem selectedItem);
     }
 
     interface MonthEventFetcher {
@@ -212,12 +212,12 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.onDateCellItemClickListener = onDateCellItemClickListener;
     }
 
-    public void setSelectedItem(SelectedDateItem selectedItem, boolean notify){
+    public void setSelectedItem(DateItem selectedItem, boolean notify){
         this.selectedItem = selectedItem;
         if(notify) notifyDataSetChanged();
     }
 
-    public SelectedDateItem getSelectedItem(){
+    public DateItem getSelectedItem(){
         return selectedItem;
     }
 
