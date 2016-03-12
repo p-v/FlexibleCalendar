@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.p_v.flexiblecalendarexample" >
+    package="com.p_v.flexiblecalendarexample">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".CalendarActivity2"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".CalendarActivity"
-            android:label="@string/title_activity_calendar" >
-        </activity>
-        <activity
-            android:name=".CalendarListActivity"
-            >
+            android:label="@string/title_activity_calendar"></activity>
+        <activity android:name=".CalendarListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +22,11 @@
         </activity>
         <activity
             android:name=".CalendarActivity3"
-            android:label="@string/title_activity_calendar_activity3" >
-        </activity>
+            android:label="@string/title_activity_calendar_activity3"></activity>
         <activity
             android:name=".CalendarActivity4"
-            android:label="@string/title_activity_calendary_activity4" >
-        </activity>
+            android:label="@string/title_activity_calendary_activity4"></activity>
+        <activity android:name=".CalendarActivity5"></activity>
     </application>
 
 </manifest>
