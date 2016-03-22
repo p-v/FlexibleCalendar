@@ -321,6 +321,9 @@ public class FlexibleCalendarView extends LinearLayout implements
 
             //refresh the previous adapter and deselect the item
             monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true,false);
+            if(disableAutoDateSelection){
+                monthViewPagerAdapter.refreshUserSelectedItem(userSelectedItem);
+            }
 
             SelectedDateItem newDateItem;
             if(shouldOverrideComputedDate){

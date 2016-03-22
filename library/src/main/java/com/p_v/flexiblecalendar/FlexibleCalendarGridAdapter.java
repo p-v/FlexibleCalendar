@@ -269,4 +269,13 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public SelectedDateItem getUserSelectedItem(){
+        return userSelectedDateItem;
+    }
+
+    public void setUserSelectedDateItem(SelectedDateItem selectedItem){
+        this.userSelectedDateItem = selectedItem;
+        notifyDataSetChanged();
+    }
+
 }
