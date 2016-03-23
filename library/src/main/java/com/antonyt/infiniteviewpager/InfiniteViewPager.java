@@ -27,6 +27,11 @@ public class InfiniteViewPager extends ViewPager {
         setCurrentItem(0);
     }
 
+    public void setAdapter(PagerAdapter adapter, int lastPosition){
+        super.setAdapter(adapter);
+        super.setCurrentItem(lastPosition,false);
+    }
+
     @Override
     public void setCurrentItem(int item) {
         // offset the current item to ensure there is space to scroll

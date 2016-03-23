@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.p_v.flexiblecalendar.entity.SelectedDateItem;
@@ -474,8 +475,32 @@ public class FlexibleCalendarView extends LinearLayout implements
             //do nothing if same month
             this.selectedDateItem = selectedItem;
         }
+
+        // redraw current month grid as the events were getting disappeared for selected day
+        redrawMonthGrid(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER);
+
         if(onDateClickListener!=null) {
             onDateClickListener.onDateClick(selectedItem.getYear(), selectedItem.getMonth(), selectedItem.getDay());
+        }
+    }
+
+    private void redrawMonthGrid(int position){
+        if(position == -1){
+            //redraw all
+            for(int i = 0; i<=3;i++){
+                View view = monthViewPager.findViewWithTag(MonthViewPagerAdapter.GRID_TAG_PREFIX+i);
+                reAddAdapter(view);
+            }
+        }else{
+            View view = monthViewPager.findViewWithTag(MonthViewPagerAdapter.GRID_TAG_PREFIX+position);
+            reAddAdapter(view);
+        }
+    }
+
+    private void reAddAdapter(View view){
+        if(view!=null){
+            ListAdapter adapter = ((GridView)view).getAdapter();
+            ((GridView)view).setAdapter(adapter);
         }
     }
 
@@ -724,7 +749,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Refresh the calendar view. Invalidate and redraw all the cells
      */
     public void refresh(){
-        monthViewPagerAdapter.refreshAdapters();
+        redrawMonthGrid(-1);
     }
 
     /**

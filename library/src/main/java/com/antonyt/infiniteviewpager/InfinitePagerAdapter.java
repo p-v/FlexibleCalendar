@@ -121,6 +121,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
     @Override
     public void notifyDataSetChanged() {
         adapter.notifyDataSetChanged();
+        super.notifyDataSetChanged();
     }
 
     @Override
