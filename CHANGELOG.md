@@ -1,3 +1,8 @@
+1.1.5
+=====
+- Support library 23.2 fixes
+- Fix SELECTED_TODAY state in drawDateCell()
+
 1.1.4
 =====
 - Add a flag `decorateDatesOutsideMonth` to decorate dates with events outside month.
