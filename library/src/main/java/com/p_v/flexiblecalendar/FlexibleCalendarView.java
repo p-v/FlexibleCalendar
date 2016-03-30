@@ -521,7 +521,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      */
     public SelectedDateItem getSelectedDateItem(){
         if(disableAutoDateSelection){
-            return userSelectedItem == null ? null : selectedDateItem.clone();
+            return userSelectedItem == null ? null : userSelectedItem.clone();
         }
         return selectedDateItem.clone();
     }
@@ -538,6 +538,10 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Move the selection to the next day
      */
     public void moveToPreviousDate(){
+        // in case when auto selection is disabled
+        // do nothing if there is nothing selected by the user
+        if(disableAutoDateSelection && userSelectedItem == null) return;
+
         if(selectedDateItem!=null){
             Calendar cal = Calendar.getInstance();
             cal.set(selectedDateItem.getYear(), selectedDateItem.getMonth(), selectedDateItem.getDay());
@@ -567,7 +571,12 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Move the selection to the previous day
      */
     public void moveToNextDate(){
+        // in case when auto selection is disabled
+        // do nothing if there is nothing selected by the user
+        if(disableAutoDateSelection && userSelectedItem == null) return;
+
         if(selectedDateItem!=null){
+
             Calendar cal = Calendar.getInstance();
             cal.set(selectedDateItem.getYear(), selectedDateItem.getMonth(), selectedDateItem.getDay());
             cal.add(Calendar.DATE, 1);
@@ -710,6 +719,10 @@ public class FlexibleCalendarView extends LinearLayout implements
         selectedDateItem.setDay(cal.get(Calendar.DAY_OF_MONTH));
         selectedDateItem.setMonth(cal.get(Calendar.MONTH));
         selectedDateItem.setYear(cal.get(Calendar.YEAR));
+
+        if(disableAutoDateSelection){
+            this.userSelectedItem = selectedDateItem.clone();
+        }
 
         if(monthDifference!=0){
             resetAdapters = true;
@@ -867,7 +880,9 @@ public class FlexibleCalendarView extends LinearLayout implements
         selectedDateItem.setMonth(newMonth);
         selectedDateItem.setYear(newYear);
 
-        this.userSelectedItem = selectedDateItem.clone();
+        if(disableAutoDateSelection){
+            this.userSelectedItem = selectedDateItem.clone();
+        }
 
         if(monthDifference!=0){
             //different month
