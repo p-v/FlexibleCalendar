@@ -1,3 +1,8 @@
+1.2.1
+=====
+- Add a flag `disableAutoDateSelection` for disabling auto date selection on month change
+- Fixed all dates not getting displayed when `showDatesOutsideMonth` was disabled
+
 1.1.5
 =====
 - Support library 23.2 fixes

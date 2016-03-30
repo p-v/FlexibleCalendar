@@ -12,7 +12,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:1.2.0'
+    compile 'com.p_v:flexiblecalendar:1.2.1'
 }
 ```
 
@@ -90,8 +90,10 @@ Existing cells include **CircularEventCellView**, **SquareCellView** and **Event
 Choose whether to show dates outside month or not by setting the `showDatesOutsideMonth` flag,
  using `FlexibleCalendarView#showDatesOutsideMonth()` method.
 
- Set the first day of the week using `FlexibleCalendarView#setStartDayOfTheWeek` method or through xml
+Set the first day of the week using `FlexibleCalendarView#setStartDayOfTheWeek` method or through xml
  by setting the attribute `startDayOfTheWeek`.
+
+Disable auto date selection on month change by using `FlexibleCalendarView#disableAutoDateSelection` method or through xml by using `disableAutoDateSelection`.
 
 ![Outside Month](demo/screenshot-2.jpg) &nbsp; ![Without Outside Month](demo/screenshot-3.jpg)
 
