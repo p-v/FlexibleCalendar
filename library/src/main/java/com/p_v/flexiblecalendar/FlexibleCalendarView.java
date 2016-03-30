@@ -181,6 +181,7 @@ public class FlexibleCalendarView extends LinearLayout implements
     private int weekViewBackground;
     private boolean showDatesOutsideMonth;
 	private boolean decorateDatesOutsideMonth;
+    private boolean disableAutoDateSelection;
 
     /**
      * Reset adapters flag used internally
@@ -192,6 +193,8 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Currently selected date item
      */
     private SelectedDateItem selectedDateItem;
+
+    private SelectedDateItem userSelectedItem;
 
     /**
      * Internal flag to override the computed date on month change
@@ -250,9 +253,9 @@ public class FlexibleCalendarView extends LinearLayout implements
         //setup month view
         monthViewPager = new MonthViewPager(context);
         monthViewPager.setBackgroundResource(monthViewBackground);
-        monthViewPager.setNumOfRows(showDatesOutsideMonth? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth,startDayOfTheWeek));
+        monthViewPager.setNumOfRows(showDatesOutsideMonth ? 6 : FlexibleCalendarHelper.getNumOfRowsForTheMonth(displayYear, displayMonth, startDayOfTheWeek));
         monthViewPagerAdapter = new MonthViewPagerAdapter(context, displayYear, displayMonth, this,
-                showDatesOutsideMonth, decorateDatesOutsideMonth, startDayOfTheWeek);
+                showDatesOutsideMonth, decorateDatesOutsideMonth, startDayOfTheWeek, disableAutoDateSelection);
         monthViewPagerAdapter.setMonthEventFetcher(this);
         monthViewPagerAdapter.setSpacing(monthDayHorizontalSpacing,monthDayVerticalSpacing);
 
@@ -292,6 +295,7 @@ public class FlexibleCalendarView extends LinearLayout implements
 
             showDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_showDatesOutsideMonth, false);
 			decorateDatesOutsideMonth = a.getBoolean(R.styleable.FlexibleCalendarView_decorateDatesOutsideMonth, false);
+            disableAutoDateSelection = a.getBoolean(R.styleable.FlexibleCalendarView_disableAutoDateSelection, false);
 
             startDayOfTheWeek = a.getInt(R.styleable.FlexibleCalendarView_startDayOfTheWeek, Calendar.SUNDAY);
             if(startDayOfTheWeek<1 || startDayOfTheWeek>7){
@@ -317,7 +321,10 @@ public class FlexibleCalendarView extends LinearLayout implements
             int direction = position>lastPosition? RIGHT : LEFT;
 
             //refresh the previous adapter and deselect the item
-            monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true);
+            monthViewPagerAdapter.getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER).setSelectedItem(null,true,false);
+            if(disableAutoDateSelection){
+                monthViewPagerAdapter.refreshUserSelectedItem(userSelectedItem);
+            }
 
             SelectedDateItem newDateItem;
             if(shouldOverrideComputedDate){
@@ -462,8 +469,8 @@ public class FlexibleCalendarView extends LinearLayout implements
         if(selectedDateItem.getYear()!=selectedItem.getYear() || selectedDateItem.getMonth()!=selectedItem.getMonth()){
             shouldOverrideComputedDate = true;
             //different month
-            int monthDifference = FlexibleCalendarHelper.getMonthDifference(selectedItem.getYear(),selectedItem.getMonth(),
-                    selectedDateItem.getYear(),selectedDateItem.getMonth());
+            int monthDifference = FlexibleCalendarHelper.getMonthDifference(selectedItem.getYear(), selectedItem.getMonth(),
+                    selectedDateItem.getYear(), selectedDateItem.getMonth());
             this.selectedDateItem = selectedItem;
             //move back or forth based on the monthDifference
             if(monthDifference > 0){
@@ -478,6 +485,11 @@ public class FlexibleCalendarView extends LinearLayout implements
 
         // redraw current month grid as the events were getting disappeared for selected day
         redrawMonthGrid(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER);
+
+        // set user selected date item
+        if(disableAutoDateSelection){
+            this.userSelectedItem = selectedItem.clone();
+        }
 
         if(onDateClickListener!=null) {
             onDateClickListener.onDateClick(selectedItem.getYear(), selectedItem.getMonth(), selectedItem.getDay());
@@ -508,7 +520,18 @@ public class FlexibleCalendarView extends LinearLayout implements
      * @return currently selected date
      */
     public SelectedDateItem getSelectedDateItem(){
+        if(disableAutoDateSelection){
+            return userSelectedItem == null ? null : selectedDateItem.clone();
+        }
         return selectedDateItem.clone();
+    }
+
+    public int getCurrentMonth(){
+        return selectedDateItem.getMonth();
+    }
+
+    public int getCurrentYear(){
+        return selectedDateItem.getYear();
     }
 
     /**
@@ -745,6 +768,25 @@ public class FlexibleCalendarView extends LinearLayout implements
 		return decorateDatesOutsideMonth;
 	}
 
+    /**
+     * Disable auto selection of the first day of the month
+     *
+     * @param disableAutoDateSelection true to disable the auto selection
+     */
+    public void setDisableAutoDateSelection(boolean disableAutoDateSelection){
+        this.disableAutoDateSelection = disableAutoDateSelection;
+        monthViewPager.invalidate();
+        monthViewPagerAdapter.setDisableAutoDateSelection(disableAutoDateSelection);
+    }
+
+    /**
+     * Get the disable auto date selection flag
+     * @return true if disableAutoDateSelection is enabled
+     */
+    public boolean isDisableAutoDateSelection(){
+        return disableAutoDateSelection;
+    }
+
 	/**
      * Refresh the calendar view. Invalidate and redraw all the cells
      */
@@ -825,6 +867,8 @@ public class FlexibleCalendarView extends LinearLayout implements
         selectedDateItem.setMonth(newMonth);
         selectedDateItem.setYear(newYear);
 
+        this.userSelectedItem = selectedDateItem.clone();
+
         if(monthDifference!=0){
             //different month
             resetAdapters = true;
@@ -836,10 +880,16 @@ public class FlexibleCalendarView extends LinearLayout implements
             //set true to override the computed date in onPageSelected method
             shouldOverrideComputedDate = true;
             moveToPosition(monthDifference);
+            // select the user selected date item
+            if(disableAutoDateSelection){
+                monthViewPagerAdapter
+                        .getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER)
+                        .setSelectedItem(selectedDateItem, true, true);
+            }
         }else{
             monthViewPagerAdapter
                     .getMonthAdapterAtPosition(lastPosition % MonthViewPagerAdapter.VIEWS_IN_PAGER)
-                    .setSelectedItem(selectedDateItem, true);
+                    .setSelectedItem(selectedDateItem, true, true);
         }
 
     }

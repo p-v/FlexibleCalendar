@@ -20,6 +20,7 @@
         <attr name="monthViewBackground" format="reference"/>
         <attr name="showDatesOutsideMonth" format="boolean"/>
         <attr name="decorateDatesOutsideMonth" format="boolean"/>
+        <attr name="disableAutoDateSelection" format="boolean"/>
         <attr name="startDayOfTheWeek" format="enum">
             <enum name="SUNDAY" value="1"/>
             <enum name="MONDAY" value="2"/>

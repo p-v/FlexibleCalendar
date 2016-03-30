@@ -12,7 +12,7 @@ Add dependencies in `build.gradle`,
 
 ```groovy
 dependencies {
-    compile 'com.p_v:flexiblecalendar:1.1.5'
+    compile 'com.p_v:flexiblecalendar:1.2.0'
 }
 ```
 
