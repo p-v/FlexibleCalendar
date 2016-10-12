@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p-v="http://schemas.android.com/apk/res-auto">
+    <item p-v:state_date_today="true"
+        android:drawable="@drawable/today_example4"/>
+    <item p-v:state_date_selected="true"
+        android:drawable="@drawable/selected_example4"/>
+</selector>

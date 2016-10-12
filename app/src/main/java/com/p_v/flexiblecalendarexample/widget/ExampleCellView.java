@@ -29,8 +29,8 @@ public class ExampleCellView extends CircularEventCellView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
-        int height =  (3*width)/5;
+        int height = (7*width)/8;
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
     }
 }

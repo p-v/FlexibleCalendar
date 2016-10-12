@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.p_v.flexiblecalendarexample.widget.ExampleCellView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:flexible="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<com.p_v.flexiblecalendarexample.widget.ExampleCellView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textSize="14sp"
     android:gravity="center"
-    android:background="@drawable/cell_inset_background"
-    flexible:event_radius="2dp"
-    android:textColor="#E6E6CD"
-    flexible:event_circle_padding="2dp"
-    android:layout_height="match_parent"
-    />
+    android:background="@drawable/example_background4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

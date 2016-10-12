@@ -79,25 +79,25 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
             public List<CalendarEvent> getEventsForTheDay(int year, int month, int day) {
-                if (year == 2015 && month == 8 && day == 12) {
+                if (year == 2016 && month == 10 && day == 12) {
                     List<CalendarEvent> eventColors = new ArrayList<>(2);
                     eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
                     eventColors.add(new CalendarEvent(android.R.color.holo_purple));
                     return eventColors;
                 }
-                if (year == 2015 && month == 8 && day == 7 ||
-                        year == 2015 && month == 8 && day == 29 ||
-                        year == 2015 && month == 8 && day == 5 ||
-                        year == 2015 && month == 8 && day == 9) {
+                if (year == 2016 && month == 10 && day == 7 ||
+                        year == 2016 && month == 10 && day == 29 ||
+                        year == 2016 && month == 10 && day == 5 ||
+                        year == 2016 && month == 10 && day == 9) {
                     List<CalendarEvent> eventColors = new ArrayList<>(1);
                     eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
                     return eventColors;
                 }
 
-                if (year == 2015 && month == 8 && day == 31 ||
-                        year == 2015 && month == 8 && day == 22 ||
-                        year == 2015 && month == 8 && day == 18 ||
-                        year == 2015 && month == 9 && day == 11) {
+                if (year == 2016 && month == 10 && day == 31 ||
+                        year == 2016 && month == 10 && day == 22 ||
+                        year == 2016 && month == 10 && day == 18 ||
+                        year == 2016 && month == 10 && day == 11) {
                     List<CalendarEvent> eventColors = new ArrayList<>(3);
                     eventColors.add(new CalendarEvent(android.R.color.holo_red_dark));
                     eventColors.add(new CalendarEvent(android.R.color.holo_orange_light));

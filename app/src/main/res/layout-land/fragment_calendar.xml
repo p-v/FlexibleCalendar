@@ -1,9 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:support="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    xmlns:support="http://schemas.android.com/apk/res-auto"
     tools:context="com.p_v.flexiblecalendarexample.CalendarActivityFragment">
 
     <android.support.v7.widget.Toolbar
@@ -18,13 +17,17 @@
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
+        android:layout_below="@id/toolbar"
         android:background="#000000"
-        android:paddingBottom="22dp"
+        android:paddingBottom="10dp"
         support:startDayOfTheWeek="WEDNESDAY"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"/>
 
     <LinearLayout android:orientation="horizontal"
+        android:id="@+id/nav_btns"
+        android:layout_toRightOf="@id/calendar_view"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -43,6 +46,9 @@
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
+        android:id="@+id/nav_btns2"
+        android:layout_toRightOf="@id/calendar_view"
+        android:layout_below="@id/nav_btns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -60,13 +66,18 @@
 
     </LinearLayout>
     <Button android:id="@+id/go_to_current_day"
+        android:layout_toRightOf="@id/calendar_view"
+        android:layout_below="@id/nav_btns2"
         android:text="Go to current day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button android:id="@+id/show_dates_outside_month"
+        android:layout_toRightOf="@id/calendar_view"
+        android:layout_below="@id/go_to_current_day"
         android:text="Show dates outside month"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+
+</RelativeLayout>
