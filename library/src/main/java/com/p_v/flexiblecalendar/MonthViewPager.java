@@ -40,15 +40,17 @@ class MonthViewPager extends InfiniteViewPager {
                 View firstChild = getChildAt(0);
 
                 firstChild.measure(widthMeasureSpec, MeasureSpec
-                        .makeMeasureSpec(height, MeasureSpec.AT_MOST));
+                        .makeMeasureSpec(height, MeasureSpec.EXACTLY));
 
                 height = firstChild.getMeasuredHeight();
                 rowHeight = numOfRows == 6? height : (int)Math.ceil(((float)height*6)/5);
             }
         }
 
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(rowHeight,
-                MeasureSpec.EXACTLY);
+        if (rowHeight > 0) {
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(rowHeight,
+                    MeasureSpec.EXACTLY);
+        }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 

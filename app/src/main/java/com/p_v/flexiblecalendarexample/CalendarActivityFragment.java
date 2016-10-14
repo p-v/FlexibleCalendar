@@ -64,7 +64,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 BaseCellView cellView = (BaseCellView) convertView;
                 if (cellView == null) {
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
-                    cellView = (SquareCellView) inflater.inflate(R.layout.calendar1_week_cell_view, null);
+                    cellView = (BaseCellView) inflater.inflate(R.layout.calendar1_week_cell_view, null);
                 }
                 return cellView;
             }
@@ -108,6 +108,8 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 return null;
             }
         });
+
+        /*
 
         Button nextDateBtn = (Button)view.findViewById(R.id.move_to_next_date);
         Button prevDateBtn = (Button)view.findViewById(R.id.move_to_previous_date);
@@ -160,6 +162,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
 
             }
         });
+        */
 
         setupToolBar(view);
 

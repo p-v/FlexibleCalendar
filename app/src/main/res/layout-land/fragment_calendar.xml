@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:visibility="gone"
         support:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         support:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         />
@@ -19,11 +20,11 @@
         android:id="@+id/calendar_view"
         android:layout_below="@id/toolbar"
         android:background="#000000"
-        android:paddingBottom="10dp"
         support:startDayOfTheWeek="WEDNESDAY"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <!--
     <LinearLayout android:orientation="horizontal"
         android:id="@+id/nav_btns"
         android:layout_toRightOf="@id/calendar_view"
@@ -79,5 +80,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
+-->
 </RelativeLayout>

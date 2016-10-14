@@ -22,7 +22,9 @@
         android:paddingBottom="22dp"
         support:startDayOfTheWeek="WEDNESDAY"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
+
+    <!--
 
     <LinearLayout android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -69,4 +71,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+-->
 </LinearLayout>
