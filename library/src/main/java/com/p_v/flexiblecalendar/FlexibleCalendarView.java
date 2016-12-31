@@ -706,6 +706,29 @@ public class FlexibleCalendarView extends LinearLayout implements
     }
 
     /**
+     * Move the position to the specified month
+     * @param date
+     */
+    public void goToMonth(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        //check has to go left side or right
+        int monthDifference = FlexibleCalendarHelper.
+                getMonthDifference(displayYear, displayMonth, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH));
+
+        if(monthDifference != 0){
+            resetAdapters = true;
+            if(monthDifference < 0){
+                //set fake count to avoid freezing in InfiniteViewPager as it iterates to Integer.MAX_VALUE
+                monthInfPagerAdapter.setFakeCount(lastPosition);
+                monthInfPagerAdapter.notifyDataSetChanged();
+            }
+            moveToPosition(monthDifference);
+        }
+    }
+
+    /**
      * move the position to today's date
      */
     public void goToCurrentDay(){
