@@ -27,7 +27,7 @@ public class CalendarActivity2 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.month_view);
+        final FlexibleCalendarView calendarView = (FlexibleCalendarView) findViewById(R.id.month_view);
         calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
             @Override
             public void onMonthChange(int year, int month, int direction) {
@@ -73,21 +73,21 @@ public class CalendarActivity2 extends ActionBarActivity {
         calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
             @Override
             public List<? extends Event> getEventsForTheDay(int year, int month, int day) {
-                if(year==2015 && month == 7 && day == 25){
+                if (year == 2015 && month == 7 && day == 25) {
                     List<CustomEvent> colorLst1 = new ArrayList<>();
                     colorLst1.add(new CustomEvent(android.R.color.holo_green_dark));
                     colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
                     colorLst1.add(new CustomEvent(android.R.color.holo_purple));
                     return colorLst1;
                 }
-                if(year==2015 && month == 7 && day == 8){
+                if (year == 2015 && month == 7 && day == 8) {
                     List<CustomEvent> colorLst1 = new ArrayList<>();
                     colorLst1.add(new CustomEvent(android.R.color.holo_green_dark));
                     colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
                     colorLst1.add(new CustomEvent(android.R.color.holo_purple));
                     return colorLst1;
                 }
-                if(year==2015 && month == 7 && day == 5){
+                if (year == 2015 && month == 7 && day == 5) {
                     List<CustomEvent> colorLst1 = new ArrayList<>();
                     colorLst1.add(new CustomEvent(android.R.color.holo_purple));
                     return colorLst1;
@@ -96,13 +96,13 @@ public class CalendarActivity2 extends ActionBarActivity {
             }
         });
 
-        Button button = (Button)findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(calendarView.isShown()){
+                if (calendarView.isShown()) {
                     calendarView.collapse();
-                }else{
+                } else {
                     calendarView.expand();
                 }
             }

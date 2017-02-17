@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:support="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:support="http://schemas.android.com/apk/res-auto"
     tools:context="com.p_v.flexiblecalendarexample.CalendarActivityFragment">
 
     <android.support.v7.widget.Toolbar
@@ -11,73 +11,81 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         support:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        support:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        />
+        support:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
-        android:layout_below="@id/toolbar"
-        android:background="#000000"
-        android:paddingBottom="10dp"
-        support:startDayOfTheWeek="WEDNESDAY"
         android:layout_width="360dp"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout android:orientation="horizontal"
-        android:id="@+id/nav_btns"
-        android:layout_toRightOf="@id/calendar_view"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
+        android:background="@android:color/black"
+        android:paddingBottom="10dp"
+        support:startDayOfTheWeek="WEDNESDAY" />
+
+    <LinearLayout
+        android:id="@+id/nav_btns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_toRightOf="@id/calendar_view"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/move_to_previous_date"
-            android:text="Move To Previous Date"
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/move_to_previous_date"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Move To Previous Date" />
 
-        <Button android:id="@+id/move_to_next_date"
-            android:text="Move to Next Date"
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/move_to_next_date"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Move to Next Date" />
 
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout
         android:id="@+id/nav_btns2"
-        android:layout_toRightOf="@id/calendar_view"
-        android:layout_below="@id/nav_btns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nav_btns"
+        android:layout_toRightOf="@id/calendar_view"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/move_to_previous_month"
-            android:text="Move to previous month"
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/move_to_previous_month"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Move to previous month" />
 
-        <Button android:id="@+id/move_to_next_month"
-            android:text="Move to next month"
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/move_to_next_month"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Move to next month" />
 
     </LinearLayout>
-    <Button android:id="@+id/go_to_current_day"
-        android:layout_toRightOf="@id/calendar_view"
-        android:layout_below="@id/nav_btns2"
-        android:text="Go to current day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <Button android:id="@+id/show_dates_outside_month"
-        android:layout_toRightOf="@id/calendar_view"
-        android:layout_below="@id/go_to_current_day"
-        android:text="Show dates outside month"
+    <Button
+        android:id="@+id/go_to_current_day"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nav_btns2"
+        android:layout_toRightOf="@id/calendar_view"
+        android:text="Go to current day" />
+
+    <Button
+        android:id="@+id/show_dates_outside_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/go_to_current_day"
+        android:layout_toRightOf="@id/calendar_view"
+        android:text="Show dates outside month" />
 
 
 </RelativeLayout>

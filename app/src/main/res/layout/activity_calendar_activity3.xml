@@ -1,26 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:flexible="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
-        flexible:disableAutoDateSelection="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
+        flexible:disableAutoDateSelection="true" />
 
-    <Button android:id="@+id/update_events_button"
-        android:text="Update Events"
+    <Button
+        android:id="@+id/update_events_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Update Events" />
 
-    <Button android:id="@+id/date_picker"
-        android:text="Select date"
+    <Button
+        android:id="@+id/date_picker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Select date" />
 
 </LinearLayout>

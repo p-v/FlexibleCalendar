@@ -26,13 +26,13 @@ public class CalendarActivity4 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendary_activity4);
 
-        final FlexibleCalendarView calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
+        final FlexibleCalendarView calendarView = (FlexibleCalendarView) findViewById(R.id.calendar_view);
         calendarView.setStartDayOfTheWeek(Calendar.MONDAY);
 
-        ImageView leftArrow = (ImageView)findViewById(R.id.left_arrow);
-        ImageView rightArrow = (ImageView)findViewById(R.id.right_arrow);
+        ImageView leftArrow = (ImageView) findViewById(R.id.left_arrow);
+        ImageView rightArrow = (ImageView) findViewById(R.id.right_arrow);
 
-        monthTextView = (TextView)findViewById(R.id.month_text_view);
+        monthTextView = (TextView) findViewById(R.id.month_text_view);
 
         Calendar cal = Calendar.getInstance();
         cal.set(calendarView.getSelectedDateItem().getYear(), calendarView.getSelectedDateItem().getMonth(), 1);
@@ -94,7 +94,7 @@ public class CalendarActivity4 extends ActionBarActivity {
             }
         });
 
-        Button resetButton = (Button)findViewById(R.id.reset_button);
+        Button resetButton = (Button) findViewById(R.id.reset_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

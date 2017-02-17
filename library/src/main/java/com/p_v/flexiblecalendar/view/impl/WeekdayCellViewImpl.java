@@ -16,7 +16,7 @@ public class WeekdayCellViewImpl implements IWeekCellViewDrawer {
 
     private FlexibleCalendarView.CalendarView calendarView;
 
-    public WeekdayCellViewImpl(FlexibleCalendarView.CalendarView calendarView){
+    public WeekdayCellViewImpl(FlexibleCalendarView.CalendarView calendarView) {
         this.calendarView = calendarView;
     }
 
@@ -32,6 +32,6 @@ public class WeekdayCellViewImpl implements IWeekCellViewDrawer {
 
     @Override
     public String getWeekDayName(int dayOfWeek, String defaultValue) {
-        return calendarView.getDayOfWeekDisplayValue(dayOfWeek,defaultValue);
+        return calendarView.getDayOfWeekDisplayValue(dayOfWeek, defaultValue);
     }
 }

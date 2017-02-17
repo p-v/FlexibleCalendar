@@ -9,7 +9,7 @@ public class CustomEvent implements Event {
 
     private int color;
 
-    public CustomEvent(int color){
+    public CustomEvent(int color) {
         this.color = color;
     }
 

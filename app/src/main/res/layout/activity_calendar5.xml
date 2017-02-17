@@ -11,9 +11,8 @@
 
     <com.p_v.flexiblecalendar.FlexibleCalendarView
         android:id="@+id/calendar_view"
-        android:background="@android:color/darker_gray"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        />
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

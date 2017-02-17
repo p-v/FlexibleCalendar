@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.p_v.flexiblecalendarexample.widget.ExampleCellView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:textSize="14sp"
-    android:gravity="center"
-    android:background="@drawable/example_background4"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:background="@drawable/example_background4"
+    android:gravity="center"
+    android:textSize="@dimen/size_text_days_of_month" />

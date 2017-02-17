@@ -19,6 +19,7 @@ public interface IWeekCellViewDrawer extends ICellViewDrawer {
 
     /**
      * Display value for the day of week
+     *
      * @param dayOfWeek
      * @param defaultValue
      * @return

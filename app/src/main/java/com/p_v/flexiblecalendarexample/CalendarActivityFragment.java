@@ -1,8 +1,6 @@
 package com.p_v.flexiblecalendarexample;
 
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -25,18 +23,16 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class CalendarActivityFragment extends Fragment implements FlexibleCalendarView.OnMonthChangeListener,
-        FlexibleCalendarView.OnDateClickListener {
+public class CalendarActivityFragment extends Fragment implements FlexibleCalendarView.OnMonthChangeListener, FlexibleCalendarView.OnDateClickListener {
 
     private FlexibleCalendarView calendarView;
     private TextView someTextView;
-
-  public CalendarActivityFragment() {
-    }
+    private Calendar calendar = Calendar.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        calendar.add(Calendar.DAY_OF_MONTH, 2);
     }
 
     @Override
@@ -44,7 +40,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        calendarView = (FlexibleCalendarView)view.findViewById(R.id.calendar_view);
+        calendarView = (FlexibleCalendarView) view.findViewById(R.id.calendar_view);
         calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
             public BaseCellView getCellView(int position, View convertView, ViewGroup parent, @BaseCellView.CellType int cellType) {
@@ -53,7 +49,7 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
                     cellView = (BaseCellView) inflater.inflate(R.layout.calendar1_date_cell_view, null);
                 }
-                if(cellType == BaseCellView.OUTSIDE_MONTH){
+                if (cellType == BaseCellView.OUTSIDE_MONTH) {
                     cellView.setTextColor(getResources().getColor(R.color.date_outside_month_text_color_activity_1));
                 }
                 return cellView;
@@ -76,45 +72,15 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         });
         calendarView.setOnMonthChangeListener(this);
         calendarView.setOnDateClickListener(this);
-        calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
-            @Override
-            public List<CalendarEvent> getEventsForTheDay(int year, int month, int day) {
-                if (year == 2016 && month == 10 && day == 12) {
-                    List<CalendarEvent> eventColors = new ArrayList<>(2);
-                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
-                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
-                    return eventColors;
-                }
-                if (year == 2016 && month == 10 && day == 7 ||
-                        year == 2016 && month == 10 && day == 29 ||
-                        year == 2016 && month == 10 && day == 5 ||
-                        year == 2016 && month == 10 && day == 9) {
-                    List<CalendarEvent> eventColors = new ArrayList<>(1);
-                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
-                    return eventColors;
-                }
 
-                if (year == 2016 && month == 10 && day == 31 ||
-                        year == 2016 && month == 10 && day == 22 ||
-                        year == 2016 && month == 10 && day == 18 ||
-                        year == 2016 && month == 10 && day == 11) {
-                    List<CalendarEvent> eventColors = new ArrayList<>(3);
-                    eventColors.add(new CalendarEvent(android.R.color.holo_red_dark));
-                    eventColors.add(new CalendarEvent(android.R.color.holo_orange_light));
-                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
-                    return eventColors;
-                }
+        fillEvents();
 
-                return null;
-            }
-        });
-
-        Button nextDateBtn = (Button)view.findViewById(R.id.move_to_next_date);
-        Button prevDateBtn = (Button)view.findViewById(R.id.move_to_previous_date);
-        Button nextMonthBtn = (Button)view.findViewById(R.id.move_to_next_month);
-        Button prevMonthBtn = (Button)view.findViewById(R.id.move_to_previous_month);
-        Button goToCurrentDayBtn = (Button)view.findViewById(R.id.go_to_current_day);
-        Button showDatesOutSideMonthBtn = (Button)view.findViewById(R.id.show_dates_outside_month);
+        Button nextDateBtn = (Button) view.findViewById(R.id.move_to_next_date);
+        Button prevDateBtn = (Button) view.findViewById(R.id.move_to_previous_date);
+        Button nextMonthBtn = (Button) view.findViewById(R.id.move_to_next_month);
+        Button prevMonthBtn = (Button) view.findViewById(R.id.move_to_previous_month);
+        Button goToCurrentDayBtn = (Button) view.findViewById(R.id.go_to_current_day);
+        Button showDatesOutSideMonthBtn = (Button) view.findViewById(R.id.show_dates_outside_month);
 
         nextDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,11 +116,11 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         showDatesOutSideMonthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(calendarView.getShowDatesOutsideMonth()){
+                if (calendarView.getShowDatesOutsideMonth()) {
                     calendarView.setShowDatesOutsideMonth(false);
-                    ((Button)v).setText("Show dates outside month");
-                }else{
-                    ((Button)v).setText("Hide dates outside month");
+                    ((Button) v).setText("Show dates outside month");
+                } else {
+                    ((Button) v).setText("Hide dates outside month");
                     calendarView.setShowDatesOutsideMonth(true);
                 }
 
@@ -166,6 +132,50 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         return view;
     }
 
+    private void fillEvents() {
+        calendarView.setEventDataProvider(new FlexibleCalendarView.EventDataProvider() {
+            @Override
+            public List<CalendarEvent> getEventsForTheDay(int year, int month, int day) {
+
+                if (year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH) && day == calendar.get(Calendar.DAY_OF_MONTH)) {
+                    List<CalendarEvent> eventColors = new ArrayList<>(2);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
+                    return eventColors;
+                }
+
+                if (year == 2016 && month == 10 && day == 12) {
+                    List<CalendarEvent> eventColors = new ArrayList<>(2);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
+                    return eventColors;
+                }
+
+                if (year == 2016 && month == 10 && day == 7 ||
+                        year == 2016 && month == 10 && day == 29 ||
+                        year == 2016 && month == 10 && day == 5 ||
+                        year == 2016 && month == 10 && day == 9) {
+                    List<CalendarEvent> eventColors = new ArrayList<>(1);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_blue_light));
+                    return eventColors;
+                }
+
+                if (year == 2016 && month == 10 && day == 31 ||
+                        year == 2016 && month == 10 && day == 22 ||
+                        year == 2016 && month == 10 && day == 18 ||
+                        year == 2016 && month == 10 && day == 11) {
+                    List<CalendarEvent> eventColors = new ArrayList<>(3);
+                    eventColors.add(new CalendarEvent(android.R.color.holo_red_dark));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_orange_light));
+                    eventColors.add(new CalendarEvent(android.R.color.holo_purple));
+                    return eventColors;
+                }
+
+                return null;
+            }
+        });
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -173,10 +183,10 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
         updateTitle(calendarView.getSelectedDateItem().getYear(), calendarView.getSelectedDateItem().getMonth());
     }
 
-    public void setupToolBar(View mainView){
+    public void setupToolBar(View mainView) {
         Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         ActionBar bar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
@@ -202,12 +212,12 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 .getColor(R.color.action_bar_color_activity_1)));
 
         //back button color
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        upArrow.setColorFilter(getResources().getColor(R.color.title_text_color_activity_1), PorterDuff.Mode.SRC_ATOP);
-        bar.setHomeAsUpIndicator(upArrow);
+//        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+//        upArrow.setColorFilter(getResources().getColor(R.color.title_text_color_activity_1), PorterDuff.Mode.SRC_ATOP);
+//        bar.setHomeAsUpIndicator(upArrow);
     }
 
-    private void updateTitle(int year, int month){
+    private void updateTitle(int year, int month) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
         someTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
@@ -218,13 +228,13 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
     public void onMonthChange(int year, int month, int direction) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
-        updateTitle(year,month);
+        updateTitle(year, month);
     }
 
     @Override
     public void onDateClick(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
-        cal.set(year,month,day);
-        Toast.makeText(getActivity(),cal.getTime().toString()+ " Clicked",Toast.LENGTH_SHORT).show();
+        cal.set(year, month, day);
+        Toast.makeText(getActivity(), cal.getTime().toString() + " Clicked", Toast.LENGTH_SHORT).show();
     }
 }

@@ -30,7 +30,7 @@ class MonthViewPager extends InfiniteViewPager {
 
         int height = getMeasuredHeight();
 
-        if(wrapHeight && rowHeight == 0){
+        if (wrapHeight && rowHeight == 0) {
             int width = getMeasuredWidth();
 
             widthMeasureSpec = MeasureSpec.makeMeasureSpec(width,
@@ -43,7 +43,7 @@ class MonthViewPager extends InfiniteViewPager {
                         .makeMeasureSpec(height, MeasureSpec.AT_MOST));
 
                 height = firstChild.getMeasuredHeight();
-                rowHeight = numOfRows == 6? height : (int)Math.ceil(((float)height*6)/5);
+                rowHeight = numOfRows == 6 ? height : (int) Math.ceil(((float) height * 6) / 5);
             }
         }
 
@@ -55,7 +55,7 @@ class MonthViewPager extends InfiniteViewPager {
     }
 
 
-    void setNumOfRows(int numOfRows){
+    void setNumOfRows(int numOfRows) {
         this.numOfRows = numOfRows;
     }
 }
