@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.p_v.flexiblecalendar.FlexibleCalendarView;
-import com.p_v.flexiblecalendar.entity.CalendarEvent;
 import com.p_v.flexiblecalendar.exception.HighValueException;
 import com.p_v.flexiblecalendar.view.BaseCellView;
 
@@ -22,32 +21,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalendarActivity3 extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
+public class CalendarActivity3 extends ActionBarActivity implements DatePickerDialog.OnDateSetListener {
 
-    private Map<Integer,List<CustomEvent>> eventMap;
+    private Map<Integer, List<CustomEvent>> eventMap;
     private FlexibleCalendarView calendarView;
-    private void  initializeEvents(){
+
+    private void initializeEvents() {
         eventMap = new HashMap<>();
         List<CustomEvent> colorLst = new ArrayList<>();
         colorLst.add(new CustomEvent(android.R.color.holo_red_dark));
-        eventMap.put(25,colorLst);
+        eventMap.put(25, colorLst);
 
         List<CustomEvent> colorLst1 = new ArrayList<>();
         colorLst1.add(new CustomEvent(android.R.color.holo_red_dark));
         colorLst1.add(new CustomEvent(android.R.color.holo_blue_light));
         colorLst1.add(new CustomEvent(android.R.color.holo_purple));
-        eventMap.put(22,colorLst1);
+        eventMap.put(22, colorLst1);
 
-        List<CustomEvent> colorLst2= new ArrayList<>();
+        List<CustomEvent> colorLst2 = new ArrayList<>();
         colorLst2.add(new CustomEvent(android.R.color.holo_red_dark));
         colorLst2.add(new CustomEvent(android.R.color.holo_blue_light));
         colorLst2.add(new CustomEvent(android.R.color.holo_purple));
-        eventMap.put(28,colorLst1);
+        eventMap.put(28, colorLst1);
 
         List<CustomEvent> colorLst3 = new ArrayList<>();
         colorLst3.add(new CustomEvent(android.R.color.holo_red_dark));
         colorLst3.add(new CustomEvent(android.R.color.holo_blue_light));
-        eventMap.put(29,colorLst1);
+        eventMap.put(29, colorLst1);
     }
 
     @Override
@@ -57,13 +57,13 @@ public class CalendarActivity3 extends ActionBarActivity implements DatePickerDi
 
         initializeEvents();
 
-        calendarView = (FlexibleCalendarView)findViewById(R.id.calendar_view);
+        calendarView = (FlexibleCalendarView) findViewById(R.id.calendar_view);
         calendarView.setMonthViewHorizontalSpacing(10);
         calendarView.setMonthViewVerticalSpacing(10);
         calendarView.setOnMonthChangeListener(new FlexibleCalendarView.OnMonthChangeListener() {
             @Override
             public void onMonthChange(int year, int month, @FlexibleCalendarView.Direction int direction) {
-                Toast.makeText(CalendarActivity3.this,""+year+" "+ (month+1),Toast.LENGTH_SHORT).show();
+                Toast.makeText(CalendarActivity3.this, "" + year + " " + (month + 1), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -117,8 +117,8 @@ public class CalendarActivity3 extends ActionBarActivity implements DatePickerDi
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog dialog= new DatePickerDialog(CalendarActivity3.this,CalendarActivity3.this,
-                        calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                DatePickerDialog dialog = new DatePickerDialog(CalendarActivity3.this, CalendarActivity3.this,
+                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.show();
 
@@ -126,7 +126,7 @@ public class CalendarActivity3 extends ActionBarActivity implements DatePickerDi
         });
     }
 
-    public List<CustomEvent> getEvents(int year, int month, int day){
+    public List<CustomEvent> getEvents(int year, int month, int day) {
         return eventMap.get(day);
     }
 
@@ -154,9 +154,9 @@ public class CalendarActivity3 extends ActionBarActivity implements DatePickerDi
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        try{
-            calendarView.selectDate(year,monthOfYear,dayOfMonth);
-        }catch(HighValueException e){
+        try {
+            calendarView.selectDate(year, monthOfYear, dayOfMonth);
+        } catch (HighValueException e) {
             e.printStackTrace();
         }
     }

@@ -1,8 +1,8 @@
 package com.p_v.flexiblecalendarexample;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -20,7 +20,7 @@ public class CalendarListActivity extends ActionBarActivity implements CalendarL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_list);
 
-        RecyclerView calendarRecyclerView = (RecyclerView)findViewById(R.id.calendar_list_view);
+        RecyclerView calendarRecyclerView = (RecyclerView) findViewById(R.id.calendar_list_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         calendarRecyclerView.setLayoutManager(layoutManager);
 
@@ -38,27 +38,27 @@ public class CalendarListActivity extends ActionBarActivity implements CalendarL
 
     @Override
     public void onCalendarTypeClick(String calendarType, int position) {
-        switch(position){
+        switch (position) {
             case 0:
-                Intent calActivity1 = new Intent(this,CalendarActivity.class);
+                Intent calActivity1 = new Intent(this, CalendarActivity.class);
                 startActivity(calActivity1);
                 break;
             case 1:
-                Intent calActivity2 = new Intent(this,CalendarActivity2.class);
+                Intent calActivity2 = new Intent(this, CalendarActivity2.class);
                 startActivity(calActivity2);
                 break;
 
             case 2:
-                Intent calActivity3 = new Intent(this,CalendarActivity3.class);
+                Intent calActivity3 = new Intent(this, CalendarActivity3.class);
                 startActivity(calActivity3);
                 break;
 
             case 3:
-                Intent calActivity4 = new Intent(this,CalendarActivity4.class);
+                Intent calActivity4 = new Intent(this, CalendarActivity4.class);
                 startActivity(calActivity4);
                 break;
             case 4:
-                Intent calActivity5 = new Intent(this,CalendarActivity5.class);
+                Intent calActivity5 = new Intent(this, CalendarActivity5.class);
                 startActivity(calActivity5);
                 break;
 

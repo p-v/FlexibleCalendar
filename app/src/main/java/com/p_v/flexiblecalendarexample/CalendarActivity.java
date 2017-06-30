@@ -5,7 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 
-public class CalendarActivity extends ActionBarActivity  {
+public class CalendarActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

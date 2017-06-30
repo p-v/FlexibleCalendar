@@ -16,7 +16,7 @@ public class CalendarListAdapter extends RecyclerView.Adapter<CalendarListAdapte
     private List<String> calendarList;
     private OnCalendarTypeClickListener onCalendarTypeClickListener;
 
-    public CalendarListAdapter(List<String> calendarList){
+    public CalendarListAdapter(List<String> calendarList) {
         this.calendarList = calendarList;
     }
 
@@ -29,15 +29,23 @@ public class CalendarListAdapter extends RecyclerView.Adapter<CalendarListAdapte
 
     @Override
     public void onBindViewHolder(CalendarListAdapter.ViewHolder holder, int position) {
-        ((TextView)holder.itemView).setText(calendarList.get(position));
+        ((TextView) holder.itemView).setText(calendarList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return calendarList == null? 0 : calendarList.size();
+        return calendarList == null ? 0 : calendarList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public void setCalendarTypeClickListener(OnCalendarTypeClickListener onCalendarTypeClickListener) {
+        this.onCalendarTypeClickListener = onCalendarTypeClickListener;
+    }
+
+    public interface OnCalendarTypeClickListener {
+        void onCalendarTypeClick(String calendarType, int position);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -46,20 +54,12 @@ public class CalendarListAdapter extends RecyclerView.Adapter<CalendarListAdapte
 
         @Override
         public void onClick(View v) {
-            if(onCalendarTypeClickListener!=null){
+            if (onCalendarTypeClickListener != null) {
                 onCalendarTypeClickListener
-                        .onCalendarTypeClick(calendarList.get(getPosition()),getPosition());
+                        .onCalendarTypeClick(calendarList.get(getPosition()), getPosition());
             }
 
         }
-    }
-
-    public void setCalendarTypeClickListener(OnCalendarTypeClickListener onCalendarTypeClickListener){
-        this.onCalendarTypeClickListener = onCalendarTypeClickListener;
-    }
-
-    public interface OnCalendarTypeClickListener {
-        void onCalendarTypeClick(String calendarType, int position);
     }
 
 

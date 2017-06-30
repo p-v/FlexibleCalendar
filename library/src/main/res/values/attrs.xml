@@ -1,40 +1,40 @@
 <resources>
     <declare-styleable name="CircularEventCellView">
-        <attr name="event_radius" format="dimension"/>
-        <attr name="event_circle_padding" format="dimension"/>
+        <attr name="event_radius" format="dimension" />
+        <attr name="event_circle_padding" format="dimension" />
     </declare-styleable>
     <declare-styleable name="EventCountCellView">
-        <attr name="event_count_radius" format="dimension"/>
-        <attr name="event_background" format="color"/>
-        <attr name="event_count_text_color" format="color"/>
-        <attr name="event_text_size" format="dimension"/>
+        <attr name="event_count_radius" format="dimension" />
+        <attr name="event_background" format="color" />
+        <attr name="event_count_text_color" format="color" />
+        <attr name="event_text_size" format="dimension" />
     </declare-styleable>
     <declare-styleable name="FlexibleCalendarView">
-        <attr name="startDisplayYear" format="integer"/>
-        <attr name="startDisplayMonth" format="integer"/>
-        <attr name="weekDayHorizontalSpacing" format="dimension"/>
-        <attr name="weekDayVerticalSpacing" format="dimension"/>
-        <attr name="monthDayHorizontalSpacing" format="dimension"/>
-        <attr name="monthDayVerticalSpacing" format="dimension"/>
-        <attr name="weekViewBackground" format="reference"/>
-        <attr name="monthViewBackground" format="reference"/>
-        <attr name="showDatesOutsideMonth" format="boolean"/>
-        <attr name="decorateDatesOutsideMonth" format="boolean"/>
-        <attr name="disableAutoDateSelection" format="boolean"/>
+        <attr name="startDisplayYear" format="integer" />
+        <attr name="startDisplayMonth" format="integer" />
+        <attr name="weekDayHorizontalSpacing" format="dimension" />
+        <attr name="weekDayVerticalSpacing" format="dimension" />
+        <attr name="monthDayHorizontalSpacing" format="dimension" />
+        <attr name="monthDayVerticalSpacing" format="dimension" />
+        <attr name="weekViewBackground" format="reference" />
+        <attr name="monthViewBackground" format="reference" />
+        <attr name="showDatesOutsideMonth" format="boolean" />
+        <attr name="decorateDatesOutsideMonth" format="boolean" />
+        <attr name="disableAutoDateSelection" format="boolean" />
         <attr name="startDayOfTheWeek" format="enum">
-            <enum name="SUNDAY" value="1"/>
-            <enum name="MONDAY" value="2"/>
-            <enum name="TUESDAY" value="3"/>
-            <enum name="WEDNESDAY" value="4"/>
-            <enum name="THURSDAY" value="5"/>
-            <enum name="FRIDAY" value="6"/>
-            <enum name="SATURDAY" value="7"/>
+            <enum name="SUNDAY" value="1" />
+            <enum name="MONDAY" value="2" />
+            <enum name="TUESDAY" value="3" />
+            <enum name="WEDNESDAY" value="4" />
+            <enum name="THURSDAY" value="5" />
+            <enum name="FRIDAY" value="6" />
+            <enum name="SATURDAY" value="7" />
         </attr>
     </declare-styleable>
     <declare-styleable name="CellState">
-        <attr name="state_date_regular" format="boolean"/>
-        <attr name="state_date_today" format="boolean"/>
-        <attr name="state_date_selected" format="boolean"/>
-        <attr name="state_date_outside_month" format="boolean"/>
+        <attr name="state_date_regular" format="boolean" />
+        <attr name="state_date_today" format="boolean" />
+        <attr name="state_date_selected" format="boolean" />
+        <attr name="state_date_outside_month" format="boolean" />
     </declare-styleable>
 </resources>

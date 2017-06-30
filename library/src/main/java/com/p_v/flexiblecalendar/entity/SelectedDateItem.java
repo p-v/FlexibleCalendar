@@ -1,7 +1,7 @@
 package com.p_v.flexiblecalendar.entity;
 
 /**
- * @author p-v 
+ * @author p-v
  */
 public class SelectedDateItem {
 
@@ -9,7 +9,7 @@ public class SelectedDateItem {
     private int month;
     private int year;
 
-    public SelectedDateItem(int year, int month, int day){
+    public SelectedDateItem(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -17,7 +17,7 @@ public class SelectedDateItem {
 
     @Override
     public SelectedDateItem clone() {
-        return new SelectedDateItem(year,month,day);
+        return new SelectedDateItem(year, month, day);
     }
 
     public int getDay() {

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:flexible="http://schemas.android.com/apk/res-auto">
-    <item flexible:state_date_regular="true"
-        android:drawable="@drawable/cell_purple_background"/>
-    <item flexible:state_date_today="true"
-        android:drawable="@drawable/cell_gray_background"/>
-    <item flexible:state_date_selected="true"
-        android:drawable="@drawable/cell_red_background"/>
-    <item flexible:state_date_outside_month="true"
-        android:drawable="@drawable/cell_blue_background"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:flexible="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/cell_purple_background" flexible:state_date_regular="true" />
+    <item android:drawable="@drawable/cell_gray_background" flexible:state_date_today="true" />
+    <item android:drawable="@drawable/cell_red_background" flexible:state_date_selected="true" />
+    <item android:drawable="@drawable/cell_blue_background" flexible:state_date_outside_month="true" />
 </selector>

@@ -30,7 +30,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         if (getRealCount() == 0) {
             return 0;
         }
-        if(fakeCount!=-1){
+        if (fakeCount != -1) {
             return fakeCount;
         }
         return MAX_VAL;
@@ -142,9 +142,10 @@ public class InfinitePagerAdapter extends PagerAdapter {
     /**
      * Set the count for the adapter. <br/>
      * A fake count to set limit the number of pages in the adapter
+     *
      * @param fakeCount count
      */
-    public void setFakeCount(int fakeCount){
+    public void setFakeCount(int fakeCount) {
         this.fakeCount = fakeCount;
     }
 

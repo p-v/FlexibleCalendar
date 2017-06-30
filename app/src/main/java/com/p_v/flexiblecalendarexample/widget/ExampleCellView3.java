@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author p-v
  */
-public class ExampleCellView3 extends BaseCellView{
+public class ExampleCellView3 extends BaseCellView {
 
     private boolean hasEvents;
 
@@ -38,18 +38,18 @@ public class ExampleCellView3 extends BaseCellView{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(!getStateSet().contains(STATE_SELECTED) && !getStateSet().contains(SELECTED_TODAY) &&
-                getStateSet().contains(STATE_REGULAR) && hasEvents){
+        if (!getStateSet().contains(STATE_SELECTED) && !getStateSet().contains(SELECTED_TODAY) &&
+                getStateSet().contains(STATE_REGULAR) && hasEvents) {
             this.setBackgroundColor(Color.BLUE);
         }
-        if(getStateSet().contains(STATE_SELECTED) && hasEvents){
+        if (getStateSet().contains(STATE_SELECTED) && hasEvents) {
             this.setBackgroundResource(R.drawable.cell_red_background);
         }
     }
 
     @Override
     public void setEvents(List<? extends Event> colorList) {
-        this.hasEvents = colorList !=null && !colorList.isEmpty();
+        this.hasEvents = colorList != null && !colorList.isEmpty();
         invalidate();
         requestLayout();
     }

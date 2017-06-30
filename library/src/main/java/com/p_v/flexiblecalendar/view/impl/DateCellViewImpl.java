@@ -9,13 +9,14 @@ import com.p_v.flexiblecalendar.view.IDateCellViewDrawer;
 
 /**
  * Default date cell view drawer
+ *
  * @author p-v
  */
 public class DateCellViewImpl implements IDateCellViewDrawer {
 
     private FlexibleCalendarView.CalendarView calendarView;
 
-    public DateCellViewImpl(FlexibleCalendarView.CalendarView calendarView){
+    public DateCellViewImpl(FlexibleCalendarView.CalendarView calendarView) {
         this.calendarView = calendarView;
     }
 
@@ -26,6 +27,6 @@ public class DateCellViewImpl implements IDateCellViewDrawer {
 
     @Override
     public BaseCellView getCellView(int position, View convertView, ViewGroup parent, @BaseCellView.CellType int cellType) {
-        return calendarView.getCellView(position,convertView,parent,cellType);
+        return calendarView.getCellView(position, convertView, parent, cellType);
     }
 }

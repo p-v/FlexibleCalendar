@@ -15,15 +15,16 @@ public class FlexibleCalendarHelper {
 
     /**
      * Set the next month for the details passed
-     * @param year year
-     * @param month month
+     *
+     * @param year     year
+     * @param month    month
      * @param nextDate next month empty array
      */
-    public static void nextMonth(int year,int month, int[] nextDate){
-        if(month==11){
+    public static void nextMonth(int year, int month, int[] nextDate) {
+        if (month == 11) {
             year++;
-            month =0;
-        }else{
+            month = 0;
+        } else {
             month++;
         }
         nextDate[0] = year;
@@ -32,15 +33,16 @@ public class FlexibleCalendarHelper {
 
     /**
      * Set the previous month for the details passed
-     * @param year year
-     * @param month month
+     *
+     * @param year         year
+     * @param month        month
      * @param previousDate previous month empty array
      */
-    public static void previousMonth(int year,int month, int[] previousDate){
-        if(month==0){
+    public static void previousMonth(int year, int month, int[] previousDate) {
+        if (month == 0) {
             year--;
             month = 11;
-        }else{
+        } else {
             month--;
         }
         previousDate[0] = year;
@@ -50,45 +52,47 @@ public class FlexibleCalendarHelper {
     /**
      * @return Get the array for week days for the current locale
      */
-    public static String[] getWeekDaysList(Context context){
+    public static String[] getWeekDaysList(Context context) {
         DateFormatSymbols symbols = new DateFormatSymbols(getLocale(context));
-        return Arrays.copyOfRange(symbols.getShortWeekdays(),1,8);
+        return Arrays.copyOfRange(symbols.getShortWeekdays(), 1, 8);
     }
 
     /**
      * Get the current locale
      */
-    public static Locale getLocale(Context context){
+    public static Locale getLocale(Context context) {
         return context.getResources().getConfiguration().locale;
     }
 
     /**
      * @return the localized calendar instance
      */
-    public static Calendar getLocalizedCalendar(Context context){
+    public static Calendar getLocalizedCalendar(Context context) {
         return Calendar.getInstance(getLocale(context));
     }
 
     /**
      * Get the number of rows for the provided month
-     * @param year year
+     *
+     * @param year  year
      * @param month month
      * @return number of rows
      */
-    public static int getNumOfRowsForTheMonth(int year,int month, int startDayOfTheWeek){
+    public static int getNumOfRowsForTheMonth(int year, int month, int startDayOfTheWeek) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
-        MonthDisplayHelper displayHelper = new MonthDisplayHelper(year,month,startDayOfTheWeek);
+        MonthDisplayHelper displayHelper = new MonthDisplayHelper(year, month, startDayOfTheWeek);
         return displayHelper.getRowOf(cal.getActualMaximum(Calendar.DAY_OF_MONTH)) + 1;
     }
 
     /**
      * Get number of month difference with the current month
+     *
      * @param year
      * @param month
      * @return
      */
-    public static int getMonthDifference(int year, int month){
+    public static int getMonthDifference(int year, int month) {
         Calendar cal = Calendar.getInstance();
         int currentMonth = cal.get(Calendar.MONTH);
         int currentYear = cal.get(Calendar.YEAR);
@@ -98,13 +102,14 @@ public class FlexibleCalendarHelper {
 
     /**
      * Get number of month difference between two the start and end month/year
+     *
      * @param startYear
      * @param startMonth
      * @param endYear
      * @param endMonth
      * @return
      */
-    public static int getMonthDifference(int startYear, int startMonth, int endYear, int endMonth){
+    public static int getMonthDifference(int startYear, int startMonth, int endYear, int endMonth) {
         return (endYear - startYear) * 12 + endMonth - startMonth;
     }
 

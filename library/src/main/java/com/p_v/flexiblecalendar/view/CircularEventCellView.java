@@ -39,12 +39,12 @@ public class CircularEventCellView extends BaseCellView {
         init(attrs);
     }
 
-    private void init(AttributeSet attrs){
-        TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.CircularEventCellView);
-        try{
-            radius = (int)a.getDimension(R.styleable.CircularEventCellView_event_radius,5);
-            padding = (int)a.getDimension(R.styleable.CircularEventCellView_event_circle_padding,1);
-        }finally {
+    private void init(AttributeSet attrs) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CircularEventCellView);
+        try {
+            radius = (int) a.getDimension(R.styleable.CircularEventCellView_event_radius, 5);
+            padding = (int) a.getDimension(R.styleable.CircularEventCellView_event_circle_padding, 1);
+        } finally {
             a.recycle();
         }
     }
@@ -56,8 +56,8 @@ public class CircularEventCellView extends BaseCellView {
         Set<Integer> stateSet = getStateSet();
 
         //initialize paint objects only if there is no state or just one state i.e. the regular day state
-        if((stateSet==null || stateSet.isEmpty()
-                ||(stateSet.size() ==1 && stateSet.contains(STATE_REGULAR))) && paintList!=null) {
+        if ((stateSet == null || stateSet.isEmpty()
+                || (stateSet.size() == 1 && stateSet.contains(STATE_REGULAR))) && paintList != null) {
             int num = paintList.size();
 
             Paint p = new Paint();
@@ -86,24 +86,24 @@ public class CircularEventCellView extends BaseCellView {
         Set<Integer> stateSet = getStateSet();
 
         // draw only if there is no state or just one state i.e. the regular day state
-        if((stateSet==null || stateSet.isEmpty() || (stateSet.size() ==1
-                && stateSet.contains(STATE_REGULAR))) && paintList!=null) {
+        if ((stateSet == null || stateSet.isEmpty() || (stateSet.size() == 1
+                && stateSet.contains(STATE_REGULAR))) && paintList != null) {
             int num = paintList.size();
-            for (int i=0;i<num;i++) {
+            for (int i = 0; i < num; i++) {
                 canvas.drawCircle(calculateStartPoint(i), eventCircleY, radius, paintList.get(i));
             }
         }
     }
 
-    private int calculateStartPoint(int offset){
-        return leftMostPosition + offset *(2*(radius+padding)) ;
+    private int calculateStartPoint(int offset) {
+        return leftMostPosition + offset * (2 * (radius + padding));
     }
 
     @Override
-    public void setEvents(List<? extends Event> colorList){
-        if(colorList!=null){
+    public void setEvents(List<? extends Event> colorList) {
+        if (colorList != null) {
             paintList = new ArrayList<>(colorList.size());
-            for(Event e: colorList){
+            for (Event e : colorList) {
                 Paint eventPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 eventPaint.setStyle(Paint.Style.FILL);
                 eventPaint.setColor(getContext().getResources().getColor(e.getColor()));
